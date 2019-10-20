@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Freat</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Boostrap-->
+    <link rel="stylesheet" href="css/bootstrap-copy.css">
+    <!--Main CSS file-->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="css/btn.css">
+    <link rel="stylesheet" type="text/css" href="css/post.css">
+    <link rel="stylesheet" type="text/css" href="css/search.css">
+</head>
+<body>
+    <div id="full-page" class="flex-container-col">
+        <nav id="nav-bar" class="navbar navbar-expand">
+            <a class="navbar-brand" href="#">Freat</a>
+            <ul class="navbar-nav mr-auto">
+                <button class="btn btn-navbar">New post</button>
+            </ul>
+            <ul class="navbar-nav">
+                <button class="btn btn-navbar">Login</button>
+            </ul>
+        </nav>
+        <div id="main-pane" class="flex-item-stretch flex-container-row">
+            <div id="post-pane" class="flex-item-rigid flex-container-col">
+                <form id="search" class="flex-container-row">
+                    <input id="searchbar" class="form-control-search" type="search" placeholder="Search for food...">
+                    <button class="btn btn-search" type="submit">Search</button>
+                </form>
+                <ul id="posts" class="flex-item-scroll">
+                    <li class="post">
+                        <div class="post-header flex-container-row">
+                            <div class="post-title mr-auto">Testfood 1</div>
+                            <div class="post-time">15 minutes ago</div>
+                        </div>
+                        <img class="post-img" src="images/berries.png">
+                        <div class="post-body">
+                            <p class="post-text">Some quick example text to build on the post title and make up the bulk of the post's content.</p>
+                        </div>
+                    </li>
+                    <li class="post">
+                        <div class="post-header flex-container-row">
+                            <div class="post-title mr-auto">Testfood 1</div>
+                            <div class="post-time">15 minutes ago</div>
+                        </div>
+                        <img class="post-img" src="images/blueberries.png">
+                        <div class="post-body">
+                            <p class="post-text">Some quick example text to build on the post title and make up the bulk of the post's content.</p>
+                        </div>
+                    </li>
+                    <li class="post">
+                        <div class="post-header flex-container-row">
+                            <div class="post-title mr-auto">Testfood 1</div>
+                            <div class="post-time">15 minutes ago</div>
+                        </div>
+                        <img class="post-img" src="images/jam.png">
+                        <div class="post-body">
+                            <p class="post-text">Some quick example text to build on the post title and make up the bulk of the post's content.</p>
+                        </div>
+                    </li>
+                    <li class="post">
+                        <div class="post-header flex-container-row">
+                            <div class="post-title mr-auto">Testfood 1</div>
+                            <div class="post-time">15 minutes ago</div>
+                        </div>
+                        <img class="post-img" src="images/pasta.png">
+                        <div class="post-body">
+                            <p class="post-text">Some quick example text to build on the post title and make up the bulk of the post's content.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="map-feed" class="flex-container-col">
+                <img src="images/map.png">
+            </div>
+        </div>
+    </div>
+
+    <!--jQuery-->
+    <script src="jquery-3.4.1.js"></script>
+    <!--Bootstrap JavaScript-->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

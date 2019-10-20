@@ -1,0 +1,59 @@
+.form-control-search {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #0066ff;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #0066ff;
+  border-radius: 5rem 0rem 0rem 5rem;
+  -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form-control-search {
+    -webkit-transition: none;
+    transition: none;
+  }
+}
+
+.form-control-search:focus {
+  color: #0066ff;
+  background-color: #fff;
+  border-color: #0066ff;
+  outline: 0;
+}
+
+.form-control-search::-webkit-input-placeholder {
+  color: #99c2ff;
+  opacity: 1;
+}
+
+.form-control-search::placeholder {
+  color: #99c2ff;
+  opacity: 1;
+}
+
+select.form-control-search[size], select.form-control-search[multiple] {
+  height: auto;
+}
+
+textarea.form-control-search {
+  height: auto;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-text {
+  display: block;
+  margin-top: 0.25rem;
+}

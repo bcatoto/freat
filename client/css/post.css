@@ -1,0 +1,138 @@
+.post {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 30px;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border-radius: 0.75rem;
+  box-shadow: 1px 1px 10px #d9d9d9;
+}
+
+.post:first-child {
+  margin-top: 10px;
+}
+
+.post:last-child {
+  margin-bottom: 10px;
+}
+
+.post > hr {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.post > .list-group:first-child .list-group-item:first-child {
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+
+.post > .list-group:last-child .list-group-item:last-child {
+  border-bottom-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.post-header {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  margin: 1.25rem 1.25rem 0.75rem 1.25rem;
+}
+
+.post-title {
+  font-size: 1.40625rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.post-time {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #95a5a6;
+}
+
+.post-body {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  margin: 0.75rem 1.25rem 1.25rem 1.25rem;
+}
+
+.post-text:last-child {
+  margin-bottom: 0;
+}
+
+.post-link:hover {
+  text-decoration: none;
+}
+
+.post-link + .post-link {
+  margin-left: 1.25rem;
+}
+
+.post-footer {
+  padding: 0.75rem 1.25rem;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.post-footer:last-child {
+  border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px);
+}
+
+.post-header-tabs {
+  margin-right: -0.625rem;
+  margin-bottom: -0.75rem;
+  margin-left: -0.625rem;
+  border-bottom: 0;
+}
+
+.post-header-pills {
+  margin-right: -0.625rem;
+  margin-left: -0.625rem;
+}
+
+.post-img-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1.25rem;
+}
+
+.post-img {
+  width: 100%;
+}
+
+.post-img-bottom {
+  width: 100%;
+  border-bottom-right-radius: calc(0.25rem - 1px);
+  border-bottom-left-radius: calc(0.25rem - 1px);
+}
+
+.post-deck {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.post-deck .post {
+  margin-bottom: 15px;
+}
+
+.post-columns .post {
+  margin-bottom: 0.75rem;
+}
