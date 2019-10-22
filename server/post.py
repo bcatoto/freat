@@ -43,3 +43,4 @@ class Post:
     def getTimePosted(self):
         return self._time_posted
 
+print("hello universe")
