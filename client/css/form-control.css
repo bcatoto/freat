@@ -1,0 +1,108 @@
+/* FORM */
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #7b8a8b;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form-control {
+    -webkit-transition: none;
+    transition: none;
+  }
+}
+
+.form-control::-ms-expand {
+  background-color: transparent;
+  border: 0;
+}
+
+.form-control:focus {
+  color: #7b8a8b;
+  background-color: #fff;
+  border-color: #597ea2;
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+          box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.form-control::-webkit-input-placeholder {
+  color: #95a5a6;
+  opacity: 1;
+}
+
+.form-control::-ms-input-placeholder {
+  color: #95a5a6;
+  opacity: 1;
+}
+
+.form-control::placeholder {
+  color: #95a5a6;
+  opacity: 1;
+}
+
+.form-control:disabled, .form-control[readonly] {
+  background-color: #ecf0f1;
+  opacity: 1;
+}
+
+select.form-control:focus::-ms-value {
+  color: #7b8a8b;
+  background-color: #fff;
+}
+
+.form-control-file,
+.form-control-range {
+  display: block;
+  width: 100%;
+}
+
+select.form-control[size], select.form-control[multiple] {
+  height: auto;
+}
+
+textarea.form-control {
+  height: auto;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-text {
+  display: block;
+  margin-top: 0.25rem;
+}
+
+/* SEARCH FORM */
+
+.form-control-search {
+  border: 1px solid #0066ff;
+  border-radius: 5rem 0rem 0rem 5rem;
+}
+
+.form-control-search:focus {
+  color: #3c4344;
+  border-color: #0066ff;
+}
+
+/* NEW POST FORM */
+
+.form-control-newpost:focus {
+  color: #3c4344;
+  border-color: #0066ff;
+}

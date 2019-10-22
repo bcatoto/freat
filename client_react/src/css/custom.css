@@ -1,0 +1,30 @@
+/* LAYOUT */
+
+.no-margins {
+  margin: 0px;
+}
+
+.no-padding {
+  padding: 0px;
+}
+
+.container-col {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.container-row {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.stretch {
+  flex-grow: 10000;
+  flex-shrink: 10000;
+  flex-basis: 0;
+  overflow: hidden;
+}
