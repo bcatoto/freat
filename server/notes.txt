@@ -1,0 +1,39 @@
+
+
+Tables:
+- user
+    - unique id (netid?) 
+    - jwt token, saved on client side; know if user logged in or not
+- postings
+    - post_id # unique id for each posting
+    - poster_id  — unique_id of user; allows original user to delete post, edit their post
+    - title # title of the post
+    - location # should we split this up into building name and number?
+    - description # pretty long string…
+    - num_ppl # hmm potential for this to be blank? maybe make this required
+    - time_posted # get the time that this was posted… how to keep track of 22 minutes ago/similar?
+- likes
+    - post_id
+    - user_id = id of the user who liked it 
+- restrictions
+    - post_id
+    - restriction # vegetarian, vegan, etc. **like with professors, not all postings will have a restriction
+
+
+Forms:
+- Title*
+- Location*
+- Description of food
+- Photo* 
+- Dietary restrictions*
+- Approximately how much it can feed
+- # timestamp of when it got posted
+- # maybe store how long ago it got posted
+- ## maybe the number of people who have liked it already?
+
+User:
+- user information
+
+authentication on server side
+- passport
+- or CAS again
