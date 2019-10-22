@@ -5,7 +5,7 @@
 #-----------------------------------------------------------------------
 
 # object post will store/allow us to access relevant information about a post
-class post:
+class Post:
 
     def __init__(self, title, location, description, num_ppl, time_posted):
         self._title = title
