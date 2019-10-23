@@ -32,9 +32,11 @@ class Database:
 
     # append a new post to the database
     def append(self, title):
+        print("called append with title: ", title)
         cursor = self._connection.cursor() # the cursor
-        APPEND_STRING = 'INSERT INTO postings(title) VALUES(?);'
+        APPEND_STRING = 'INSERT INTO postings(title) VALUES(?)'
         cursor.execute(APPEND_STRING, [title]) 
+        self._connection.commit()
 
     # return all the entries in the postings table
     def get_all(self):
@@ -42,11 +44,12 @@ class Database:
         QUERY_STRING = \
             'select title FROM postings'
         cursor.execute(QUERY_STRING) 
+        self._connection.commit()
 
         titles = []
         row = cursor.fetchone()
         while row is not None:
-            titles.append(row[0])
+            titles.append(Post(row[0]))
             row = cursor.fetchone()
         cursor.close()
         return(titles)
@@ -59,6 +62,7 @@ class Database:
             'select title, price from postings ' + \
             'where title like ?'
         cursor.execute(QUERY_STRING, [title]) 
+        self._connection.commit()
         
         titles = []
         row = cursor.fetchone()
@@ -75,12 +79,9 @@ class Database:
 if __name__ == '__main__':
     database = Database()
     database.connect()
-    database.append("Sandwich")
-    database.append("Oyster")
-    database.append("Eggplant")
-    database.append("salami")
-    database.append("italian")
+    database.append("asdfasdf")
+
     books = database.get_all()
     for book in books:
-        print(book)
+        print(book.getTitle())
     database.disconnect()
