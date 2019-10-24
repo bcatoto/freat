@@ -1,13 +1,13 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/Row'
 
 export default function Searchbar() {
   return (
-    <Form>
-      <FormControl type="text" placeholder="Search" />
-      <Button variant="outline-success">Search</Button>
+    <Form inline className="p-3">
+      <Form.Control className="form-search flex-grow-1" type="text" placeholder="Search for food..." />
+      <Button variant="search"><i class='fas fa-search'></i></Button>
     </Form>
   );
 }
