@@ -1,10 +1,6 @@
-import React from 'react';
-import Container from 'react-bootstrap/Container'
-import Accordion from 'react-bootstrap/Accordion'
-import Post from './Post'
-
-import berries from './../assets/images/berries.png'
-import blueberries from './../assets/images/blueberries.png'
+import React from "react";
+import Accordion from "react-bootstrap/Accordion"
+import Post from "./Post"
 
 export default function PostsFeed() {
   return (

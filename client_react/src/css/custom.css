@@ -28,7 +28,7 @@
   .show > .btn-navbar.dropdown-toggle {
     color: #fff;
     background-color: #0052cc;
-    border-color: #004dbf; }
+    border-color: #0066FF; }
     .btn-navbar:not(:disabled):not(.disabled):active:focus, .btn-navbar:not(:disabled):not(.disabled).active:focus,
     .show > .btn-navbar.dropdown-toggle:focus {
       box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }

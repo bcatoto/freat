@@ -1,10 +1,8 @@
-import React from 'react';
-import Container from 'react-bootstrap/Container'
-import Accordion from 'react-bootstrap/Accordion'
-import Card from 'react-bootstrap/Card'
+import React from "react";
+import Accordion from "react-bootstrap/Accordion"
+import Card from "react-bootstrap/Card"
 
-import berries from './../assets/images/berries.png'
-import blueberries from './../assets/images/blueberries.png'
+import berries from "./../assets/images/berries.png"
 
 class Post extends React.Component{
   constructor(props) {
