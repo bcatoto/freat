@@ -15,14 +15,26 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: true
+      showModal: false
     };
+  }
+
+  handleOpenModal() {
+    this.setState({
+      showModal: true
+    });
+  }
+
+  handleCloseModal() {
+    this.setState({
+      showModal: false
+    });
   }
 
   render() {
     return (
       <div id="app" className="vw-100 vh-100">
-        <NavBar />
+        <NavBar handleNewPost={() => this.handleOpenModal()}/>
         <Container fluid className="h-100 p-0">
           <Row fluid="true" noGutters="true" className="h-100">
             <Col id="post-pane">
@@ -34,6 +46,7 @@ class App extends React.Component {
             </Col>
           </Row>
         </Container>
+        <NewPost show={this.state.showModal} handleClose={() => this.handleCloseModal()}/>
       </div>
     );
   }

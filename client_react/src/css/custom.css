@@ -148,6 +148,16 @@
   .accordion > .card .card-header {
     margin-bottom: 0px; }
 
+/* MODAL */
+
+.modal-header {
+  padding: 1rem 1rem 0rem 1rem;
+  border-bottom: 0px solid transparent; }
+
+.modal-footer {
+  padding: 0rem 1rem 1rem 1rem;
+  border-top: 0px solid transparent; }
+
 #app {
   overflow: hidden;
 }
