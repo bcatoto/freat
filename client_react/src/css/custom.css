@@ -129,7 +129,7 @@
 /* ACCORDION */
 
 .accordion {
-  height: 500px;
+  height: 600px;
   overflow: scroll;
 }
 
@@ -159,6 +159,7 @@
   border-top: 0px solid transparent; }
 
 #app {
+  position: relative;
   overflow: hidden;
 }
 

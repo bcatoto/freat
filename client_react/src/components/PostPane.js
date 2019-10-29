@@ -6,7 +6,7 @@ export default function PostPane() {
   return (
     <>
       <Searchbar />
-      <PostsFeed />
+      <PostsFeed id="posts-feed"/>
     </>
   );
 }
