@@ -126,6 +126,34 @@
   width: 100%;
   border-radius: 0; }
 
+/* BADGE (PILL) */
+
+.badge-pill {
+  margin-right: 5px; }
+  .badge-pill:last-child {
+  margin-right: 0px; }
+
+.badge-vegetarian {
+  color: #fff;
+  background-color: #18bc1d; }
+
+.badge-vegan {
+  color: #fff;
+  background-color: #3498DB; }
+
+.badge-kosher {
+  color: #fff;
+  background-color: #0066FF; }
+
+.badge-halal {
+  color: #fff;
+  background-color: #E74C3C; }
+
+.badge-gluten {
+  color: #fff;
+  background-color: #F39C12; }
+
+
 /* ACCORDION */
 
 .accordion {

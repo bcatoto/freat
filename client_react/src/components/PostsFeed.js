@@ -2,12 +2,23 @@ import React from "react";
 import Accordion from "react-bootstrap/Accordion"
 import Post from "./Post"
 
-export default function PostsFeed() {
-  return (
-    <Accordion>
-      <Post id="0" title="Test Title 1" body="Test description 1!"/>
-      <Post id="1" title="Test Title 2" body="Test description 2!"/>
-      <Post id="2" title="Test Title 3" body="Test description 3!"/>
-    </Accordion>
-  );
+export default class PostsFeed extends React.Component {
+  renderPosts() {
+    return this.props.posts.map(post =>
+      <Post
+        key={post.id}
+        id={post.id}
+        title={post.title}
+        body={post.description}
+      />
+    );
+  }
+
+  render() {
+    return (
+      <Accordion>
+        {this.renderPosts()}
+      </Accordion>
+    );
+  }
 }
