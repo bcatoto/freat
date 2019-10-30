@@ -7,9 +7,7 @@ export default class PostsFeed extends React.Component {
     return this.props.posts.map(post =>
       <Post
         key={post.id}
-        id={post.id}
-        title={post.title}
-        body={post.description}
+        post={post}
       />
     );
   }
