@@ -6,7 +6,7 @@
       "room": "4th floor common room",
       "building": "Bloomberg Hall",
       "description": "Test description 1",
-      "diet-options": [0, 1, 2, 3, 4],
+      "diet": [0, 1, 2, 3, 4],
       "feeds": 10
     },
     {
@@ -15,7 +15,7 @@
       "room": "Basement",
       "building": "Dod Hall",
       "description": "Test description 2",
-      "diet-options": [0, 1],
+      "diet": [0, 1],
       "feeds": 25
     },
     {
@@ -24,7 +24,7 @@
       "room": "212",
       "building": "Frist Center",
       "description": "Test description 3",
-      "diet-options": [2, 3],
+      "diet": [2, 3],
       "feeds": 40
     },
     {
@@ -33,7 +33,7 @@
       "room": "402",
       "building": "CS Building",
       "description": "Test description 4",
-      "diet-options": [2, 3, 4],
+      "diet": [2, 3, 4],
       "feeds": 5
     }
   ]
