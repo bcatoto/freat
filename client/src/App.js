@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 
 import NavBar from "./components/NavBar";
 import PostPane from "./components/PostPane";
+import MapPane from "./components/MapPane";
 import NewPost from "./components/NewPost";
 
 import axios from "axios";
@@ -45,14 +46,13 @@ class App extends React.Component {
     return (
       <div id="app" className="vw-100 vh-100">
         <NavBar handleNewPost={() => this.handleOpenModal()}/>
-        <Container fluid className="h-100 p-0">
+        <Container fluid className="h-90 p-0">
           <Row fluid="true" noGutters="true" className="h-100">
             <Col id="post-pane">
               <PostPane posts={this.state.posts}/>
             </Col>
-            <Col id="map">
-              <Container fluid="true" >
-              </Container>
+            <Col>
+              <MapPane />
             </Col>
           </Row>
         </Container>
