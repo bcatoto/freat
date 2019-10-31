@@ -4,18 +4,13 @@
 # restful_server_v1.py
 #-----------------------------------------------------------------------
 from sys import argv
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
 from tiny_database import Database
 
 # set up app
 app = Flask(__name__, template_folder='.')
 api = Api(app) 
-
-# # abort if we go to a webpage for a posting that doesn't exist
-# def abort_if_post_doesnt_exist(post_id):
-#     if post_id not in TODOS: # instead of being in TODOs, would be being in the database
-#         abort(404, message="Todo {} doesn't exist".format(todo_id))
 
 # intro page of website
 class Welcome(Resource):
@@ -37,20 +32,6 @@ class Posting(Resource):
             return "none"
 
         return results
-
-    # def delete(self, todo_id):
-    #     #abort_if_todo_doesnt_exist(todo_id)
-    #     del TODOS[todo_id]
-    #     return '', 204
-
-    def put(self, post_id):
-        args = parser.parse_args()
-        task = {'task': args['task']}
-        TODOS[todo_id] = task
-        return task, 201
-
-
-
 
 # main page of website
 class MainPage(Resource):
