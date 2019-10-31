@@ -54,7 +54,7 @@ export default class Post extends React.Component {
               <span className="post-time">15 minutes ago</span>
             </Row>
             <Row noGutters="true" className="mt-1 post-location">
-              <i class="fas fa-map-marker-alt mr-1"></i> {this.props.post.room} {this.props.post.building}
+              <i className="fas fa-map-marker-alt mr-1"></i> {this.props.post.room} {this.props.post.building}
             </Row>
           </Container>
         </Card.Header>
