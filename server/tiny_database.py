@@ -59,7 +59,7 @@ class Database:
         cursor = self._connection.cursor()
 
         QUERY_STRING = \
-            'select title, price from postings ' + \
+            'select title from postings ' + \
             'where title like ?'
         cursor.execute(QUERY_STRING, [title]) 
         self._connection.commit()
