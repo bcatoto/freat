@@ -48,7 +48,7 @@ class App extends React.Component {
         <NavBar handleNewPost={() => this.handleOpenModal()}/>
         <Container fluid className="p-0">
           <Row fluid="true" noGutters="true" className="h-100">
-            <Col id="post-pane" sm={5}>
+            <Col id="post-pane" xs={12} sm={5}>
               <PostPane posts={this.state.posts}/>
             </Col>
             <Col id="map-pane">
