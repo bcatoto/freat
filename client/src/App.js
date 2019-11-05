@@ -46,12 +46,12 @@ class App extends React.Component {
     return (
       <div id="app" className="vw-100 vh-100">
         <NavBar handleNewPost={() => this.handleOpenModal()}/>
-        <Container fluid className="h-90 p-0">
+        <Container fluid className="p-0">
           <Row fluid="true" noGutters="true" className="h-100">
-            <Col id="post-pane">
+            <Col id="post-pane" sm={5}>
               <PostPane posts={this.state.posts}/>
             </Col>
-            <Col>
+            <Col id="map-pane">
               <MapPane />
             </Col>
           </Row>
