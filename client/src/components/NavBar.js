@@ -1,18 +1,19 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
+import { Link } from 'react-router-dom'
 import Navbar from "react-bootstrap/Navbar";
+import Button from "react-bootstrap/Button";
 
 export default function NavBar(props) {
   return (
     <Navbar className="p-2 bg-primary" variant="dark" expand="lg">
-      <Navbar.Brand className="ml-2">Freat</Navbar.Brand>
+      <Link to='/'><Navbar.Brand className="ml-2">Freat</Navbar.Brand></Link>
       <Button
         className="mr-auto" variant="navbar"
         onClick={props.handleNewPost}
       >
         New post
       </Button>
-      <Button  href="#profile" variant="navbar">Account</Button>
+      <Link to='/profile'><Button variant="navbar">Account</Button></Link>
     </Navbar>
   );
 }
