@@ -85,7 +85,7 @@
   .card:first-child {
     margin-top: 10px; }
   .card:last-child {
-    margin-bottom: 10px; }
+    margin-bottom: 20px; }
 
 
 .card-body {
@@ -148,7 +148,7 @@
 /* ACCORDION */
 
 .accordion {
-  overflow: scroll;
+  overflow: auto;
 }
 
 .accordion > .card {
@@ -163,8 +163,6 @@
   .accordion > .card:last-of-type {
     border-top-left-radius: 0.75rem;
     border-top-right-radius: 0.75rem; }
-  .accordion > .card .card-header {
-    margin-bottom: 0px; }
 
 /* MODAL */
 
@@ -176,15 +174,20 @@
   padding: 0rem 1rem 1rem 1rem;
   border-top: 0px solid transparent; }
 
-#app {
-  overflow: hidden; }
+#test {
+  background-color: #000;
+  height: 50px;
+}
 
 #post-pane {
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - 38px);
+  height: calc(100vh - 54.38px);
   max-width: 576px;
   min-width: 400px; }
+
+#map-pane {
+  height: calc(100vh - 54.38px); }
 
 @media (max-width: 576px) {
   #post-pane {
