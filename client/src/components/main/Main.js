@@ -9,9 +9,6 @@ import MapPane from "./MapPane";
 
 import axios from "axios";
 
-import "bootswatch/dist/custom/bootstrap.min.css";
-import "./../css/custom.css";
-
 export default class Main extends React.Component {
   constructor(props) {
     super(props);

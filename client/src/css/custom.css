@@ -89,6 +89,7 @@
 
 
 .card-body {
+  color: #1a1a1a;
   padding: 1.25rem 1.25rem 0rem 1.25rem; }
 
 .card-title {
@@ -174,11 +175,6 @@
   padding: 0rem 1rem 1rem 1rem;
   border-top: 0px solid transparent; }
 
-#test {
-  background-color: #000;
-  height: 50px;
-}
-
 #post-pane {
   display: flex;
   flex-direction: column;
@@ -210,7 +206,15 @@
   background-color: #000; }
 
 #profile {
-  overflow: hidden;
-  background-color: #ddd;
   height: calc(100vh - 54.38px);
-}
+  max-width: 500px; }
+
+#profile-name {
+  text-align: center;
+  color: #0066ff;
+  margin: 50px auto 20px; }
+
+#profile-text {
+  text-align: center;
+  color: #0066ff;
+  margin-bottom: 20px; }

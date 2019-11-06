@@ -1,14 +1,13 @@
 import React from "react";
-import Accordion from "react-bootstrap/Accordion"
-import Card from "react-bootstrap/Card"
-import Button from "react-bootstrap/Button"
-import Badge from "react-bootstrap/Badge"
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import Badge from "react-bootstrap/Badge";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
 
-import berries from "./../assets/images/berries.png"
+import berries from "./../assets/berries.png";
 
-export default class Post extends React.Component {
+export default class UserPost extends React.Component {
   renderDietOptions() {
     const info = [
       {
@@ -46,7 +45,7 @@ export default class Post extends React.Component {
 
   render() {
     return (
-      <Accordion.Toggle as={Card} eventKey={this.props.post.id}>
+      <Card>
         <Card.Header>
           <Container fluid className="p-0">
             <Row noGutters="true">
@@ -61,17 +60,15 @@ export default class Post extends React.Component {
           </Container>
         </Card.Header>
         <Card.Img src={berries} />
-        <Accordion.Collapse eventKey={this.props.post.id}>
-          <Card.Body>
-            {this.props.post.description}
-            <br/>
-            <em>Feeds approximately: {this.props.post.feeds}</em>
-          </Card.Body>
-        </Accordion.Collapse>
+        <Card.Body>
+          {this.props.post.description}
+          <br/>
+          <em>Feeds approximately: {this.props.post.feeds}</em>
+        </Card.Body>
         <Card.Footer>
           {this.renderDietOptions()}
         </Card.Footer>
-      </Accordion.Toggle>
+      </Card>
     );
   }
 }

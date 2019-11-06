@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Main from './Main'
-import Profile from './Profile'
+import Main from './main/Main'
+import Profile from './profile/Profile'
 
 const Routes = () => (
   <Switch>

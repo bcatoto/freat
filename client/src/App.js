@@ -3,6 +3,9 @@ import NavBar from './components/NavBar';
 import Routes from './components/Routes';
 import NewPost from './components/NewPost';
 
+import "bootswatch/dist/custom/bootstrap.min.css";
+import "./css/custom.css";
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
