@@ -54,6 +54,7 @@
       box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
 
 .btn-location {
+  text-align: left;
   font-size: 0.75rem;
   line-height: 1.2;
   padding: 0px;
@@ -69,7 +70,18 @@
     color: #0052cc;
     pointer-events: none; }
 
-
+.btn-edit {
+  padding: 0px;
+  margin: 0px 0px 0px 10px;
+  font-weight: 400;
+  color: #999999; }
+  .btn-link:hover {
+    color: #4d4d4d; }
+  .btn-link:focus, .btn-link.focus {
+    box-shadow: none; }
+  .btn-link:disabled, .btn-link.disabled {
+    color: #95a5a6;
+    pointer-events: none; }
 
 /* CARD */
 
@@ -116,6 +128,7 @@
   font-size: 0.85rem;
   line-height: 1.2;
   color: #95a5a6;
+  margin-top: 2px;
 }
 
 /* BADGE (PILL) */
@@ -206,15 +219,20 @@
   background-color: #000; }
 
 #profile {
-  height: calc(100vh - 54.38px);
-  max-width: 500px; }
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 54.38px); }
 
 #profile-name {
   text-align: center;
   color: #0066ff;
-  margin: 50px auto 20px; }
+  margin: 30px auto 15px; }
 
 #profile-text {
   text-align: center;
   color: #0066ff;
-  margin-bottom: 20px; }
+  margin-bottom: 10px; }
+
+#user-feed {
+  max-width: 500px;
+  overflow: auto; }

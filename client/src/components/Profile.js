@@ -1,6 +1,8 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
-import UserPostsFeed from "./UserPostsFeed";
+
+import NavBar from "./NavBar";
+import UserPostsFeed from "./profile/UserPostsFeed";
 
 import axios from "axios";
 
@@ -22,11 +24,14 @@ export default class Profile extends React.Component {
 
   render() {
     return (
-      <Container fluid id="profile" className="p-0">
-        <h2 id="profile-name">Bianca Catoto</h2>
-        <h4 id="profile-text">Current Active Posts</h4>
-        <UserPostsFeed posts={this.state.posts}/>
-      </Container>
+      <>
+        <NavBar />
+        <Container fluid id="profile" className="p-0">
+          <h3 id="profile-name">Bianca Catoto</h3>
+          <h4 id="profile-text">Active Posts</h4>
+          <UserPostsFeed posts={this.state.posts}/>
+        </Container>
+      </>
     );
   }
 }

@@ -1,12 +1,14 @@
-import React from 'react'
-import { Switch, Route } from 'react-router-dom'
-import Main from './main/Main'
-import Profile from './profile/Profile'
+import React from "react"
+import { Switch, Route } from "react-router-dom"
+import Landing from "./Landing"
+import Home from "./Home"
+import Profile from "./Profile"
 
 const Routes = () => (
   <Switch>
-    <Route exact path='/' component={Main}/>
-    <Route path='/profile' component={Profile}/>
+    <Route exact path="/" component={Landing}/>
+    <Route path="/home" component={Home}/>
+    <Route path="/profile" component={Profile}/>
   </Switch>
 )
 

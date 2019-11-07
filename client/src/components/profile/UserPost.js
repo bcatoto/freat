@@ -51,6 +51,7 @@ export default class UserPost extends React.Component {
             <Row noGutters="true">
               <Card.Title className="mr-auto">{this.props.post.title}</Card.Title>
               <span className="post-time">15 minutes ago</span>
+              <Button variant="edit"><i className="fas fa-ellipsis-v p-0 m-0"></i></Button>
             </Row>
             <Row noGutters="true" className="mt-1">
               <Button variant="location">

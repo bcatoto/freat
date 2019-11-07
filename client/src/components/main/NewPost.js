@@ -9,56 +9,60 @@ import axios from "axios";
 export default class NewPost extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      post: {
-        title: "",
-        room: "",
-        building: null,
-        image: null,
-        description: "",
-        diet: {
-          "vegetarian": false,
-          "vegan": false,
-          "kosher": false,
-          "halal": false,
-          "gluten": false,
-        },
-        feeds: ""
+    this.emptyPost = {
+      title: "",
+      room: "",
+      building: null,
+      image: null,
+      description: "",
+      diet: {
+        "vegetarian": false,
+        "vegan": false,
+        "kosher": false,
+        "halal": false,
+        "gluten": false,
       },
+      feeds: ""
+    };
+
+    this.buildings = ["-- Select building --", "Bloomberg Hall", "Dod Hall", "Colonial", "Friend Center"];
+
+    this.diets = [
+      {
+        "id": 0,
+        "name": "vegetarian",
+        "label": "Vegetarian"
+      },
+      {
+        "id": 1,
+        "name": "vegan",
+        "label": "Vegan"
+      },
+      {
+        "id": 2,
+        "name": "kosher",
+        "label": "Kosher"
+      },
+      {
+        "id": 3,
+        "name": "halal",
+        "label": "Halal"
+      },
+      {
+        "id": 4,
+        "name": "gluten",
+        "label": "Gluten-Free"
+      }
+    ];
+
+    this.state = {
+      post: this.emptyPost,
       valid: {
         title: false,
         room: false,
         building: false,
         feeds: false
-      },
-      buildings: ["-- Select building --", "Bloomberg Hall", "Dod Hall", "Colonial", "Friend Center"],
-      diets: [
-        {
-          "id": 0,
-          "name": "vegetarian",
-          "label": "Vegetarian"
-        },
-        {
-          "id": 1,
-          "name": "vegan",
-          "label": "Vegan"
-        },
-        {
-          "id": 2,
-          "name": "kosher",
-          "label": "Kosher"
-        },
-        {
-          "id": 3,
-          "name": "halal",
-          "label": "Halal"
-        },
-        {
-          "id": 4,
-          "name": "gluten",
-          "label": "Gluten-Free"
-        }
-      ]
+      }
     };
   }
 
@@ -92,22 +96,7 @@ export default class NewPost extends React.Component {
   }
 
   close() {
-    const post = {
-      title: "",
-      room: "",
-      building: null,
-      image: null,
-      description: "",
-      diet: {
-        "vegetarian": false,
-        "vegan": false,
-        "kosher": false,
-        "halal": false,
-        "gluten": false,
-      },
-      feeds: ""
-    };
-    this.setState({ post });
+    this.setState({ post: this.emptyPost });
     this.props.handleClose();
   }
 
@@ -116,22 +105,22 @@ export default class NewPost extends React.Component {
 
     // Creates diet options array
     const diet = [];
-    for (let i = 0; i < this.state.diets.length; i++) {
-      if (this.state.post.diet[this.state.diets[i].name]) {
+    for (let i = 0; i < this.diets.length; i++) {
+      if (this.state.post.diet[this.diets[i].name]) {
         diet.push(i);
       }
     }
 
     const post = {
-      "title": this.state.title,
-      "room": this.state.room,
-      "building": this.state.building,
-      "description": this.state.description,
+      "title": this.state.post.title,
+      "room": this.state.post.room,
+      "building": this.state.post.building,
+      "description": this.state.post.description,
       "diet": diet,
-      "feeds": this.state.feeds
+      "feeds": this.state.post.feeds
     };
 
-    axios.post('https://my-json-server.typicode.com/bcatoto/freat/posts', { post })
+    axios.post('/api/post/requests/', { post })
       .then(res => {
         console.log(res);
         console.log(res.data);
@@ -141,14 +130,14 @@ export default class NewPost extends React.Component {
   }
 
   renderBuildings() {
-    return this.state.buildings.sort()
+    return this.buildings.sort()
       .map((building, index) =>
         <option key={index}>{building}</option>
       );
   }
 
   renderDietOptions() {
-    return this.state.diets.map(diet =>
+    return this.diets.map(diet =>
       <Form.Check
         key={diet.id}
         type="checkbox"
