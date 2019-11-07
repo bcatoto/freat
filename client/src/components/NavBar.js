@@ -1,18 +1,43 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
+import Button from "react-bootstrap/Button";
+import NewPost from "./main/NewPost";
 
-export default function NavBar(props) {
-  return (
-    <Navbar className="p-2 bg-primary" variant="dark" expand="lg">
-      <Navbar.Brand className="ml-2">Freat</Navbar.Brand>
-      <Button
-        className="mr-auto" variant="navbar"
-        onClick={props.handleNewPost}
-      >
-        New post
-      </Button>
-      <Button  href="#profile" variant="navbar">Account</Button>
-    </Navbar>
-  );
+export default class NavBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false
+    };
+  }
+
+  handleOpenModal() {
+    this.setState({ showModal: true });
+  }
+
+  handleCloseModal() {
+    this.setState({ showModal: false });
+  }
+
+  render() {
+    return (
+      <>
+        <NewPost
+          show={this.state.showModal}
+          handleClose={() => this.handleCloseModal()}
+        />
+        <Navbar className="p-2 bg-primary" variant="dark" expand="lg">
+          <Link to="/home"><Navbar.Brand className="ml-2">Freat</Navbar.Brand></Link>
+          <Button
+            className="mr-auto" variant="navbar"
+            onClick={() => this.handleOpenModal()}
+          >
+            New post
+          </Button>
+          <Link to="/profile"><Button variant="navbar">Account</Button></Link>
+        </Navbar>
+      </>
+    );
+  }
 }

@@ -1,65 +1,81 @@
-import React from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-
-import NavBar from "./components/NavBar";
-import PostPane from "./components/PostPane";
-import NewPost from "./components/NewPost";
+import React from "react"
+import { Switch, Route } from "react-router-dom"
+import Landing from "./components/Landing"
+import Home from "./components/Home"
+import Profile from "./components/Profile"
 
 import axios from "axios";
 
 import "bootswatch/dist/custom/bootstrap.min.css";
 import "./css/custom.css";
 
-class App extends React.Component {
+// For CSRF token
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
+
+export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: false,
-      posts: []
+      posts:[],
+      userPosts: []
     };
   }
 
   componentDidMount() {
-    axios.get('https://my-json-server.typicode.com/bcatoto/freat/posts')
+    this.getPosts();
+    this.getUserPosts();
+  }
+
+  getPosts() {
+    axios.get("https://my-json-server.typicode.com/bcatoto/freat/posts")
       .then(res => {
         const posts = res.data;
         this.setState({ posts });
-      })
+      });
   }
 
-  handleOpenModal() {
-    this.setState({
-      showModal: true
-    });
+  getUserPosts() {
+    axios.get("https://my-json-server.typicode.com/bcatoto/freat/posts")
+      .then(res => {
+        const userPosts = res.data;
+        this.setState({ userPosts });
+      });
   }
 
-  handleCloseModal() {
-    this.setState({
-      showModal: false
-    });
+  addPost(post) {
+    axios.post("https://my-json-server.typicode.com/bcatoto/freat/posts", { post })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      });
   }
 
   render() {
-    return (
-      <div id="app" className="vw-100 vh-100">
-        <NavBar handleNewPost={() => this.handleOpenModal()}/>
-        <Container fluid className="h-100 p-0">
-          <Row fluid="true" noGutters="true" className="h-100">
-            <Col id="post-pane">
-              <PostPane posts={this.state.posts}/>
-            </Col>
-            <Col id="map">
-              <Container fluid="true" >
-              </Container>
-            </Col>
-          </Row>
-        </Container>
-        <NewPost show={this.state.showModal} handleClose={() => this.handleCloseModal()}/>
+    return(
+      <div id="app">
+        <Switch>
+          <Route
+            exact path="/"
+            render={(props) => (
+              <Landing {...props} />
+            )}
+          />
+          <Route
+            path="/home"
+            render={(props) => (
+              <Home {...props} posts={this.state.posts} />
+            )}
+          />
+          <Route
+            path="/profile"
+            render={(props) => (
+              <Profile {...props} posts={this.state.userPosts} />
+            )}
+          />
+        </Switch>
       </div>
     );
   }
 }
-
-export default App;
