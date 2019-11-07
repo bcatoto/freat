@@ -95,11 +95,13 @@ export default class NewPost extends React.Component {
     this.setState({ post });
   }
 
+  // Closes and resets form
   close() {
     this.setState({ post: this.emptyPost });
     this.props.handleClose();
   }
 
+  // Handles submission of new post form
   handleSubmit = event => {
     event.preventDefault();
 
@@ -111,22 +113,47 @@ export default class NewPost extends React.Component {
       }
     }
 
+    // Gets timestamp
+    const time = new Date().getTime();
+
     const post = {
       "title": this.state.post.title,
       "room": this.state.post.room,
       "building": this.state.post.building,
       "description": this.state.post.description,
       "diet": diet,
-      "feeds": this.state.post.feeds
+      "feeds": this.state.post.feeds,
+      "time": time
     };
 
-    axios.post('/api/post/requests/', { post })
+    axios.post("https://my-json-server.typicode.com/bcatoto/freat/posts", { post })
       .then(res => {
         console.log(res);
         console.log(res.data);
       });
 
     this.close();
+  }
+
+  // Converts time difference to minutes/hours
+  getTime() {
+    const min = 60 * 1000;
+    const hour = min * 60;
+
+    const time = 2700;
+
+    if (time > 2 * hour) {
+      return Math.floor(time / hour) + " hours ago";
+    }
+    else if (time > hour) {
+      return "1 hour ago";
+    }
+    else if (time > min){
+      return Math.floor(time / min) + " minutes ago";
+    }
+    else {
+      return "1 minute ago";
+    }
   }
 
   renderBuildings() {

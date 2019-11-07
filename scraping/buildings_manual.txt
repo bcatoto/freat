@@ -103,43 +103,24 @@ Center for Jewish Life
 Chancellor Green
 Chapel
 Charter Club
-Clarke Field Dugout
-Clarke Field Press Box
 Clio Hall
 Cloister Inn
-Cogeneration Plant
 Colonial Club
 Community Hall
 Computer Science Building
-Cordish Family Pavilion
 Corwin Hall
 Cottage Club
 Cuyler Hall
-Davis Building
-DeNunzio Pool
 Dickinson Hall
-Dillon Court East
-Dillon Court West
 Dillon Gym
-Dinky Bar &amp; Kitchen
 Dod Hall
 Dodge Hall
 Dodge-Osborn Hall
 East Pyne Building
 Edwards Hall
 Effron Music Building
-Elementary Particles Lab East
-Elementary Particles Lab West
-Elm Drive Substation
-Engineering QUAD
-Engineering Quad A Wing
-Engineering Quad B Wing
-Engineering Quad C Wing
-Engineering Quad D Wing
-Engineering Quad E Wing
-Engineering Quad F Wing
-Engineering Quad G Wing
-Engineering Quad J Wing
+Elementary Particle Labs
+Engineering Quad
 Eno Hall
 Feinberg Hall
 Fields Center
@@ -149,29 +130,17 @@ Fisher Hall
 Fisher Hall Dorm
 FitzRandolph Observatory
 Forbes Addition
-Forbes Garden
 Forbes Main
-Forrestal Campus Data Center
-Forrestal Complex
 Foulke Hall
 Frick Chemistry Laboratory
 Friend Center
 Frist Campus Center
-GGM Office Trailer
 Garden Theatre
-Gas Dynamics Laboratory
 Gauss Hall
 Green Hall
-Grinder Lab
-Grounds Storage Building
-Grounds Storage Shed #1
-Grounds Storage Shed #2
-Gulick Pavilion
 Guyot Hall
-Haaga House
 Hamilton Hall
 Hargadon Hall
-Harmony
 Helm Building
 Henry Hall
 Henry House
@@ -181,19 +150,16 @@ Icahn Laboratory
 Ivy Club
 Jadwin Gym
 Jadwin Hall
-Johnstone Building
 Joline Hall
 Jones Hall
 Julis Romo Rabinowitz Building
-Labyrinth Books
-Launch House
 Lauritzen Hall
 Lewis Library
 Library Annex A
 Little Hall
 Lockhart Hall
 Louis A. Simpson International Building
-Lourie - Love Pavilion
+Lourie-Love Pavilion
 Lowrie House
 Lyman Spitzer Building
 MacMillan Annex
