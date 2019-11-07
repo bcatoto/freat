@@ -1,0 +1,1 @@
+web: gunicorn app:freat_server_1

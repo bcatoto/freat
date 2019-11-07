@@ -1,0 +1,243 @@
+100 Overlook Center
+11 University Place
+114-116 Nassau Street
+116 Prospect Avenue
+120 Alexander Street
+126 Alexander Street
+130 University Place
+136 Alexander Street
+161 Nassau Court
+165-167 Nassau Court
+169 Nassau Street
+171 Broadmead Street
+172 Alexander Street
+173 Nassau Street
+175 Nassau Street
+179 Nassau Street
+180 Alexander Street
+185 Broadmead
+185 Nassau Street
+1879 Hall
+1895 Field Dugout
+1901-Laughlin Hall
+1903 Hall
+1912 Pavilion
+1915 Hall
+192 Nassau Street
+1927 - Clapp Hall
+1937 Hall
+1938 Hall
+1939 Hall
+194 Alexander Street
+194 Nassau Street
+1952 Stadium
+1967 Hall
+1976 Hall
+1981 Hall
+199 Nassau Street
+2 Dickinson Street
+2-4 Nassau Street
+200 Elm Drive
+201 Forrestal Road
+201 Nassau Street
+22 Chambers Street
+221 Nassau Street
+228 Alexander Street
+23 University Place
+26 College Road West
+262 Alexander Street
+262A Alexander Street
+272 Alexander Street
+282 Alexander Street
+29 Murray Place
+294 Alexander Street
+2B Auditorium Building
+303 College Road East
+306 Alexander Street
+34 Chambers Street
+350 Alexander Street
+36 University Place
+39 University Place
+41 University Place
+42 William Street
+48 University Place
+4A Chemical Sciences Building
+4B Isotope Separator Building
+5 Ivy Lane
+693 Alexander Road
+6A-C Machine Shops Buildings
+700 Forrestal Road
+701 Carnegie Center
+71 University Place
+755 Alexander Road
+81 Alexander Street
+87 Prospect Avenue
+91 Prospect Avenue
+99 Alexander Street
+9A Cafeteria/Power House
+Alexander Hall
+Andlinger Center
+Architecture Building
+Architecture Laboratory
+Art Museum
+Arts Tower
+Baker Hall
+Baker Rink
+Bendheim Finance
+Bendheim Hall
+Blair Hall
+Bloomberg Hall
+Bobst Hall
+Bogle Hall
+Bowen Hall
+Brown Hall
+Burr Hall
+Buyers Hall
+Caldwell Field House
+Campbell Hall
+Campus Club
+Cannon Club
+Cannon Green
+Cap and Gown Club
+Center for Jewish Life
+Chancellor Green
+Chapel
+Charter Club
+Clio Hall
+Cloister Inn
+Colonial Club
+Community Hall
+Computer Science Building
+Corwin Hall
+Cottage Club
+Cuyler Hall
+Dickinson Hall
+Dillon Gym
+Dod Hall
+Dodge Hall
+Dodge-Osborn Hall
+East Pyne Building
+Edwards Hall
+Effron Music Building
+Elementary Particle Labs
+Engineering Quad
+Eno Hall
+Feinberg Hall
+Fields Center
+Fine Hall
+Firestone Library
+Fisher Hall
+Fisher Hall Dorm
+FitzRandolph Observatory
+Forbes Addition
+Forbes Main
+Foulke Hall
+Frick Chemistry Laboratory
+Friend Center
+Frist Campus Center
+Garden Theatre
+Gauss Hall
+Green Hall
+Guyot Hall
+Hamilton Hall
+Hargadon Hall
+Helm Building
+Henry Hall
+Henry House
+Holder Hall
+Hoyt Lab
+Icahn Laboratory
+Ivy Club
+Jadwin Gym
+Jadwin Hall
+Joline Hall
+Jones Hall
+Julis Romo Rabinowitz Building
+Lauritzen Hall
+Lewis Library
+Library Annex A
+Little Hall
+Lockhart Hall
+Louis A. Simpson International Building
+Lourie-Love Pavilion
+Lowrie House
+Lyman Spitzer Building
+MacMillan Annex
+MacMillan Annex
+MacMillan Building
+Maclean House
+Madison Hall
+Maeder Hall
+Marx Hall
+McCarter Theatre
+McCormick Hall
+McCosh Hall
+McCosh Health Center
+McDonnell Hall
+McPartland Building
+Meyers Building
+Moffett Laboratory
+Moran Building
+Morrison Hall
+Mudd Library
+Mullet Building
+Murley-Pivirotto Family Tower
+Murray Theater
+Nassau Hall
+New Graduate College
+New South Building
+North Guard Gate
+Nursery Office
+Nursery Shed
+Old Graduate College
+Palmer Guest House
+Patton Hall
+Peretsman Scully Hall
+Peyton Hall
+Princeton Neuroscience Institute
+Princeton Plasma Physics Lab
+Princeton Plasma Physics Laboratory
+Princeton Stadium
+Princeton University Press
+Printing Services
+Prospect House
+Pyne Hall
+Quadrangle Club
+ReCAP
+Roberts Stadium
+Robertson Hall
+Rock Magnetism Laboratory
+Sayre Hall
+Scheide Caldwell House
+Schultz Laboratory
+Scully Hall
+Shea Rowing Center
+Sherrerd Hall
+South Guard Booth
+Spelman Halls
+Springdale Club House
+Springdale Clubhouse
+Stanhope Hall
+Streicker Bridge
+Tennis Pavilion
+Terrace Club
+Thomas Laboratory
+Thompson Building
+Tiger Inn
+Tower Club
+Von Neumann Hall
+Walker Hall
+Wallace Dance & Theater
+Wallace Hall
+Weaver Track Stadium
+Wendell Hall
+West Lodge
+Whig Hall
+Wilcox Hall
+Wilf Hall
+Witherspoon Hall
+Woolworth Center
+Wright Hall
+Wu Hall
+Wyman House
+Yoseloff Hall
