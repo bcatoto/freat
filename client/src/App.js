@@ -6,7 +6,7 @@ import Profile from "./components/Profile"
 
 import axios from "axios";
 
-import "bootswatch/dist/custom/bootstrap.min.css";
+import "bootswatch/dist/flatly/bootstrap.min.css";
 import "./css/custom.css";
 
 // For CSRF token
@@ -29,7 +29,7 @@ export default class App extends React.Component {
   }
 
   getPosts() {
-    axios.get("https://my-json-server.typicode.com/bcatoto/freat/posts")
+    axios.get("http://localhost:5000/api/v1/posting/")
       .then(res => {
         const posts = res.data;
         this.setState({ posts });
