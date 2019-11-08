@@ -1,1 +1,2 @@
-web: gunicorn app:freat_server_1
+web: npm run build
+web: gunicorn --pythonpath=inPerson app:run.py
