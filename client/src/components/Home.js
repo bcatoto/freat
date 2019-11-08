@@ -9,17 +9,14 @@ import MapPane from "./main/MapPane";
 
 export default function Home(props) {
   return(
-    <>
-      <NavBar />
-      <Row fluid="true" noGutters="true">
-        <Col id="post-pane" xs={12} sm={5}>
-          <Searchbar />
-          <PostsFeed posts={props.posts} />
-        </Col>
-        <Col id="map-pane">
-          <MapPane />
-        </Col>
-      </Row>
-    </>
+    <Row fluid="true" noGutters="true">
+      <Col id="post-pane" xs={12} sm={5}>
+        <Searchbar />
+        <PostsFeed posts={props.posts} />
+      </Col>
+      <Col id="map-pane">
+        <MapPane />
+      </Col>
+    </Row>
   );
 }
