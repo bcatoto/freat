@@ -10,11 +10,6 @@ import axios from "axios";
 import "bootswatch/dist/flatly/bootstrap.min.css";
 import "./css/custom.css";
 
-// For CSRF token
-axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
-axios.defaults.withCredentials = true;
-
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -34,7 +29,7 @@ export default class App extends React.Component {
   }
 
   getPosts() {
-    axios.get("http://localhost:5000/api/v1/posting/")
+    axios.get("/api/v1/posting/")
       .then(res => {
         const posts = res.data;
         this.setState({ posts });

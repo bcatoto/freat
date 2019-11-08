@@ -173,12 +173,13 @@
   background-color: #FFF;
   background-clip: border-box;
   border: 0px;
+  border-radius: 0.75rem;
   box-shadow: 1px 1px 10px #d9d9d9; }
   @media (max-width: 576px) {
     .card {
       margin: 25px 30px; } }
   .card:first-child {
-    margin-top: 10px; }
+    margin-top: 20px; }
   .card:last-child {
     margin-bottom: 20px; }
 
