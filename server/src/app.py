@@ -32,8 +32,7 @@ def create_app(env_name):
     """
     example endpoint
     """
-    return "This should work now"
-    # return render_template('index.html')
+    return render_template('index.html')
 
   #@cross_origin(supports_credentials=True)
   @app.route('/test', methods=['GET'])
