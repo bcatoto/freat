@@ -26,8 +26,9 @@ export default class NavBar extends React.Component {
         <NewPost
           show={this.state.showModal}
           handleClose={() => this.handleCloseModal()}
+          addPost={this.props.addPost}
         />
-        <Navbar className="p-2 bg-primary" variant="dark" expand="lg">
+        <Navbar className="p-2" variant="dark" expand="lg">
           <Link to="/home"><Navbar.Brand className="ml-2">Freat</Navbar.Brand></Link>
           <Button
             className="mr-auto" variant="navbar"

@@ -80,6 +80,7 @@ export default class NewPost extends React.Component {
     }
   }
 
+  // Keeps track of field changes
   handleChange = event => {
     const name = event.target.name;
     const value = event.target.value;
@@ -88,6 +89,7 @@ export default class NewPost extends React.Component {
     this.setState({ post });
   }
 
+  // Keeps track of diet options selected
   handleDietChange = event => {
     const name = event.target.name;
     const post = this.state.post;
@@ -123,15 +125,11 @@ export default class NewPost extends React.Component {
       "description": this.state.post.description,
       "diet": diet,
       "feeds": this.state.post.feeds,
-      "time": time
+      "time": time,
+      "userid": this.props.user.userid
     };
 
-    axios.post("https://my-json-server.typicode.com/bcatoto/freat/posts", { post })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      });
-
+    this.props.addPost(post);
     this.close();
   }
 
@@ -156,6 +154,7 @@ export default class NewPost extends React.Component {
     }
   }
 
+  // Renders building options
   renderBuildings() {
     return this.buildings.sort()
       .map((building, index) =>
@@ -163,6 +162,7 @@ export default class NewPost extends React.Component {
       );
   }
 
+  // Renders diet options
   renderDietOptions() {
     return this.diets.map(diet =>
       <Form.Check
@@ -224,8 +224,8 @@ export default class NewPost extends React.Component {
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button type="reset" variant="danger" className="mr-1" onClick={() => this.close()}>Cancel</Button>
-            <Button type="submit" variant="outline-primary">Submit</Button>
+            <Button type="reset" variant="cancel" className="mr-1" onClick={() => this.close()}>Cancel</Button>
+            <Button type="submit" variant="submit">Submit</Button>
           </Modal.Footer>
         </Form>
       </Modal>

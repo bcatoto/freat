@@ -1,4 +1,4 @@
-from flask import Flask,request, Response, json
+from flask import Flask,request, Response, json, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS,cross_origin
 import os
@@ -12,10 +12,10 @@ def create_app(env_name):
   """
   Create app
   """
-  
+
   # app initiliazation
-  app = Flask(__name__)
-  CORS(app, support_credentials=True)
+  app = Flask(__name__, static_folder='./../../client/build/static',
+    template_folder='./../../client/build')
 
   app.config.from_object(app_config[env_name])
 
@@ -27,13 +27,13 @@ def create_app(env_name):
 
 
   @app.route('/', methods=['GET'])
-  
+
   def index():
     """
     example endpoint
     """
-    return 'Congratulations! Your first endpoint is workin'
-  
+    return render_template('index.html')
+
   #@cross_origin(supports_credentials=True)
   @app.route('/test', methods=['GET'])
   def getPostings():
