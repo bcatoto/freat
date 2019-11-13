@@ -16,7 +16,9 @@ pip install -r requirements.txt
 
 To build the React app, execute:
 
-```npm run build```
+```
+npm run build
+```
 
 To run the app, go into the `server` folder and run `run.py`:
 
