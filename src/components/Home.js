@@ -1,9 +1,6 @@
 import React from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
-import NavBar from "./NavBar";
-import Searchbar from "./main/Searchbar";
 import PostsFeed from "./main/PostsFeed";
 import MapPane from "./main/MapPane";
 
@@ -14,7 +11,7 @@ export default function Home(props) {
         <PostsFeed posts={props.posts} />
       </Col>
       <Col id="map-pane">
-        <MapPane />
+        <MapPane posts={props.posts} />
       </Col>
     </Row>
   );

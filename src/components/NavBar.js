@@ -27,6 +27,7 @@ export default class NavBar extends React.Component {
           show={this.state.showModal}
           handleClose={() => this.handleCloseModal()}
           addPost={this.props.addPost}
+          user={this.props.user}
         />
         <Navbar className="p-2" variant="dark" expand="lg">
           <Link to="/home"><Navbar.Brand className="ml-2">Freat</Navbar.Brand></Link>
