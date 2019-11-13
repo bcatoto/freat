@@ -14,8 +14,8 @@ def create_app(env_name):
   """
 
   # app initiliazation
-  app = Flask(__name__, static_folder='./../../client/build/static',
-    template_folder='./../../client/build')
+  app = Flask(__name__, static_folder='./../../build/static',
+    template_folder='./../../build')
 
   app.config.from_object(app_config[env_name])
 
