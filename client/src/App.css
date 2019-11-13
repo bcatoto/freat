@@ -171,6 +171,12 @@
     background-color: #ecf0f1;
     opacity: 1; }
 
+.form-text {
+  display: block;
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+}
+
 /* CARD */
 
 .card {
@@ -285,10 +291,8 @@
   padding: 0rem 1rem 1rem 1rem;
   border-top: 0px solid transparent; }
 
-/* TEXT FORMATTING */
 .required {
-  color: #E74C3C;
-}
+  color: #E74C3C; }
 
 #post-pane {
   display: flex;

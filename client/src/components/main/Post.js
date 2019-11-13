@@ -9,6 +9,30 @@ import Row from "react-bootstrap/Row";
 import berries from "./../assets/berries.png";
 
 export default class Post extends React.Component {
+
+  // Converts time difference to minutes/hours
+  getTime() {
+    const min = 60 * 1000;
+    const hour = min * 60;
+
+    const now = Date.now();
+    const time = new Date(this.props.post.created_at);
+    const diff = now - time;
+
+    if (diff > 2 * hour) {
+      return Math.floor(diff / hour) + " hours ago";
+    }
+    else if (diff > hour) {
+      return "1 hour ago";
+    }
+    else if (diff > min){
+      return Math.floor(diff / min) + " minutes ago";
+    }
+    else {
+      return "1 minute ago";
+    }
+  }
+
   renderDietOptions() {
     const info = [
       {
@@ -51,7 +75,7 @@ export default class Post extends React.Component {
           <Container fluid className="p-0">
             <Row noGutters="true">
               <Card.Title className="mr-auto">{this.props.post.title}</Card.Title>
-              <span className="post-time">15 minutes ago</span>
+              <span className="post-time">{this.getTime()}</span>
             </Row>
             <Row noGutters="true" className="mt-1">
               <Button variant="location">
@@ -63,7 +87,7 @@ export default class Post extends React.Component {
         <Card.Img src={berries} />
         <Accordion.Collapse eventKey={this.props.post.id}>
           <Card.Body>
-            {this.props.post.description}
+            {this.props.post.desc}
             <br/>
             <em>Feeds approximately: {this.props.post.feeds}</em>
           </Card.Body>
