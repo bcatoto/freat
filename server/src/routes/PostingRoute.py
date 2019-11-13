@@ -25,8 +25,20 @@ def newPost():
   Create a new post and add to the database
   """
 
-  req_data = request.get_json()
-  print('debug, reqdata: ', req_data)
+  req_data = request.get_json().post
+  print(req_data)
+  try:
+    data = posting_schema.load(req_data)
+    print(data)
+    ## future check for if the post id already exists
+    post = PostingModel(req_data)
+    post.save()
+    data = posting_schema.dump(post)
+    print(data)
+    return custom_response(data,201)
+  except ValidationError as err:
+    errors = err.messages
+    return custom_response({'message': err}, 400)
 
   # # this is the owner
   # # req_data['owner_id'] = g.user.get('id') # idk what the g. is
