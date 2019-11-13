@@ -34,30 +34,6 @@ def create_app(env_name):
     """
     return render_template('index.html')
 
-  # # take care of new posts
-  # @app.route('/', methods=['POST'])
-  # def add_post():
-  #   # check if this posting is valid: do we need to verify userid?
-
-  #   # get all the information
-  #   title = request.form.get('title')
-  #   room = request.form.get('room')
-  #   building = request.form.get('building')
-  #   description = request.form.get('description')
-  #   diet = request.form.get('diet')
-  #   feeds = request.form.get('feeds')
-  #   userid = request.form.get('userid') # ? userid doesn't show up in PostingModel 
-
-  #   # add a row to the postings table
-  #   new_post = PostingModel(title=title, desc=description, room=room, building=building, diet=diet, feeds=feeds)
-  #   db.session.add(new_post)
-  #   db.session.commit()
-
-  #   # still same html file
-  #   return render_template('index.html')
-
-
-
   #@cross_origin(supports_credentials=True)
   @app.route('/test', methods=['GET'])
   def getPostings():
