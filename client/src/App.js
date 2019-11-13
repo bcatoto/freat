@@ -29,7 +29,7 @@ export default class App extends React.Component {
   }
 
   getPosts() {
-    axios.get("https://my-json-server.typicode.com/bcatoto/freat/posts")
+    axios.get("/api/v1/posting/")
       .then(res => {
         const posts = res.data;
         this.setState({ posts });
@@ -37,7 +37,7 @@ export default class App extends React.Component {
   }
 
   getUserPosts() {
-    axios.get("https://my-json-server.typicode.com/bcatoto/freat/posts")
+    axios.get("/api/v1/posting/")
       .then(res => {
         const userPosts = res.data;
         this.setState({ userPosts });

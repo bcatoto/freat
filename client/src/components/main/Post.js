@@ -14,9 +14,10 @@ export default class Post extends React.Component {
   getTime() {
     const min = 60 * 1000;
     const hour = min * 60;
+
     const now = Date.now();
-    const created = new Date(this.props.post.created_at)
-    const diff = now - created;
+    const time = new Date(this.props.post.created_at);
+    const diff = now - time;
 
     if (diff > 2 * hour) {
       return Math.floor(diff / hour) + " hours ago";
@@ -86,7 +87,7 @@ export default class Post extends React.Component {
         <Card.Img src={berries} />
         <Accordion.Collapse eventKey={this.props.post.id}>
           <Card.Body>
-            {this.props.post.description}
+            {this.props.post.desc}
             <br/>
             <em>Feeds approximately: {this.props.post.feeds}</em>
           </Card.Body>

@@ -8,6 +8,7 @@ import Col from "react-bootstrap/Col";
 export default class NewPost extends React.Component {
   constructor(props) {
     super(props);
+
     this.emptyPost = {
       title: "",
       room: "",
@@ -133,9 +134,7 @@ export default class NewPost extends React.Component {
       }
     }
 
-    // Gets timestamp
-    const time = new Date().getTime();
-
+    // Creates POST request data
     const post = {
       title: this.state.post.title,
       room: this.state.post.room,
@@ -201,6 +200,9 @@ export default class NewPost extends React.Component {
                 <Form.Control as="select" name="building" onChange={this.handleChange}>
                   {this.renderBuildings()}
                 </Form.Control>
+                <Form.Control.Feedback type="invalid">
+                  Please select a building.
+                </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
 
