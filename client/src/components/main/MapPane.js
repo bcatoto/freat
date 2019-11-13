@@ -2,6 +2,8 @@ import React from "react";
 import Map from "./Map"
 import { withScriptjs, withGoogleMap } from "react-google-maps"
 
+require('dotenv').config()
+
 export default class MapPane extends React.Component {
   constructor(props) {
     super(props);
