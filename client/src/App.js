@@ -8,15 +8,15 @@ import Profile from "./components/Profile"
 import axios from "axios";
 
 import "bootswatch/dist/flatly/bootstrap.min.css";
-import "./css/custom.css";
+import "./App.css";
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       user: {
-        id: null,
-        name: ""
+        id: 12345,
+        name: "Test User"
       },
       posts:[],
       userPosts: []
@@ -29,7 +29,7 @@ export default class App extends React.Component {
   }
 
   getPosts() {
-    axios.get("/api/v1/posting/")
+    axios.get("https://my-json-server.typicode.com/bcatoto/freat/posts")
       .then(res => {
         const posts = res.data;
         this.setState({ posts });
@@ -45,7 +45,7 @@ export default class App extends React.Component {
   }
 
   addPost(post) {
-    axios.post("https://my-json-server.typicode.com/bcatoto/freat/posts", { post })
+    axios.post("/api/v1/posting/", { post })
       .then(res => {
         console.log(res);
         console.log(res.data);

@@ -2,9 +2,8 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Collapse from "react-bootstrap/Collapse";
 import Col from "react-bootstrap/Col";
-
-import axios from "axios";
 
 export default class NewPost extends React.Component {
   constructor(props) {
@@ -12,7 +11,7 @@ export default class NewPost extends React.Component {
     this.emptyPost = {
       title: "",
       room: "",
-      building: null,
+      building: "",
       image: null,
       description: "",
       diet: {
@@ -61,13 +60,16 @@ export default class NewPost extends React.Component {
         title: false,
         room: false,
         building: false,
-        feeds: false
-      }
+        feeds: true
+      },
+      validForm: false
     };
   }
 
+  // Validates input
   validate(name, value) {
     const valid = this.state.valid;
+
     switch (name) {
       case "title":
         valid.title = value.length > 0;
@@ -75,9 +77,22 @@ export default class NewPost extends React.Component {
       case "room":
         valid.room = value.length > 0;
         break;
+      case "building":
+        valid.building = value !== "-- Select building --";
+        break;
+      case "image":
+        break;
+      case "feeds":
+        valid.feeds = value > 0;
+        break;
       default:
         break;
     }
+
+    // Checks if entire form is valid
+    this.state.validForm = valid.title && valid.room && valid.building && valid.feeds;
+
+    console.log(this.state.validForm)
   }
 
   // Keeps track of field changes
@@ -87,6 +102,9 @@ export default class NewPost extends React.Component {
     const post = this.state.post;
     post[name] = value;
     this.setState({ post });
+
+    // Validate input
+    this.validate(name, value)
   }
 
   // Keeps track of diet options selected
@@ -119,39 +137,23 @@ export default class NewPost extends React.Component {
     const time = new Date().getTime();
 
     const post = {
-      "title": this.state.post.title,
-      "room": this.state.post.room,
-      "building": this.state.post.building,
-      "description": this.state.post.description,
-      "diet": diet,
-      "feeds": this.state.post.feeds,
-      "time": time,
-      "userid": this.props.user.userid
+      title: this.state.post.title,
+      room: this.state.post.room,
+      building: this.state.post.building,
+      desc: this.state.post.description,
+      diet: diet,
+      feeds: this.state.post.feeds,
+      userid: this.props.user.id
     };
 
     this.props.addPost(post);
     this.close();
   }
 
-  // Converts time difference to minutes/hours
-  getTime() {
-    const min = 60 * 1000;
-    const hour = min * 60;
-
-    const time = 2700;
-
-    if (time > 2 * hour) {
-      return Math.floor(time / hour) + " hours ago";
-    }
-    else if (time > hour) {
-      return "1 hour ago";
-    }
-    else if (time > min){
-      return Math.floor(time / min) + " minutes ago";
-    }
-    else {
-      return "1 minute ago";
-    }
+  renderRequired(label) {
+    return (
+      <Form.Label>{label}<span className="required">*</span></Form.Label>
+    );
   }
 
   // Renders building options
@@ -184,18 +186,18 @@ export default class NewPost extends React.Component {
         <Form onSubmit={this.handleSubmit}>
           <Modal.Body>
             <Form.Group>
-              <Form.Label>Title</Form.Label>
+              {this.renderRequired("Title")}
               <Form.Control type="text" name="title" placeholder="Enter title" onChange={this.handleChange}/>
             </Form.Group>
 
             <Form.Row>
               <Form.Group as={Col}>
-                <Form.Label>Room</Form.Label>
+                {this.renderRequired("Room")}
                 <Form.Control type="text" name="room" placeholder="Enter room" onChange={this.handleChange}/>
               </Form.Group>
 
               <Form.Group as={Col} controlId="input-building">
-                <Form.Label>Building</Form.Label>
+                {this.renderRequired("Building")}
                 <Form.Control as="select" name="building" onChange={this.handleChange}>
                   {this.renderBuildings()}
                 </Form.Control>
@@ -203,7 +205,7 @@ export default class NewPost extends React.Component {
             </Form.Row>
 
             <Form.Group controlId="input-image">
-              <Form.Label>Image</Form.Label>
+              {this.renderRequired("Image")}
               <Form.Control type="file" />
               <Form.Control.Feedback type="invalid">Please upload an image.</Form.Control.Feedback>
             </Form.Group>
@@ -215,6 +217,9 @@ export default class NewPost extends React.Component {
 
             <Form.Group controlId="input-diet">
               <Form.Label>Dietary Options</Form.Label>
+              <Form.Text className="text-muted">
+                Please select if any food fits a dietary option.
+              </Form.Text>
               {this.renderDietOptions()}
             </Form.Group>
 
@@ -225,7 +230,7 @@ export default class NewPost extends React.Component {
           </Modal.Body>
           <Modal.Footer>
             <Button type="reset" variant="cancel" className="mr-1" onClick={() => this.close()}>Cancel</Button>
-            <Button type="submit" variant="submit">Submit</Button>
+            <Button type="submit" variant="submit" disabled={!this.state.validForm}>Submit</Button>
           </Modal.Footer>
         </Form>
       </Modal>
