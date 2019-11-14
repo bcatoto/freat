@@ -49,6 +49,7 @@ export default class App extends React.Component {
       .then(res => {
         console.log(res);
         console.log(res.data);
+        this.setState({posts : this.state.posts.concat(res.data)})
       });
   }
 
