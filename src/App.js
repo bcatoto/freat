@@ -51,7 +51,6 @@ export default class App extends React.Component {
       .then(res => {
         console.log(res);
         console.log(res.data);
-
         const posts = this.state.posts;
         posts.push(post)
         this.setState({ posts });

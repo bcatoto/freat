@@ -150,7 +150,7 @@ export default class NewPost extends React.Component {
       desc: this.state.post.description,
       diet: diet,
       feeds: this.state.post.feeds,
-      userid: this.props.user.id
+      // userid: this.props.user.id
     };
 
     this.props.addPost(post);
