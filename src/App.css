@@ -291,7 +291,50 @@
   padding: 0rem 1rem 1rem 1rem;
   border-top: 0px solid transparent; }
 
-.required {
+/* DROPDOWN */
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 5rem;
+  padding: 0.5rem 0;
+  margin: 0.125rem 0 0;
+  font-size: 0.9375rem;
+  color: #212529;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem; }
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 0.25rem 1rem;
+  clear: both;
+  font-weight: 400;
+  color: #7b8a8b;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0; }
+  .dropdown-item:hover, .dropdown-item:focus {
+    color: #0066ff;
+    text-decoration: none;
+    background-color: #fff; }
+
+/* Removes caret from dropdown button */
+.dropdown-toggle::after {
+  display: none; }
+
+/* CUSTOM */
+
+.red {
   color: #E74C3C; }
 
 #post-pane {

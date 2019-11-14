@@ -5,7 +5,11 @@ import UserPost from "./UserPost"
 export default class UserPostsFeed extends React.Component {
   renderPosts() {
     return this.props.posts.map(post =>
-      <UserPost key={post.id} post={post} />
+      <UserPost
+        key={post.id}
+        deletePost={this.props.deletePost}
+        post={post}
+      />
     );
   }
 

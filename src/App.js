@@ -28,28 +28,45 @@ export default class App extends React.Component {
     this.getUserPosts();
   }
 
-  getPosts() {
-    axios.get("/api/v1/posting/")
+  getPosts = async () => {
+    await axios.get("/api/v1/posting/")
       .then(res => {
         const posts = res.data;
         this.setState({ posts });
-      });
+      })
+      .catch((err) => console.log(err));
   }
 
-  getUserPosts() {
-    axios.get("/api/v1/posting/")
+  getUserPosts = async () => {
+    await axios.get("/api/v1/posting/")
       .then(res => {
         const userPosts = res.data;
         this.setState({ userPosts });
-      });
+      })
+      .catch((err) => console.log(err));
   }
 
-  addPost(post) {
-    axios.post("/api/v1/posting/", { post })
+  addPost = async (post) => {
+    await axios.post("/api/v1/posting/", { post })
       .then(res => {
         console.log(res);
         console.log(res.data);
-      });
+
+        const posts = this.state.posts;
+        posts.push(post)
+        this.setState({ posts });
+      })
+      .catch((err) => console.log(err));
+  }
+
+  deletePost = async (postid) => {
+    axios.delete("/api/v1/posting/${postid}")
+      .then(res => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err))
+
+      // TODO: update posts and user's posts without refreshing page
   }
 
   render() {
@@ -76,6 +93,7 @@ export default class App extends React.Component {
         <Route path="/profile"
           render={(props) => (
             <Profile {...props}
+              deletePost={this.deletePost}
               posts={this.state.userPosts}
               user={this.state.user}
             />

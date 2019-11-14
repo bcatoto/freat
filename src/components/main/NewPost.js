@@ -64,36 +64,44 @@ export default class NewPost extends React.Component {
         feeds: true
       },
       validForm: false
+
+      // // Checks if initial values are valid
+      // this.validate("title");
+      // this.validate("room");
+      // this.validate("building");
+      // this.validate("image")
+      // this.validate("feeds")
     };
   }
 
   // Validates input
-  validate(name, value) {
+  validate(name) {
     const valid = this.state.valid;
+    const post = this.state.post
 
     switch (name) {
       case "title":
-        valid.title = value.length > 0;
+        valid.title = post.title.length > 0;
         break;
       case "room":
-        valid.room = value.length > 0;
+        valid.room = post.room.length > 0;
         break;
       case "building":
-        valid.building = value !== "-- Select building --";
+        valid.building = post.building !== "-- Select building --";
         break;
       case "image":
         break;
       case "feeds":
-        valid.feeds = value > 0;
+        valid.feeds = post.feed > 0;
         break;
       default:
         break;
     }
 
     // Checks if entire form is valid
-    this.state.validForm = valid.title && valid.room && valid.building && valid.feeds;
-
-    console.log(this.state.validForm)
+    const validForm = valid.title && valid.room && valid.building &&
+      valid.feeds;
+    this.setState({ validForm })
   }
 
   // Keeps track of field changes
@@ -105,7 +113,7 @@ export default class NewPost extends React.Component {
     this.setState({ post });
 
     // Validate input
-    this.validate(name, value)
+    this.validate(name)
   }
 
   // Keeps track of diet options selected
@@ -151,7 +159,7 @@ export default class NewPost extends React.Component {
 
   renderRequired(label) {
     return (
-      <Form.Label>{label}<span className="required">*</span></Form.Label>
+      <Form.Label>{label}<span className="red">*</span></Form.Label>
     );
   }
 
@@ -186,18 +194,24 @@ export default class NewPost extends React.Component {
           <Modal.Body>
             <Form.Group>
               {this.renderRequired("Title")}
-              <Form.Control type="text" name="title" placeholder="Enter title" onChange={this.handleChange}/>
+              <Form.Control type="text" name="title" placeholder="Enter title"
+                onChange={this.handleChange}
+              />
             </Form.Group>
 
             <Form.Row>
               <Form.Group as={Col}>
                 {this.renderRequired("Room")}
-                <Form.Control type="text" name="room" placeholder="Enter room" onChange={this.handleChange}/>
+                <Form.Control type="text" name="room" placeholder="Enter room"
+                  onChange={this.handleChange}
+                />
               </Form.Group>
 
               <Form.Group as={Col} controlId="input-building">
                 {this.renderRequired("Building")}
-                <Form.Control as="select" name="building" onChange={this.handleChange}>
+                <Form.Control as="select" name="building"
+                  onChange={this.handleChange}
+                >
                   {this.renderBuildings()}
                 </Form.Control>
                 <Form.Control.Feedback type="invalid">
@@ -209,12 +223,16 @@ export default class NewPost extends React.Component {
             <Form.Group controlId="input-image">
               {this.renderRequired("Image")}
               <Form.Control type="file" />
-              <Form.Control.Feedback type="invalid">Please upload an image.</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+                Please upload an image.
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId="input-desc">
               <Form.Label>Description</Form.Label>
-              <Form.Control as="textarea" name="description" rows="3" onChange={this.handleChange}/>
+              <Form.Control as="textarea" name="description" rows="3"
+                onChange={this.handleChange}
+              />
             </Form.Group>
 
             <Form.Group controlId="input-diet">
@@ -227,12 +245,20 @@ export default class NewPost extends React.Component {
 
             <Form.Group controlId="input-feeds">
               <Form.Label>Feeds approximately...</Form.Label>
-              <Form.Control type="number" name="feeds" placeholder="1" onChange={this.handleChange}/>
+              <Form.Control type="number" name="feeds" placeholder="1"
+                onChange={this.handleChange}
+              />
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button type="reset" variant="cancel" className="mr-1" onClick={() => this.close()}>Cancel</Button>
-            <Button type="submit" variant="submit" disabled={!this.state.validForm}>Submit</Button>
+            <Button type="reset" variant="cancel" className="mr-1"
+              onClick={() => this.close()}>
+              Cancel
+            </Button>
+            <Button type="submit" variant="submit"
+              disabled={!this.state.validForm}>
+              Submit
+            </Button>
           </Modal.Footer>
         </Form>
       </Modal>

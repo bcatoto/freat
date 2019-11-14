@@ -7,7 +7,10 @@ export default function Profile(props) {
     <Container fluid id="profile" className="p-0">
       <h3 id="profile-name">{props.user.name}</h3>
       <h4 id="profile-text">Active Posts</h4>
-      <UserPostsFeed posts={props.posts}/>
+      <UserPostsFeed
+        deletePost={props.deletePost}
+        posts={props.posts}
+      />
     </Container>
   );
 }
