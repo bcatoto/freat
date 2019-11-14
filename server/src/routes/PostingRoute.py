@@ -31,8 +31,7 @@ def newPost():
     post.save()
     data = posting_schema.dump(post)
     return custom_response(data,201)
-  except ValidationError as err:
-    errors = err.messages
+  except Exception as err:
     return custom_response({'message': err}, 400)
 
 
