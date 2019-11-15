@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Collapse from "react-bootstrap/Collapse";
 import Col from "react-bootstrap/Col";
 
-export default class NewPost extends React.Component {
+export default class PostForm extends React.Component {
   constructor(props) {
     super(props);
 

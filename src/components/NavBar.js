@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
-import NewPost from "./main/NewPost";
+import PostForm from "./PostForm";
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -23,7 +23,7 @@ export default class NavBar extends React.Component {
   render() {
     return (
       <>
-        <NewPost
+        <PostForm
           show={this.state.showModal}
           handleClose={() => this.handleCloseModal()}
           addPost={this.props.addPost}
