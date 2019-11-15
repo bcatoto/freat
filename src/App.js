@@ -46,13 +46,10 @@ export default class App extends React.Component {
       .catch((err) => console.log(err));
   }
 
-  addPost(post) {
-    axios.post("/api/v1/posting/", { post })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
+  addPost = async (post) => {
+    await axios.post("/api/v1/posting/", { post })
       .catch((err) => console.log(err));
+    this.getPosts();
   }
 
   deletePost = async (postid) => {

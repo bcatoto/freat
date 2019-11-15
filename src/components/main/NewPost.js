@@ -25,6 +25,13 @@ export default class NewPost extends React.Component {
       feeds: ""
     };
 
+    this.initialValid = {
+      title: false,
+      room: false,
+      building: false,
+      feeds: true
+    }
+
     this.buildings = ["-- Select building --", "Bloomberg Hall", "Dod Hall", "Colonial", "Friend Center"];
 
     this.diets = [
@@ -64,14 +71,14 @@ export default class NewPost extends React.Component {
         feeds: true
       },
       validForm: false
-
-      // // Checks if initial values are valid
-      // this.validate("title");
-      // this.validate("room");
-      // this.validate("building");
-      // this.validate("image")
-      // this.validate("feeds")
     };
+
+    // // Checks if initial values are valid
+    // this.validate("title");
+    // this.validate("room");
+    // this.validate("building");
+    // this.validate("image")
+    // this.validate("feeds")
   }
 
   // Validates input
@@ -92,7 +99,7 @@ export default class NewPost extends React.Component {
       case "image":
         break;
       case "feeds":
-        valid.feeds = post.feed > 0;
+        valid.feeds = post.feeds == "" || post.feeds > 0;
         break;
       default:
         break;
@@ -126,8 +133,12 @@ export default class NewPost extends React.Component {
 
   // Closes and resets form
   close() {
-    this.setState({ post: this.emptyPost });
     this.props.handleClose();
+    this.setState({
+      post: this.emptyPost,
+      valid:  this.initialValid,
+      validForm: false
+    });
   }
 
   // Handles submission of new post form
