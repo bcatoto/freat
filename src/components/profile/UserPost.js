@@ -9,7 +9,11 @@ import Row from "react-bootstrap/Row";
 import berries from "./../assets/berries.png";
 
 export default class UserPost extends Post {
-  handleDelete() {
+  handleEdit = event => {
+    this.props.openForm(false, Object.assign({}, this.props.post));
+  }
+
+  handleDelete = event => {
     this.props.deletePost(this.props.post.id);
   }
 
@@ -27,10 +31,12 @@ export default class UserPost extends Post {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <Dropdown.Item eventKey="1">Edit</Dropdown.Item>
-                  <Dropdown.Item
-                    className="red"
-                    onClick={() => this.handleDelete()}>
+                  <Dropdown.Item onClick={() => this.handleEdit()}>
+                    Edit
+                  </Dropdown.Item>
+                  <Dropdown.Item className="red"
+                    onClick={() => this.handleDelete()}
+                  >
                     Delete
                   </Dropdown.Item>
                 </Dropdown.Menu>

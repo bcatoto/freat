@@ -9,32 +9,10 @@ import Row from "react-bootstrap/Row";
 import berries from "./../assets/berries.png";
 
 export default class Post extends React.Component {
+  constructor(props) {
+    super(props);
 
-  // Converts time difference to minutes/hours
-  getTime() {
-    const min = 60 * 1000;
-    const hour = min * 60;
-
-    const now = Date.now();
-    const time = new Date(this.props.post.created_at);
-    const diff = now - time;
-
-    if (diff > 2 * hour) {
-      return Math.floor(diff / hour) + " hours ago";
-    }
-    else if (diff > hour) {
-      return "1 hour ago";
-    }
-    else if (diff > min){
-      return Math.floor(diff / min) + " minutes ago";
-    }
-    else {
-      return "1 minute ago";
-    }
-  }
-
-  renderDietOptions() {
-    const info = [
+    this.diets = [
       {
         "key": 0,
         "name": "Vegetarian",
@@ -61,8 +39,33 @@ export default class Post extends React.Component {
         "color": "gluten",
       }
     ];
+  }
 
-    const diets = this.props.post.diet.map(i => info[i]);
+  // Converts time difference to minutes/hours
+  getTime() {
+    const min = 60 * 1000;
+    const hour = min * 60;
+
+    const now = Date.now();
+    const time = new Date(this.props.post.created_at);
+    const diff = now - time;
+
+    if (diff > 2 * hour) {
+      return Math.floor(diff / hour) + " hours ago";
+    }
+    else if (diff > hour) {
+      return "1 hour ago";
+    }
+    else if (diff > min){
+      return Math.floor(diff / min) + " minutes ago";
+    }
+    else {
+      return "1 minute ago";
+    }
+  }
+
+  renderDietOptions() {
+    const diets = this.props.post.diet.map(i => this.diets[i]);
     return diets.map(diet =>
       <Badge pill key={diet.key} variant={diet.color}>{diet.name}</Badge>
     );
