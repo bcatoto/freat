@@ -334,6 +334,14 @@
 
 /* CUSTOM */
 
+.user-location {
+  text-align: left;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  padding: 0px;
+  color: #0066ff;
+}
+
 .red {
   color: #E74C3C; }
 

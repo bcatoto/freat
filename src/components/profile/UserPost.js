@@ -42,11 +42,9 @@ export default class UserPost extends Post {
                 </Dropdown.Menu>
               </Dropdown>
             </Row>
-            <Row noGutters="true" className="mt-1">
-              <Button variant="location">
-                <i className="fas fa-map-marker-alt mr-1"></i>
-                {this.props.post.room}, {this.props.post.building}
-              </Button>
+            <Row noGutters="true" className="mt-1 user-location">
+              <i className="fas fa-map-marker-alt mr-1"></i>
+              {this.props.post.room}, {this.props.post.building}
             </Row>
           </Container>
         </Card.Header>
