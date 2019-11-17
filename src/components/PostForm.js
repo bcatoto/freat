@@ -5,6 +5,8 @@ import Button from "react-bootstrap/Button";
 import Collapse from "react-bootstrap/Collapse";
 import Col from "react-bootstrap/Col";
 
+import buildings from "./assets/buildings.json"
+
 export default class PostForm extends React.Component {
   constructor(props) {
     super(props);
@@ -33,8 +35,6 @@ export default class PostForm extends React.Component {
       building: false,
       feeds: true
     };
-
-    this.buildings = ["-- Select building --", "Bloomberg Hall", "Dod Hall", "Colonial", "Friend Center"];
 
     this.diets = [
       {
@@ -76,7 +76,6 @@ export default class PostForm extends React.Component {
     if (this.state.prevProps !== this.props && this.props.show) {
       if (!this.props.isNew) {
         const post = this.props.values;
-        console.log(post)
         post.diet = this.dietToDict(this.props.values.diet);
 
         const valid = this.initialValid;
@@ -121,6 +120,7 @@ export default class PostForm extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    event.returnValue = false;
 
     const post = {
       title: this.state.post.title,
@@ -158,11 +158,8 @@ export default class PostForm extends React.Component {
   }
 
   dietToDict(diet) {
-    console.log(diet)
     const dict = Object.assign({}, this.initialDiet);
-    console.log(dict);
     diet.forEach(i => dict[this.diets[i].name] = true);
-    console.log(dict);
     return dict;
   }
 
@@ -189,7 +186,7 @@ export default class PostForm extends React.Component {
   }
 
   renderBuildings() {
-    return this.buildings.sort()
+    return buildings.sort()
       .map((building, index) =>
         <option key={index}>{building}</option>
       );

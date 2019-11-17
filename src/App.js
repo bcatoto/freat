@@ -61,11 +61,9 @@ export default class App extends React.Component {
   }
 
   editPost = async (post) => {
-    console.log(post)
     await axios.put(`api/vi/posting/${post.id}`, { post })
       .then(res => console.log(res))
       .catch((err) => console.log(err));
-    console.log(post)
     // TODO: update posts
   }
 
@@ -95,13 +93,25 @@ export default class App extends React.Component {
   render() {
     return(
       <div id="app">
+
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route render={(props) => (
-            <NavBar {...props}
-              user={this.state.user}
-              openForm={this.handleOpenForm}
-            />
+            <>
+              <NavBar {...props}
+                user={this.state.user}
+                openForm={this.handleOpenForm}
+              />
+              <PostForm
+                show={this.state.showForm}
+                addPost={this.addPost}
+                editPost={this.editPost}
+                handleClose={this.handleCloseForm}
+                isNew={this.state.form.isNew}
+                values={this.state.form.values}
+                user={this.props.user}
+              />
+            </>
             )}
           />
         </Switch>
@@ -122,15 +132,6 @@ export default class App extends React.Component {
               user={this.state.user}
             />
           )}
-        />
-        <PostForm
-          show={this.state.showForm}
-          addPost={this.addPost}
-          editPost={this.editPost}
-          handleClose={this.handleCloseForm}
-          isNew={this.state.form.isNew}
-          values={this.state.form.values}
-          user={this.props.user}
         />
       </div>
     );
