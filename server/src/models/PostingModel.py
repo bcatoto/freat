@@ -34,6 +34,7 @@ class PostingModel(db.Model):
     ## serialize might be useful for returning json objects
 
     def save(self):
+        print("hit save")
         db.session.add(self)
         db.session.commit()
     
@@ -43,13 +44,18 @@ class PostingModel(db.Model):
         db.session.commit()
     
     def delete(self):
+        print("hit delete")
         db.session.delete(self)
         db.session.commit()
-    
+
 
     @staticmethod
     def get_all_postings():
         return PostingModel.query.all()
+
+    @staticmethod
+    def get_one_post(postid):
+        return PostingModel.query.filter_by(id=postid)
     
     def __repr(self):
         return '<id {}>'.format(self.id)
