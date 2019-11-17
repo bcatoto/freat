@@ -2,44 +2,24 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
-import PostForm from "./PostForm";
 
 export default class NavBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showModal: false
-    };
-  }
-
-  handleOpenModal() {
-    this.setState({ showModal: true });
-  }
-
-  handleCloseModal() {
-    this.setState({ showModal: false });
+  handleClick = event => {
+    this.props.openForm(true, null);
   }
 
   render() {
     return (
-      <>
-        <PostForm
-          show={this.state.showModal}
-          handleClose={() => this.handleCloseModal()}
-          addPost={this.props.addPost}
-          user={this.props.user}
-        />
-        <Navbar className="p-2" variant="dark" expand="lg">
-          <Link to="/home"><Navbar.Brand className="ml-2">Freat</Navbar.Brand></Link>
-          <Button
-            className="mr-auto" variant="navbar"
-            onClick={() => this.handleOpenModal()}
-          >
-            New post
-          </Button>
-          <Link to="/profile"><Button variant="navbar">Account</Button></Link>
-        </Navbar>
-      </>
+      <Navbar className="p-2" variant="dark" expand="lg">
+        <Link to="/home"><Navbar.Brand className="ml-2">Freat</Navbar.Brand></Link>
+        <Button
+          className="mr-auto" variant="navbar"
+          onClick={this.handleClick}
+        >
+          New post
+        </Button>
+        <Link to="/profile"><Button variant="navbar">Account</Button></Link>
+      </Navbar>
     );
   }
 }
