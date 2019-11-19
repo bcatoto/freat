@@ -36,43 +36,52 @@ export default class App extends React.Component {
   }
 
   getPosts = async () => {
-    await axios.get(`/api/v1/posting/`)
-      .then(res => {
-        const posts = res.data;
-        this.setState({ posts });
-      })
-      .catch((err) => console.log(err));
+    const res = await axios.get(`/api/v1/posting/`)
+      .catch(err => console.log(err));
+
+    const posts = res.data;
+    this.setState({ posts });
   }
 
   getUserPosts = async () => {
-    await axios.get(`/api/v1/posting/`)
-      .then(res => {
-        const userPosts = res.data;
-        this.setState({ userPosts });
-      })
-      .catch((err) => console.log(err));
-    // TODO: update posts
+    const res = await axios.get(`/api/v1/posting/`)
+      .catch(err => console.log(err));
+
+    const userPosts = res.data;
+    this.setState({ userPosts });
   }
 
   addPost = async (post) => {
-    await axios.post(`/api/v1/posting/`, { post })
-      .catch((err) => console.log(err));
-    this.getPosts();
+    const res = await axios.post(`/api/v1/posting/`, { post })
+      .catch(err => console.log(err));
+
+    const posts = this.state.posts;
+    const userPosts = this.state.userPosts;
+    posts.unshift(res.data);
+    userPosts.unshift(res.data);
+    this.setState({ posts, userPosts });
   }
 
-  editPost = async (post) => {
-    await axios.put(`api/vi/posting/${post.id}`, { post })
-      .then(res => console.log(res))
-      .catch((err) => console.log(err));
+  editPost = async (postid, post) => {
+    console.log(postid)
+    console.log(post)
+    const res = await axios.put(`api/v1/posting/${postid}`, { post })
+      .catch(err => console.log(err));
+
     // TODO: update posts
+    console.log(res)
   }
 
   deletePost = async (postid) => {
-    await axios.delete(`/api/v1/posting/${postid}`)
-      .then(res => console.log(res))
-      .catch((err) => console.log(err))
+    const res = await axios.delete(`/api/v1/posting/${postid}`)
+      .catch(err => console.log(err));
 
-    // TODO: update posts
+    console.log(res)
+    let posts = this.state.posts;
+    posts = posts.filter(post => post.id !== postid);
+    let userPosts = this.state.userPosts;
+    userPosts = userPosts.filter(post => post.id !== postid);
+    this.setState({ posts, userPosts });
   }
 
   handleOpenForm = (isNew, values) => {
