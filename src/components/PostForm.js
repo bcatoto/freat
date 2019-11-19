@@ -23,7 +23,7 @@ export default class PostForm extends React.Component {
       title: "",
       room: "",
       building: "",
-      image: null,
+      // image: null,
       desc: "",
       diet: this.initialDiet,
       feeds: ""
@@ -122,21 +122,14 @@ export default class PostForm extends React.Component {
     event.preventDefault();
     event.returnValue = false;
 
-    const post = {
-      title: this.state.post.title,
-      room: this.state.post.room,
-      building: this.state.post.building,
-      desc: this.state.post.desc,
-      diet: this.dietToList(this.state.post.diet),
-      feeds: this.state.post.feeds,
-      // userid: this.props.user.id
-    };
+    const post = this.state.post;
+    post.diet = this.dietToList(this.state.post.diet);
 
     if (this.props.isNew) {
       this.props.addPost(post);
     }
     else {
-      this.props.editPost(post);
+      this.props.editPost(post.id, post);
     }
 
     this.close();
