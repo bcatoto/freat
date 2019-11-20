@@ -1,6 +1,6 @@
 from flask import request, json, Response, Blueprint, jsonify
 from ..models.PostingModel import PostingModel, PostingSchema
-from flask_cors import CORS,cross_origin
+from flask_cas import login_required
 
 
 posting_schema = PostingSchema()
@@ -9,6 +9,7 @@ posting_api = Blueprint('posting', __name__)
 posting_schema = PostingSchema()
 
 @posting_api.route('/', methods=['GET'])
+@login_required
 def getPostings():
     """
     Get all the available postings
