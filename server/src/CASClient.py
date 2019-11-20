@@ -85,6 +85,15 @@ class CASClient:
             
         abort(redirect(login_url))
 
+    #-------------------------------------------------------------------
+
+    # attempt to logout
+    def logout(self):
+        logout_url = self.cas_url + 'logout' \
+            + '?service='
+
+        abort(redirect(logout_url))
+
 #-----------------------------------------------------------------------
 
 def main():

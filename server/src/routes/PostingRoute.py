@@ -1,6 +1,6 @@
 from flask import request, json, Response, Blueprint, jsonify
 from ..models.PostingModel import PostingModel, PostingSchema
-from flask_cors import CORS,cross_origin
+# from flask_cas import login_required
 
 
 posting_schema = PostingSchema()
@@ -23,7 +23,7 @@ def newPost():
   Create a new post and add to the database
   """
   req_data = request.get_json()
-  print(req_data)
+  print("DEBUG2!: ",req_data)
   try:
     data = posting_schema.load(req_data['post'])
     ## future check for if the post id already exists
@@ -71,6 +71,7 @@ def updatePost(postid):
   Update the post with id postid
   """
   req_data = request.get_json()
+
   post = PostingModel.get_one_post(postid)
   data = posting_schema.dump(post, many=True)
 
@@ -82,10 +83,12 @@ def updatePost(postid):
   # return custom_response({'error': 'permission denied'}, 400)
 
   try:
-    data = posting_schema.load(req_data['update'], partial=True)
+    del req_data["post"]["id"] # attempt.... 
+    data = posting_schema.load(req_data['post'], partial=True)
     post[0].update(data) # need post[0] b/c the PostingModel.get_one_post(postid) list/only way to get sqlalchemy to return an object
     data = posting_schema.dump(post)
     return custom_response(data, 200)
+
   except Exception as err:
     return custom_response({'message': err}, 400)
 

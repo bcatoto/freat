@@ -1,12 +1,17 @@
 from flask import Flask,request, Response, json, render_template
 from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS,cross_origin
+# from flask_cas import CAS
+# from flask_cas import login_required
+from pprint import pprint
+
 import os
 
 from .config import app_config
 from .models import db
 from .routes.PostingRoute import posting_api as posting_blueprint
 from .models.PostingModel import PostingModel, PostingSchema
+
+from .CASClient import CASClient
 
 def create_app(env_name):
   """
@@ -16,6 +21,12 @@ def create_app(env_name):
   # app initiliazation
   app = Flask(__name__, static_folder='./../../build/static',
     template_folder='./../../build')
+
+  app.secret_key = b'\xcdt\x8dn\xe1\xbdW\x9d[}yJ\xfc\xa3~/'
+  # CAS Authentication setup
+  # cas = CAS(app, '/cas')
+  # app.config['CAS_SERVER'] = 'https://fed.princeton.edu/cas/' 
+  # app.config['CAS_AFTER_LOGIN'] = 'index'
 
   app.config.from_object(app_config[env_name])
 
@@ -27,12 +38,25 @@ def create_app(env_name):
 
 
   @app.route('/', methods=['GET'])
-
   def index():
     """
     example endpoint
     """
+    username = CASClient().authenticate()
+    print(username)
+    # pprint(vars(cas._app))
+    # print(cas.username)
+    
+    # print(cas.attributes)
+    
     return render_template('index.html')
+
+  @app.route('/logout')
+  def casLogout():
+    """
+    logout from cas
+    """
+    CASClient().logout()
 
   #@cross_origin(supports_credentials=True)
   @app.route('/test', methods=['GET'])
