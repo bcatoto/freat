@@ -17,8 +17,7 @@ export default class App extends React.Component {
 
     this.state = {
       user: {
-        id: 12345,
-        name: "Test User"
+        netid: "testuser"
       },
       posts:[],
       userPosts: [],
@@ -31,8 +30,13 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    this.authenticate()
     this.getPosts();
     this.getUserPosts();
+  }
+
+  authenticate = async () => {
+    
   }
 
   getPosts = async () => {
