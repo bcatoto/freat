@@ -2,7 +2,6 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Collapse from "react-bootstrap/Collapse";
 import Col from "react-bootstrap/Col";
 
 import buildings from "./assets/buildings.json"
@@ -22,8 +21,8 @@ export default class PostForm extends React.Component {
     this.initialPost = {
       title: "",
       room: "",
-      building: "",
-      // image: null,
+      building: "-- Select building --",
+      image: undefined,
       desc: "",
       diet: this.initialDiet,
       feeds: ""
@@ -33,6 +32,7 @@ export default class PostForm extends React.Component {
       title: false,
       room: false,
       building: false,
+      image: false,
       feeds: true
     };
 
@@ -82,6 +82,7 @@ export default class PostForm extends React.Component {
         valid.title = true;
         valid.room = true;
         valid.building = true;
+        valid.image = true;
 
         this.setState({
           post,
@@ -100,6 +101,13 @@ export default class PostForm extends React.Component {
     post[name] = value;
     this.setState({ post });
     this.validate()
+  }
+
+  handleImageChange = event => {
+    const post = this.state.post;
+    post.image = event.target.files[0];
+    this.setState({ post });
+    this.validate();
   }
 
   handleDietChange = event => {
@@ -141,12 +149,12 @@ export default class PostForm extends React.Component {
 
     valid.title = post.title.length > 0;
     valid.room = post.room.length > 0;
-    valid.building = post.building != "" &&
-      post.building !== "-- Select building --";
+    valid.building = post.building !== "-- Select building --";
+    valid.image = post.image !== undefined;
     valid.feeds = post.feeds === "" || post.feeds > 0;
 
     const validForm = valid.title && valid.room && valid.building &&
-      valid.feeds;
+      valid.image && valid.feeds;
     this.setState({ validForm });
   }
 
@@ -241,7 +249,10 @@ export default class PostForm extends React.Component {
 
             <Form.Group controlId="input-image">
               {this.renderRequired("Image")}
-              <Form.Control type="file" />
+              <Form.Control type="file"
+                accept="image/png, image/jpeg"
+                onChange={this.handleImageChange}
+              />
               <Form.Control.Feedback type="invalid">
                 Please upload an image.
               </Form.Control.Feedback>
