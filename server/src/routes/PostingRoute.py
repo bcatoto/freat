@@ -1,6 +1,5 @@
 from flask import request, json, Response, Blueprint, jsonify
 from ..models.PostingModel import PostingModel, PostingSchema
-from ..CASClient import CASClient
 # from flask_cas import login_required
 
 
@@ -9,16 +8,8 @@ posting_schema = PostingSchema()
 posting_api = Blueprint('posting', __name__)
 posting_schema = PostingSchema()
 
-# Attempt at CAS logout
-@posting_api.route('/logout')
-def userLogout():
-  CASClient().logout()
-
 @posting_api.route('/', methods=['GET'])
 def getPostings():
-    username = CASClient().authenticate()
-    print("DEBUG3: ", username)
-
     """
     Get all the available postings
     """
