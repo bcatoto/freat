@@ -9,6 +9,11 @@ posting_schema = PostingSchema()
 posting_api = Blueprint('posting', __name__)
 posting_schema = PostingSchema()
 
+# Attempt at CAS logout
+@posting_api.route('/logout')
+def userLogout():
+  CASClient().logout()
+
 @posting_api.route('/', methods=['GET'])
 def getPostings():
     username = CASClient().authenticate()
@@ -75,7 +80,7 @@ def updatePost(postid):
   Update the post with id postid
   """
   req_data = request.get_json()
-  print("DEBUG!: ", req_data)
+
   post = PostingModel.get_one_post(postid)
   data = posting_schema.dump(post, many=True)
 
@@ -89,12 +94,10 @@ def updatePost(postid):
   try:
     del req_data["post"]["id"] # attempt.... 
     data = posting_schema.load(req_data['post'], partial=True)
-    print("DEBUG222!: ", req_data)
-    #data = posting_schema.load(req_data['post'], partial=("building", "desc", "diet", "feeds", "room", "title"))
-
     post[0].update(data) # need post[0] b/c the PostingModel.get_one_post(postid) list/only way to get sqlalchemy to return an object
     data = posting_schema.dump(post)
     return custom_response(data, 200)
+
   except Exception as err:
     return custom_response({'message': err}, 400)
 

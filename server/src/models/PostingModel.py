@@ -35,17 +35,16 @@ class PostingModel(db.Model):
     ## serialize might be useful for returning json objects
 
     def save(self):
-        print("hit save")
         db.session.add(self)
         db.session.commit()
     
     def update(self, data):
         for key, item in data.items():
+            print("hit update with key: ", key)
             setattr(self, key, item)
         db.session.commit()
     
     def delete(self):
-        print("hit delete")
         db.session.delete(self)
         db.session.commit()
 
