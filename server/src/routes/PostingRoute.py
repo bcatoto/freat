@@ -1,6 +1,6 @@
 from flask import request, json, Response, Blueprint, jsonify
 from ..models.PostingModel import PostingModel, PostingSchema
-from .CASClient import CASClient
+from ..CASClient import CASClient
 # from flask_cas import login_required
 
 
