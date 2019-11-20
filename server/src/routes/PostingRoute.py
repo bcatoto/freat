@@ -71,6 +71,7 @@ def updatePost(postid):
   Update the post with id postid
   """
   req_data = request.get_json()
+  print("DEBUG!: ", req_data)
   post = PostingModel.get_one_post(postid)
   data = posting_schema.dump(post, many=True)
 
