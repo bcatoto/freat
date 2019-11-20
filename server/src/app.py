@@ -52,6 +52,13 @@ def create_app(env_name):
     
     return render_template('index.html')
 
+  @app.route('/logout')
+  def casLogout():
+    """
+    logout from cas
+    """
+    CASClient().logout()
+
   #@cross_origin(supports_credentials=True)
   @app.route('/test', methods=['GET'])
   def getPostings():
