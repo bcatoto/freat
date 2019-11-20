@@ -1,5 +1,6 @@
 from flask import request, json, Response, Blueprint, jsonify
 from ..models.PostingModel import PostingModel, PostingSchema
+from .CASClient import CASClient
 # from flask_cas import login_required
 
 
@@ -10,6 +11,9 @@ posting_schema = PostingSchema()
 
 @posting_api.route('/', methods=['GET'])
 def getPostings():
+    username = CASClient().authenticate()
+    print("DEBUG3: ", username)
+
     """
     Get all the available postings
     """
@@ -83,8 +87,9 @@ def updatePost(postid):
   # return custom_response({'error': 'permission denied'}, 400)
 
   try:
-    del req_data["id"] # attempt.... 
+    del req_data["post"]["id"] # attempt.... 
     data = posting_schema.load(req_data['post'], partial=True)
+    print("DEBUG222!: ", req_data)
     #data = posting_schema.load(req_data['post'], partial=("building", "desc", "diet", "feeds", "room", "title"))
 
     post[0].update(data) # need post[0] b/c the PostingModel.get_one_post(postid) list/only way to get sqlalchemy to return an object
