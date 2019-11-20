@@ -126,7 +126,6 @@
 
 .btn-edit {
   padding: 0px;
-  margin: 0px 0px 0px 10px;
   font-weight: 400;
   color: #999999; }
   .btn-link:hover {
@@ -228,12 +227,25 @@
   width: 100%;
   border-radius: 0; }
 
-.post-time {
+.card-time {
+  text-align: right;
   font-size: 0.85rem;
   line-height: 1.2;
   color: #95a5a6;
   margin-top: 2px;
+  min-width: 80px;
+  max-width: 90px;
 }
+
+.card-title-container {
+  max-width: 250px;
+}
+
+.card-edit-container {
+  margin-left: 10px;
+  max-width: 8px;
+}
+
 
 /* ACCORDION */
 
@@ -334,16 +346,15 @@
 
 /* CUSTOM */
 
+.red {
+  color: #E74C3C; }
+
 .user-location {
   text-align: left;
   font-size: 0.75rem;
   line-height: 1.2;
   padding: 0px;
-  color: #0066ff;
-}
-
-.red {
-  color: #E74C3C; }
+  color: #0066ff; }
 
 #post-pane {
   display: flex;

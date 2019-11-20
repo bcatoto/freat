@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 import berries from "./../assets/berries.png";
 
@@ -77,8 +78,12 @@ export default class Post extends React.Component {
         <Card.Header>
           <Container fluid className="p-0">
             <Row noGutters="true">
-              <Card.Title className="mr-auto">{this.props.post.title}</Card.Title>
-              <span className="post-time">{this.getTime()}</span>
+              <Col className="card-title-container mr-auto p-0">
+                <Card.Title>{this.props.post.title}</Card.Title>
+              </Col>
+              <Col className="card-time ml-auto p-0" xs={3} sm={3}>
+                {this.getTime()}
+              </Col>
             </Row>
             <Row noGutters="true" className="mt-1">
               <Button variant="location">

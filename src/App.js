@@ -54,6 +54,8 @@ export default class App extends React.Component {
   }
 
   addPost = async (post) => {
+    console.log(post)
+    console.log(post.image)
     axios.post(`/api/v1/posting/`, { post })
       .then(res => {
         if (res.status === 201) {
