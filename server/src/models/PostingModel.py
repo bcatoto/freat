@@ -1,7 +1,6 @@
 # src/models/PostingModel.py
 
 import datetime
-import pytz
 from marshmallow import fields, Schema
 from . import db
 from sqlalchemy import desc # allows sorting sqlalchemy query
@@ -72,8 +71,6 @@ class PostingSchema(Schema):
   room = fields.Str()
   building = fields.Str()
   created_at = fields.DateTime()
-  timezone = pytz.timezone("America/Los_Angeles")
-
   diet = fields.List(fields.Int)
   feeds = fields.Int()
 
