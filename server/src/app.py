@@ -1,7 +1,7 @@
 from flask import Flask,request, Response, json, render_template
 from flask_sqlalchemy import SQLAlchemy
-from flask_cas import CAS
-from flask_cas import login_required
+# from flask_cas import CAS
+# from flask_cas import login_required
 from pprint import pprint
 
 import os
@@ -24,9 +24,9 @@ def create_app(env_name):
 
   app.secret_key = b'\xcdt\x8dn\xe1\xbdW\x9d[}yJ\xfc\xa3~/'
   # CAS Authentication setup
-  cas = CAS(app, '/cas')
-  app.config['CAS_SERVER'] = 'https://fed.princeton.edu/cas/' 
-  app.config['CAS_AFTER_LOGIN'] = 'index'
+  # cas = CAS(app, '/cas')
+  # app.config['CAS_SERVER'] = 'https://fed.princeton.edu/cas/' 
+  # app.config['CAS_AFTER_LOGIN'] = 'index'
 
   app.config.from_object(app_config[env_name])
 
@@ -38,17 +38,17 @@ def create_app(env_name):
 
 
   @app.route('/', methods=['GET'])
-  @login_required
+
   def index():
     """
     example endpoint
     """
-    #username = CASClient().authenticate()
+    username = CASClient().authenticate()
     print(username)
-    pprint(vars(cas._app))
-    print(cas.username)
+    # pprint(vars(cas._app))
+    # print(cas.username)
     
-    print(cas.attributes)
+    # print(cas.attributes)
     
     return render_template('index.html')
 
