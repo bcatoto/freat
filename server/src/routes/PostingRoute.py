@@ -23,7 +23,7 @@ def newPost():
   Create a new post and add to the database
   """
   req_data = request.get_json()
-  print(req_data)
+  print("DEBUG2!: ",req_data)
   try:
     data = posting_schema.load(req_data['post'])
     ## future check for if the post id already exists

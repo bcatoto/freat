@@ -3,6 +3,7 @@
 import datetime
 from marshmallow import fields, Schema
 from . import db
+from sqlalchemy import desc # allows sorting sqlalchemy query
 
 class PostingModel(db.Model):
 
@@ -51,7 +52,7 @@ class PostingModel(db.Model):
 
     @staticmethod
     def get_all_postings():
-        return PostingModel.query.all()
+        return PostingModel.query.order_by(desc(PostingModel.created_at)).all()
 
     @staticmethod
     def get_one_post(postid):
