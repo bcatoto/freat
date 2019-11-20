@@ -84,7 +84,8 @@ def updatePost(postid):
 
   try:
     #data = posting_schema.load(req_data['post'], partial=True)
-    data = posting_schema.load(req_data['post'])
+    data = posting_schema.load(req_data['post'], partial=("building", "desc", "diet", "feeds", "room", "title"))
+
     post[0].update(data) # need post[0] b/c the PostingModel.get_one_post(postid) list/only way to get sqlalchemy to return an object
     data = posting_schema.dump(post)
     return custom_response(data, 200)
