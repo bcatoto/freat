@@ -28,7 +28,7 @@ class PostingModel(db.Model):
         self.desc = data.get('desc')
         self.room = data.get('room')
         self.building = data.get('building')
-        self.created_at = datetime.datetime.now()
+        self.created_at = datetime.now()
         self.diet = data.get('diet')
         self.feeds = data.get('feeds')
 
