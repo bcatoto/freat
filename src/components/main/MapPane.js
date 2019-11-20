@@ -1,5 +1,4 @@
 import React from "react";
-import Map from "./Map"
 import { GoogleMap, Marker, withScriptjs, withGoogleMap } from "react-google-maps"
 
 import coordinates from "./../assets/coordinates.json"
