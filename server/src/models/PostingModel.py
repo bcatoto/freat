@@ -1,6 +1,7 @@
 # src/models/PostingModel.py
 
 import datetime
+import pytz
 from marshmallow import fields, Schema
 from . import db
 from sqlalchemy import desc # allows sorting sqlalchemy query
@@ -28,7 +29,7 @@ class PostingModel(db.Model):
         self.desc = data.get('desc')
         self.room = data.get('room')
         self.building = data.get('building')
-        self.created_at = datetime.datetime.utcnow()
+        self.created_at = datetime.datetime.now()
         self.diet = data.get('diet')
         self.feeds = data.get('feeds')
 
@@ -71,6 +72,8 @@ class PostingSchema(Schema):
   room = fields.Str()
   building = fields.Str()
   created_at = fields.DateTime()
+  timezone = pytz.timezone("America/Los_Angeles")
+
   diet = fields.List(fields.Int)
   feeds = fields.Int()
 
