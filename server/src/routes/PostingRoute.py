@@ -1,7 +1,7 @@
 from flask import request, json, Response, Blueprint, jsonify
 from ..models.PostingModel import PostingModel, PostingSchema
 # from flask_cas import login_required
-
+from ..CASClient import CASClient
 
 posting_schema = PostingSchema()
 
@@ -13,6 +13,10 @@ def getPostings():
     """
     Get all the available postings
     """
+
+
+
+    username = CASClient().authenticate()
     posts = PostingModel.get_all_postings()
     data = posting_schema.dump(posts, many=True)
     return custom_response(data, 200)

@@ -37,17 +37,27 @@ def create_app(env_name):
   posting_schema = PostingSchema()
 
 
-  @app.route('/', methods=['GET'])
+  @app.route('/')
+  @app.route('/profile')
   def index():
     """
     example endpoint
     """
-    username = CASClient().authenticate()
-    print(username)
+    # username = CASClient().authenticate()
+    # print(username)
     # pprint(vars(cas._app))
     # print(cas.username)
     
     # print(cas.attributes)
+    
+    return render_template('index.html')
+  
+  @app.route('/home')
+  def home():
+    """
+    example endpoint
+    """
+    username = CASClient().authenticate()
     
     return render_template('index.html')
 
