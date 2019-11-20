@@ -68,12 +68,24 @@ export default class App extends React.Component {
   }
 
   editPost = async (postid, post) => {
-    console.log(postid)
-    console.log(post)
     axios.put(`api/v1/posting/${postid}`, { post })
       .then(res => {
-        console.log(res);
-        // TODO: update posts
+        const posts = this.state.posts;
+        const userPosts = this.state.userPosts;
+
+        for (let i = 0; i < posts.length; i++) {
+          if (posts[i].id == postid) {
+            posts[i] = Object.assign(posts[i], post);
+          }
+        }
+
+        for (let i = 0; i < userPosts.length; i++) {
+          if (userPosts[i].id == postid) {
+            userPosts[i] = Object.assign(userPosts[i], post);
+          }
+        }
+
+        this.setState({ posts, userPosts });
       })
       .catch(err => console.log(err));
   }

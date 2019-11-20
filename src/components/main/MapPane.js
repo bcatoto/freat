@@ -12,7 +12,6 @@ export default class MapPane extends React.Component {
   }
 
   renderMarkers() {
-    console.log(this.props.posts)
     return this.props.posts.map(post =>
       <Marker
         key={post.id}
