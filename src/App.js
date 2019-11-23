@@ -61,7 +61,13 @@ export default class App extends React.Component {
   }
 
   addPost = async (post) => {
-    post.image = this.uploadImage(post.image);
+    const urls = [];
+    for (let i = 0; i < post.image.length; i++) {
+      const url = await this.uploadImage(post.image.item(i));
+      urls.push(url);
+    }
+    post.image = urls;
+
     axios.post(`/api/v1/posting/`, { post })
       .then(res => {
         if (res.status === 201) {

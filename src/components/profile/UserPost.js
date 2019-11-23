@@ -7,8 +7,6 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import berries from "./../assets/berries.png";
-
 export default class UserPost extends Post {
   handleEdit = event => {
     this.props.openForm(false, Object.assign({}, this.props.post));
@@ -36,7 +34,7 @@ export default class UserPost extends Post {
                     <i className="fas fa-ellipsis-v p-0 m-0"></i>
                   </Dropdown.Toggle>
 
-                  <Dropdown.Menu>
+                  <Dropdown.Menu className="card-dropdown-menu">
                     <Dropdown.Item onClick={() => this.handleEdit()}>
                       Edit
                     </Dropdown.Item>

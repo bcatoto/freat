@@ -305,24 +305,8 @@
 
 /* DROPDOWN */
 
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  display: none;
-  float: left;
-  min-width: 5rem;
-  padding: 0.5rem 0;
-  margin: 0.125rem 0 0;
-  font-size: 0.9375rem;
-  color: #212529;
-  text-align: left;
-  list-style: none;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0.25rem; }
+.card-dropdown-menu {
+  min-width: 5rem; }
 
 .dropdown-item {
   display: block;
@@ -362,6 +346,20 @@
   height: calc(100vh - 54.38px);
   max-width: 576px;
   min-width: 400px; }
+
+#no-food {
+  text-align: center;
+  color: #bfbfbf;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin-top: calc(100vh / 3);
+}
+
+#heart-broken {
+  font-size: 60px;
+  margin-bottom: 5px;
+}
 
 #map-pane {
   height: calc(100vh - 54.38px); }

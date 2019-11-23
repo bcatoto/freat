@@ -22,7 +22,7 @@ export default class PostForm extends React.Component {
       title: "",
       room: "",
       building: "-- Select building --",
-      image: undefined,
+      image: [],
       desc: "",
       diet: this.initialDiet,
       feeds: ""
@@ -105,7 +105,7 @@ export default class PostForm extends React.Component {
 
   handleImageChange = event => {
     const post = this.state.post;
-    post.image = event.target.files[0];
+    post.image = event.target.files;
     this.setState({ post });
     this.validate();
   }
@@ -150,7 +150,7 @@ export default class PostForm extends React.Component {
     valid.title = post.title.length > 0;
     valid.room = post.room.length > 0;
     valid.building = post.building !== "-- Select building --";
-    valid.image = post.image !== undefined;
+    valid.image = post.image.length > 0;
     valid.feeds = post.feeds === "" || post.feeds > 0;
 
     const validForm = valid.title && valid.room && valid.building &&
@@ -249,7 +249,7 @@ export default class PostForm extends React.Component {
 
             <Form.Group controlId="input-image">
               {this.renderRequired("Image")}
-              <Form.Control type="file"
+              <Form.Control type="file" multiple
                 accept="image/png, image/jpeg"
                 onChange={this.handleImageChange}
               />
