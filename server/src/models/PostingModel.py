@@ -4,9 +4,9 @@ import datetime
 from marshmallow import fields, Schema
 from . import db
 from sqlalchemy import desc # allows sorting sqlalchemy query
-# from pytz import timezone
+from pytz import timezone
 
-# eastern = timezone('US/Eastern')
+eastern = timezone('US/Eastern')
 
 class PostingModel(db.Model):
 
@@ -31,7 +31,7 @@ class PostingModel(db.Model):
         self.desc = data.get('desc')
         self.room = data.get('room')
         self.building = data.get('building')
-        self.created_at = datetime.datetime.now() # eastern later...
+        self.created_at = datetime.datetime.now(eastern)
         self.diet = data.get('diet')
         self.feeds = data.get('feeds')
 
