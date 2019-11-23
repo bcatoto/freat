@@ -92,7 +92,7 @@ export default class Post extends React.Component {
             </Row>
           </Container>
         </Card.Header>
-        <Card.Img src={berries} />
+        <Card.Img src={this.props.post.image} />
         <Accordion.Collapse eventKey={this.props.post.id}>
           <Card.Body>
             {this.props.post.desc}
