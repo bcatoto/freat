@@ -1,5 +1,6 @@
 import React from "react";
 import Accordion from "react-bootstrap/Accordion"
+import Container from "react-bootstrap/Container"
 import Post from "./Post"
 
 export default class PostsFeed extends React.Component {
@@ -9,11 +10,29 @@ export default class PostsFeed extends React.Component {
     );
   }
 
+  renderFeed() {
+    if (this.props.posts.length > 0) {
+      return (
+        <Accordion>
+          {this.renderPosts()}
+        </Accordion>
+      );
+    }
+    else {
+      return (
+        <Container id="no-food">
+          <i id="heart-broken" class="fas fa-heart-broken"></i>
+          <h4>Sorry, no free food on campus</h4>
+        </Container>
+      );
+    }
+  }
+
   render() {
     return (
-      <Accordion>
-        {this.renderPosts()}
-      </Accordion>
+      <>
+        {this.renderFeed()}
+      </>
     );
   }
 }
