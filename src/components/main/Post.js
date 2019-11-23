@@ -2,12 +2,11 @@ import React from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import Carousel from "react-bootstrap/Carousel";
 import Badge from "react-bootstrap/Badge";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
-import berries from "./../assets/berries.png";
 
 export default class Post extends React.Component {
   constructor(props) {
@@ -65,6 +64,14 @@ export default class Post extends React.Component {
     }
   }
 
+  renderImages() {
+    return this.props.post.images.map(url =>
+      <Carousel.Item>
+        <img className="d-block w-100" src={url} />
+      </Carousel.Item>
+    );
+  }
+
   renderDietOptions() {
     const diets = this.props.post.diet.map(i => this.diets[i]);
     return diets.map(diet =>
@@ -74,8 +81,8 @@ export default class Post extends React.Component {
 
   render() {
     return (
-      <Accordion.Toggle as={Card} eventKey={this.props.post.id}>
-        <Card.Header>
+      <Card>
+        <Accordion.Toggle as={Card.Header} eventKey={this.props.post.id}>
           <Container fluid className="p-0">
             <Row noGutters="true">
               <Col className="card-title-container mr-auto p-0">
@@ -91,8 +98,10 @@ export default class Post extends React.Component {
               </Button>
             </Row>
           </Container>
-        </Card.Header>
-        <Card.Img src={berries} />
+        </Accordion.Toggle>
+        <Carousel indicators={false} interval={null}>
+          {this.renderImages()}
+        </Carousel>
         <Accordion.Collapse eventKey={this.props.post.id}>
           <Card.Body>
             {this.props.post.desc}
@@ -100,10 +109,10 @@ export default class Post extends React.Component {
             <em>Feeds approximately: {this.props.post.feeds}</em>
           </Card.Body>
         </Accordion.Collapse>
-        <Card.Footer>
+        <Accordion.Toggle as={Card.Footer}>
           {this.renderDietOptions()}
-        </Card.Footer>
-      </Accordion.Toggle>
+        </Accordion.Toggle>
+      </Card>
     );
   }
 }

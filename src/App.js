@@ -7,9 +7,12 @@ import Profile from "./components/Profile"
 import PostForm from "./components/PostForm";
 
 import axios from "axios";
+import FormData from "form-data"
 
 import "bootswatch/dist/flatly/bootstrap.min.css";
 import "./App.css";
+
+require('dotenv').config()
 
 export default class App extends React.Component {
   constructor(props) {
@@ -36,7 +39,7 @@ export default class App extends React.Component {
   }
 
   authenticate = async () => {
-    
+
   }
 
   getPosts = async () => {
@@ -58,8 +61,13 @@ export default class App extends React.Component {
   }
 
   addPost = async (post) => {
-    console.log(post)
-    console.log(post.image)
+    const urls = [];
+    for (let i = 0; i < post.images.length; i++) {
+      const url = await this.uploadImage(post.images.item(i));
+      urls.push(url);
+    }
+    post.images = urls;
+
     axios.post(`/api/v1/posting/`, { post })
       .then(res => {
         if (res.status === 201) {
@@ -108,6 +116,24 @@ export default class App extends React.Component {
         }
       })
       .catch(err => console.log(err));
+  }
+
+  uploadImage = async (image) => {
+    const formData = new FormData();
+    formData.append('file', image);
+    formData.append('upload_preset',
+      process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
+
+    const res = await axios({
+        url: process.env.REACT_APP_CLOUDINARY_URL,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data: formData
+    }).catch(err => console.log(err));
+
+    return res.data.secure_url;
   }
 
   handleOpenForm = (isNew, values) => {

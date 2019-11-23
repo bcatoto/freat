@@ -3,11 +3,10 @@ import Post from "./../main/Post"
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
+import Carousel from "react-bootstrap/Carousel";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
-import berries from "./../assets/berries.png";
 
 export default class UserPost extends Post {
   handleEdit = event => {
@@ -36,7 +35,7 @@ export default class UserPost extends Post {
                     <i className="fas fa-ellipsis-v p-0 m-0"></i>
                   </Dropdown.Toggle>
 
-                  <Dropdown.Menu>
+                  <Dropdown.Menu className="card-dropdown-menu">
                     <Dropdown.Item onClick={() => this.handleEdit()}>
                       Edit
                     </Dropdown.Item>
@@ -55,7 +54,9 @@ export default class UserPost extends Post {
             </Row>
           </Container>
         </Card.Header>
-        <Card.Img src={berries} />
+        <Carousel indicators={false} interval={null}>
+          {this.renderImages()}
+        </Carousel>
         <Card.Body>
           {this.props.post.desc}
           <br/>
