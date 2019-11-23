@@ -53,7 +53,7 @@ export default class UserPost extends Post {
             </Row>
           </Container>
         </Card.Header>
-        <Card.Img src={this.props.post.image} />
+        <Card.Img src={this.props.post.images[0]} />
         <Card.Body>
           {this.props.post.desc}
           <br/>
