@@ -3,6 +3,7 @@ import Post from "./../main/Post"
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
+import Carousel from "react-bootstrap/Carousel";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -53,7 +54,9 @@ export default class UserPost extends Post {
             </Row>
           </Container>
         </Card.Header>
-        <Card.Img src={this.props.post.images[0]} />
+        <Carousel indicators={false} interval={null}>
+          {this.renderImages()}
+        </Carousel>
         <Card.Body>
           {this.props.post.desc}
           <br/>
