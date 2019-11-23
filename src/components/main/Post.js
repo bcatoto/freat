@@ -65,6 +65,10 @@ export default class Post extends React.Component {
   }
 
   renderImages() {
+    if (this.props.post.images == null) {
+      return;
+    }
+    
     return this.props.post.images.map(url =>
       <Carousel.Item>
         <img className="d-block w-100" src={url} />
