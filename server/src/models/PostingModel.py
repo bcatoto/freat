@@ -20,11 +20,12 @@ class PostingModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(128), nullable=False)
     desc = db.Column(db.String(250))
-    room = db.Column(db.String(50))
+    room = db.Column(db.String(50), nullable=False)
     building = db.Column(db.String(128), nullable=False)
     created_at = db.Column(db.DateTime)
     diet = db.Column(db.ARRAY(db.Integer))
     feeds = db.Column(db.Integer)
+    images = db.Column(db.ARRAY(db.String(128)))
 
     def __init__(self,data):
         self.title = data.get('title')
@@ -34,6 +35,7 @@ class PostingModel(db.Model):
         self.created_at = datetime.datetime.now(eastern)
         self.diet = data.get('diet')
         self.feeds = data.get('feeds')
+        self.images= data.get('images')
 
     ## serialize might be useful for returning json objects
 
@@ -76,5 +78,6 @@ class PostingSchema(Schema):
   created_at = fields.DateTime()
   diet = fields.List(fields.Int)
   feeds = fields.Int()
+  images = fields.List(fields.Str())
 
   
