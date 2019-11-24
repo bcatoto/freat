@@ -62,9 +62,11 @@ def deletePost(postid):
   post = PostingModel.get_one_post(postid)
   data = posting_schema.dump(post, many=True)
   image_url = data['images'] # hopefully return image url (s)
-  parsed = urlparse('image_url')
+  print("DEBUG1: ", image_url)
+  parsed = urlparse(image_url)
   split1 = parsed.path.split('/')
   split2 = split1[5].split('.')
+  print("DEBUG2: ", split2[0])
   cloudinary.uploader.destroy(split2[0]) # TEST
 
   if (len(data) == 0):
