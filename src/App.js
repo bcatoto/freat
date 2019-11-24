@@ -88,13 +88,13 @@ export default class App extends React.Component {
         const userPosts = this.state.userPosts;
 
         for (let i = 0; i < posts.length; i++) {
-          if (posts[i].id == postid) {
+          if (posts[i].id === postid) {
             posts[i] = Object.assign(posts[i], post);
           }
         }
 
         for (let i = 0; i < userPosts.length; i++) {
-          if (userPosts[i].id == postid) {
+          if (userPosts[i].id === postid) {
             userPosts[i] = Object.assign(userPosts[i], post);
           }
         }

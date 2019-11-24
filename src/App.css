@@ -38,6 +38,15 @@
     .show > .btn-navbar.dropdown-toggle:focus {
       box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
 
+.btn-profile {
+  font-weight: 400;
+  color: #7b8a8b;
+  text-decoration: none; }
+
+.btn-profile:hover {
+  color: #0066ff;
+  text-decoration: none; }
+
 .btn-search {
   color: #FFF;
   background-color: #0066ff;
@@ -185,9 +194,6 @@
   border: 0px;
   border-radius: 0.75rem;
   box-shadow: 1px 1px 10px #d9d9d9; }
-  @media (max-width: 576px) {
-    .card {
-      margin: 25px 30px; } }
   .card:first-child {
     margin-top: 20px; }
   .card:last-child {
@@ -198,6 +204,11 @@
   .card > .list-group:last-child .list-group-item:last-child {
     border-bottom-right-radius: 0.75rem;
     border-bottom-left-radius: 0.75rem; }
+  @media (max-width: 576px) {
+    .card {
+      margin: 25px 30px; }
+    .card:last-child {
+      margin-bottom: 40px; } }
 
 .card-body {
   color: #1a1a1a;
@@ -305,8 +316,15 @@
 
 /* DROPDOWN */
 
+.account-dropdown-menu {
+  min-width: 7rem; }
+
 .card-dropdown-menu {
   min-width: 5rem; }
+
+/* Removes caret from card dropdown button */
+.card-dropdown-toggle.dropdown-toggle::after {
+  display: none; }
 
 .dropdown-item {
   display: block;
@@ -323,10 +341,6 @@
     color: #0066ff;
     text-decoration: none;
     background-color: #fff; }
-
-/* Removes caret from dropdown button */
-.dropdown-toggle::after {
-  display: none; }
 
 /* CUSTOM */
 
@@ -346,6 +360,10 @@
   height: calc(100vh - 54.38px);
   max-width: 576px;
   min-width: 400px; }
+  @media (max-width: 576px) {
+    #post-pane {
+      min-width: 320px;
+      width: 100vw; } }
 
 #no-food {
   text-align: center;
@@ -363,14 +381,9 @@
 
 #map-pane {
   height: calc(100vh - 54.38px); }
-
-@media (max-width: 576px) {
-  #post-pane {
-    min-width: 320px;
-    width: 100vw; }
-
-  #map-pane {
-    display: none; } }
+  @media (max-width: 576px) {
+    #map-pane {
+      display: none; } }
 
 #form-search {
   height: calc(1.5em + 0.75rem + 1.5px);

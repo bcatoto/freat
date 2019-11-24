@@ -3,7 +3,6 @@ import Post from "./../main/Post"
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
-import Carousel from "react-bootstrap/Carousel";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -31,7 +30,9 @@ export default class UserPost extends Post {
               </Col>
               <Col className="p-0 card-edit-container" xs={1} sm={1}>
                 <Dropdown>
-                  <Dropdown.Toggle as={Button} variant="edit">
+                  <Dropdown.Toggle as={Button} variant="edit"
+                    className="card-dropdown-toggle"
+                  >
                     <i className="fas fa-ellipsis-v p-0 m-0"></i>
                   </Dropdown.Toggle>
 
@@ -54,9 +55,7 @@ export default class UserPost extends Post {
             </Row>
           </Container>
         </Card.Header>
-        <Carousel indicators={false} interval={null}>
-          {this.renderImages()}
-        </Carousel>
+        {this.renderCarousel()}
         <Card.Body>
           {this.props.post.desc}
           <br/>

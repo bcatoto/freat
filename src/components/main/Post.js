@@ -67,8 +67,21 @@ export default class Post extends React.Component {
   renderImages() {
     return this.props.post.images.map(url =>
       <Carousel.Item>
-        <img className="d-block w-100" src={url} />
+        <img className="d-block w-100" src={url} alt="Image of free food." />
       </Carousel.Item>
+    );
+  }
+
+  renderCarousel() {
+    let controls = false;
+    if (this.props.post.images.length > 1) {
+      controls = true;
+    }
+
+    return(
+      <Carousel controls={controls} indicators={false} interval={null}>
+        {this.renderImages()}
+      </Carousel>
     );
   }
 
@@ -94,22 +107,21 @@ export default class Post extends React.Component {
             </Row>
             <Row noGutters="true" className="mt-1">
               <Button variant="location">
-                <i className="fas fa-map-marker-alt mr-1"></i>{this.props.post.room} {this.props.post.building}
+                <i className="fas fa-map-marker-alt mr-1"></i>
+                {this.props.post.room}, {this.props.post.building}
               </Button>
             </Row>
           </Container>
         </Accordion.Toggle>
-        <Carousel indicators={false} interval={null}>
-          {this.renderImages()}
-        </Carousel>
+        {this.renderCarousel()}
         <Accordion.Collapse eventKey={this.props.post.id}>
-          <Card.Body>
+          <Accordion.Toggle as={Card.Body} eventKey={this.props.post.id}>
             {this.props.post.desc}
             <br/>
             <em>Feeds approximately: {this.props.post.feeds}</em>
-          </Card.Body>
+          </Accordion.Toggle>
         </Accordion.Collapse>
-        <Accordion.Toggle as={Card.Footer}>
+        <Accordion.Toggle as={Card.Footer} eventKey={this.props.post.id}>
           {this.renderDietOptions()}
         </Accordion.Toggle>
       </Card>
