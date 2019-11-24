@@ -2,6 +2,12 @@ from flask import request, json, Response, Blueprint, jsonify
 from ..models.PostingModel import PostingModel, PostingSchema
 # from flask_cas import login_required
 from ..CASClient import CASClient
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+# configures cloudinary. note: should we move cloud name, etc. to config.py?
+cloudinary.config(cloud_name = 'hadg27jul', api_key = '752588741865624', api_secret = 'Q0JigeE-1yXsch3qqfkMWvHJoiI')
 
 posting_schema = PostingSchema()
 
@@ -46,7 +52,7 @@ def postDetails(postid):
   data = posting_schema.dump(post, many=True)
   return custom_response(data, 200)
 
-# deletes the post with the id postid
+# deletes the post with the id postid, and delete image from cloudinary
 @posting_api.route('/<int:postid>', methods=['DELETE'])
 def deletePost(postid):
   """
@@ -54,6 +60,8 @@ def deletePost(postid):
   """
   post = PostingModel.get_one_post(postid)
   data = posting_schema.dump(post, many=True)
+
+  cloudinary.uploader.destroy("rcrkwqftmb9qxkxcgoug") # TEST
 
   if (len(data) == 0):
     return custom_response({'error': 'post not found'}, 404)
