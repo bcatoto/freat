@@ -70,11 +70,12 @@ def deletePost(postid):
   # if data.get('owner_id') != g.user.get('id'):
   #   return custom_response({'error': 'permission denied'}, 400)
 
-  for image_url in data[0]['images']:
-    parsed = urlparse(image_url)
-    split1 = parsed.path.split('/')
-    split2 = split1[5].split('.')
-    cloudinary.uploader.destroy(split2[0])
+  for public_id in data[0]['images']:
+    # parsed = urlparse(image_url)
+    # split1 = parsed.path.split('/')
+    # split2 = split1[5].split('.')
+    # cloudinary.uploader.destroy(split2[0])
+    cloudinary.uploader.destroy(public_id)
 
   post[0].delete()
   return custom_response({'message': 'deleted'}, 204)
