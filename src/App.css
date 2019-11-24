@@ -244,19 +244,18 @@
   line-height: 1.2;
   color: #95a5a6;
   margin-top: 2px;
-  min-width: 80px;
-  max-width: 90px;
+  min-width: 100px;
+  max-width: 110px;
 }
 
 .card-title-container {
-  max-width: 250px;
+  max-width: 225px;
 }
 
 .card-edit-container {
   margin-left: 10px;
   max-width: 8px;
 }
-
 
 /* ACCORDION */
 
