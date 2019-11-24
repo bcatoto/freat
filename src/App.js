@@ -132,8 +132,8 @@ export default class App extends React.Component {
         },
         data: formData
     }).catch(err => console.log(err));
-
-    return res.data.secure_url;
+    console.log(res)
+    return res.data.public_id;
   }
 
   handleOpenForm = (isNew, values) => {

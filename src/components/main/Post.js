@@ -3,6 +3,7 @@ import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Carousel from "react-bootstrap/Carousel";
+import { Image, Transformation } from 'cloudinary-react';
 import Badge from "react-bootstrap/Badge";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -68,10 +69,14 @@ export default class Post extends React.Component {
     if (this.props.post.images == null) {
       return;
     }
-    
-    return this.props.post.images.map(url =>
+
+    return this.props.post.images.map(id =>
       <Carousel.Item>
-        <img className="d-block w-100" src={url} alt="Image of free food." />
+        <Image
+          className="d-block w-100"
+          cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}
+          publicId={id}
+        />
       </Carousel.Item>
     );
   }
@@ -105,7 +110,7 @@ export default class Post extends React.Component {
               <Col className="card-title-container mr-auto p-0">
                 <Card.Title>{this.props.post.title}</Card.Title>
               </Col>
-              <Col className="card-time ml-auto p-0" xs={3} sm={3}>
+              <Col className="card-time p-0" xs={3} sm={3}>
                 {this.getTime()}
               </Col>
             </Row>

@@ -25,7 +25,7 @@ export default class UserPost extends Post {
               <Col className="card-title-container mr-auto p-0">
                 <Card.Title>{this.props.post.title}</Card.Title>
               </Col>
-              <Col className="card-time ml-auto p-0" xs={3} sm={3}>
+              <Col className="card-time p-0" xs={3} sm={3}>
                 {this.getTime()}
               </Col>
               <Col className="p-0 card-edit-container" xs={1} sm={1}>
