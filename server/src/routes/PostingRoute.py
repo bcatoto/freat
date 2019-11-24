@@ -62,15 +62,6 @@ def deletePost(postid):
   post = PostingModel.get_one_post(postid)
   data = posting_schema.dump(post, many=True)
 
-
-  image_url = data[0]['images'][0] # hopefully return image url (s)
-
-  parsed = urlparse(image_url)
-  split1 = parsed.path.split('/')
-  split2 = split1[5].split('.')
-  print("DEBUG2: ", split2[0])
-  cloudinary.uploader.destroy(split2[0]) # TEST
-
   if (len(data) == 0):
     return custom_response({'error': 'post not found'}, 404)
 
@@ -78,6 +69,12 @@ def deletePost(postid):
   # data = posting_schema.dump(post, many=True)
   # if data.get('owner_id') != g.user.get('id'):
   #   return custom_response({'error': 'permission denied'}, 400)
+
+  for image_url in data[0]['images']:
+    parsed = urlparse(image_url)
+    split1 = parsed.path.split('/')
+    split2 = split1[5].split('.')
+    cloudinary.uploader.destroy(split2[0])
 
   post[0].delete()
   return custom_response({'message': 'deleted'}, 204)
