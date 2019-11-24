@@ -5,6 +5,7 @@ from ..CASClient import CASClient
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+from urllib.parse import urlparse # to deal w/ image urls
 
 # configures cloudinary. note: should we move cloud name, etc. to config.py?
 cloudinary.config(cloud_name = 'hadg27jul', api_key = '752588741865624', api_secret = 'Q0JigeE-1yXsch3qqfkMWvHJoiI')
@@ -60,8 +61,11 @@ def deletePost(postid):
   """
   post = PostingModel.get_one_post(postid)
   data = posting_schema.dump(post, many=True)
-
-  cloudinary.uploader.destroy("rcrkwqftmb9qxkxcgoug") # TEST
+  image_url = data['images'] # hopefully return image url (s)
+  parsed = urlparse('image_url')
+  split1 = parsed.path.split('/')
+  split2 = split1[5].split('.')
+  cloudinary.uploader.destroy(split2[0]) # TEST
 
   if (len(data) == 0):
     return custom_response({'error': 'post not found'}, 404)
