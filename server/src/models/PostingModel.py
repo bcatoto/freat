@@ -75,7 +75,7 @@ class PostingSchema(Schema):
   desc = fields.Str()
   room = fields.Str()
   building = fields.Str()
-  created_at = fields.DateTime()
+  created_at = fields.DateTime(timezone=eastern)
   diet = fields.List(fields.Int)
   feeds = fields.Int()
   images = fields.List(fields.Str())
