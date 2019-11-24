@@ -61,6 +61,7 @@ def deletePost(postid):
   """
   post = PostingModel.get_one_post(postid)
   data = posting_schema.dump(post, many=True)
+  print("DEBUG0: ", data)
   image_url = data['images'] # hopefully return image url (s)
   print("DEBUG1: ", image_url)
   parsed = urlparse(image_url)
