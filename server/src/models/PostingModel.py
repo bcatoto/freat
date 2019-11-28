@@ -9,7 +9,6 @@ from pytz import timezone
 eastern = timezone('US/Eastern')
 
 class PostingModel(db.Model):
-
     """
     Posting Model
     """
@@ -26,6 +25,7 @@ class PostingModel(db.Model):
     diet = db.Column(db.ARRAY(db.Integer))
     feeds = db.Column(db.Integer)
     images = db.Column(db.ARRAY(db.String(128)))
+    owner_id = db.Column(db.String(20), db.ForeignKey('users.netid'), nullable=False)
 
     def __init__(self,data):
         self.title = data.get('title')
@@ -36,8 +36,7 @@ class PostingModel(db.Model):
         self.diet = data.get('diet')
         self.feeds = data.get('feeds')
         self.images= data.get('images')
-
-    ## serialize might be useful for returning json objects
+        self.owner_id = data.get('netid')
 
     def save(self):
         db.session.add(self)
@@ -62,6 +61,10 @@ class PostingModel(db.Model):
     def get_one_post(postid):
         return PostingModel.query.filter_by(id=postid)
     
+    @staticmethod
+    def get_by_user(netid):
+        return PostingModel.query.filter_by(owner_id=netid).all()
+    
     def __repr(self):
         return '<id {}>'.format(self.id)
 
@@ -79,5 +82,6 @@ class PostingSchema(Schema):
   diet = fields.List(fields.Int)
   feeds = fields.Int()
   images = fields.List(fields.Str())
+  netid = fields.Str()
 
   

@@ -6,3 +6,4 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 from .PostingModel import PostingModel
+from .UserModel import UserModel

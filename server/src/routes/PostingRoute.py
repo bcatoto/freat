@@ -21,7 +21,7 @@ def getPostings():
     Get all the available postings
     """
 
-    username = CASClient().authenticate()
+    # username = CASClient().authenticate()
     posts = PostingModel.get_all_postings()
     data = posting_schema.dump(posts, many=True)
     return custom_response(data, 200)
@@ -109,6 +109,16 @@ def updatePost(postid):
     return custom_response({'message': err}, 400)
 
  
+# get all posts of a certain user
+@posting_api.route('/getByUser/<string:netid>', methods=['GET'])
+def getPostsByUser(netid):
+  """
+  Get all available posts of a certain user
+  """
+  print("hereeeeee")
+  posts = PostingModel.get_by_user(netid)
+  data = posting_schema.dump(posts, many=True)
+  return custom_response(data, 200)
 
 def custom_response(res, status_code):
   """
