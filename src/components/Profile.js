@@ -1,8 +1,26 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
+import Alert from "react-bootstrap/Alert";
 import UserPost from "./profile/UserPost";
+import Fade from "react-bootstrap/Fade";
+
 
 export default class Profile extends React.Component {
+  handleClose() {
+    this.props.closeAlert();
+  }
+
+  renderAlert() {
+    if (this.props.show) {
+      return (
+        <Alert variant="delete" dismissible onClose={() => this.handleClose()}>
+          <i className="far fa-trash-alt mr-2"></i>
+          Your post was successfully deleted!
+        </Alert>
+      );
+    }
+  }
+
   renderText() {
     if (this.props.posts.length === 0) {
       return "No Active Posts"
@@ -17,6 +35,7 @@ export default class Profile extends React.Component {
       <UserPost
         key={post.id}
         deletePost={this.props.deletePost}
+        openAlert={this.props.openAlert}
         openForm={this.props.openForm}
         post={post}
       />
@@ -26,7 +45,8 @@ export default class Profile extends React.Component {
   render() {
     return (
       <Container fluid id="profile" className="p-0">
-        <h4 id="profile-name">{this.props.user.name}</h4>
+        {this.renderAlert()}
+        <h4 id="profile-name">{this.props.user.netid}</h4>
         <h5 id="profile-text">{this.renderText()}</h5>
         <Container id="user-feed" className="p-0">
           {this.renderPosts()}

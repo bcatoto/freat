@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 
-import buildings from "./assets/buildings.json"
+import buildings from "./assets/buildings.json";
 
 export default class PostForm extends React.Component {
   constructor(props) {
@@ -25,7 +25,8 @@ export default class PostForm extends React.Component {
       images: [],
       desc: "",
       diet: this.initialDiet,
-      feeds: ""
+      feeds: "",
+      netid: this.props.user.netid
     };
 
     this.initialValid = {
@@ -241,9 +242,6 @@ export default class PostForm extends React.Component {
                 >
                   {this.renderBuildings()}
                 </Form.Control>
-                <Form.Control.Feedback type="invalid">
-                  Please select a building.
-                </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
 
@@ -253,9 +251,9 @@ export default class PostForm extends React.Component {
                 accept="image/png, image/jpeg"
                 onChange={this.handleImageChange}
               />
-              <Form.Control.Feedback type="invalid">
-                Please upload an image.
-              </Form.Control.Feedback>
+              <Form.Text className="text-muted mt-1">
+                Please upload landscape photos. Multiple photos can be uploaded.
+              </Form.Text>
             </Form.Group>
 
             <Form.Group controlId="input-desc">
