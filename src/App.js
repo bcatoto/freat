@@ -182,7 +182,7 @@ export default class App extends React.Component {
                 handleClose={this.handleCloseForm}
                 isNew={this.state.form.isNew}
                 values={this.state.form.values}
-                user={this.props.user}
+                user={this.state.user}
               />
             </>
             )}
