@@ -17,18 +17,17 @@ export default class NavBar extends React.Component {
           className="mr-auto" variant="navbar"
           onClick={this.handleClick}
         >
-          New post
+          <i className="fas fa-plus mr-2"></i>
+          New Post
         </Button>
         <Dropdown alignRight>
           <Dropdown.Toggle as={Button} variant="navbar">
-            <i class="fas fa-user p-0 m-0"></i>
+            <i className="fas fa-user p-0 m-0"></i>
           </Dropdown.Toggle>
 
           <Dropdown.Menu className="account-dropdown-menu">
-            <Dropdown.Item>
-              <Link className="btn-profile" to="/profile">
-                Profile
-              </Link>
+            <Dropdown.Item as={Link} className="btn-profile" to="/profile">
+              Profile
             </Dropdown.Item>
             <Dropdown.Item>
               Log Out

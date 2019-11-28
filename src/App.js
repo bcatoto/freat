@@ -20,10 +20,11 @@ export default class App extends React.Component {
 
     this.state = {
       user: {
-        netid: "testuser"
+        netid: "bcatoto"
       },
       posts:[],
       userPosts: [],
+      showAlert: false,
       showForm: false,
       form: {
         isNew: true,
@@ -113,6 +114,8 @@ export default class App extends React.Component {
           let userPosts = this.state.userPosts;
           userPosts = userPosts.filter(post => post.id !== postid);
           this.setState({ posts, userPosts });
+
+          this.handleOpenAlert();
         }
       })
       .catch(err => console.log(err));
@@ -132,8 +135,17 @@ export default class App extends React.Component {
         },
         data: formData
     }).catch(err => console.log(err));
-    console.log(res)
+
     return res.data.public_id;
+  }
+
+  handleOpenAlert = () => {
+    this.setState({ showAlert: true });
+    setTimeout(this.handleCloseAlert, 5000);
+  }
+
+  handleCloseAlert = () => {
+    this.setState({ showAlert: false });
   }
 
   handleOpenForm = (isNew, values) => {
@@ -187,9 +199,12 @@ export default class App extends React.Component {
         <Route path="/profile"
           render={(props) => (
             <Profile {...props}
+              closeAlert={this.handleCloseAlert}
               deletePost={this.deletePost}
+              openAlert={this.handleOpenAlert}
               openForm={this.handleOpenForm}
               posts={this.state.userPosts}
+              show={this.state.showAlert}
               user={this.state.user}
             />
           )}
