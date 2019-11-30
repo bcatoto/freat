@@ -26,6 +26,16 @@ def getPostings():
     data = posting_schema.dump(posts, many=True)
     return custom_response(data, 200)
 
+@posting_api.route('/authenticate', methods=['GET'])
+def getUsername():
+  """
+  Get CAS username
+  """
+  username = CASClient().authenticate()
+  return custom_response(username, 200)
+
+
+
 @posting_api.route('/', methods=['POST'])
 def newPost():
   """
