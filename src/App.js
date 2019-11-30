@@ -1,13 +1,13 @@
-import React from "react"
-import { Switch, Route } from "react-router-dom"
-import Landing from "./components/Landing"
-import NavBar from "./components/NavBar"
-import Home from "./components/Home"
-import Profile from "./components/Profile"
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import Landing from "./components/Landing";
+import NavBar from "./components/NavBar";
+import Home from "./components/Home";
+import Profile from "./components/Profile";
 import PostForm from "./components/PostForm";
 
 import axios from "axios";
-import FormData from "form-data"
+import FormData from "form-data";
 
 import "bootswatch/dist/flatly/bootstrap.min.css";
 import "./App.css";
@@ -35,12 +35,21 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this.authenticate()
-    this.getPosts();
+    this.refreshPosts()
     this.getUserPosts();
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.refresh);
   }
 
   authenticate = async () => {
 
+  }
+
+  refreshPosts = async () => {
+    await this.getPosts();
+    setTimeout(this.refresh, 15 * 60000);
   }
 
   getPosts = async () => {
