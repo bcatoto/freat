@@ -26,15 +26,6 @@ def getPostings():
     data = posting_schema.dump(posts, many=True)
     return custom_response(data, 200)
 
-@posting_api.route('/authenticate', methods=['GET'])
-def getUsername():
-  """
-  Get CAS username
-  """
-  username = CASClient().authenticate()
-  username = username.rstrip('\n')
-  return custom_response({'username': username}, 200)
-
 @posting_api.route('/', methods=['POST'])
 def newPost():
   """
@@ -108,7 +99,7 @@ def updatePost(postid):
   # return custom_response({'error': 'permission denied'}, 400)
 
   try:
-    del req_data["post"]["id"] # attempt.... 
+    del req_data["post"]["id"] # attempt....
     data = posting_schema.load(req_data['post'], partial=True)
     post[0].update(data) # need post[0] b/c the PostingModel.get_one_post(postid) list/only way to get sqlalchemy to return an object
     data = posting_schema.dump(post)
@@ -117,7 +108,7 @@ def updatePost(postid):
   except Exception as err:
     return custom_response({'message': err}, 400)
 
- 
+
 # get all posts of a certain user
 @posting_api.route('/getByUser/<string:netid>', methods=['GET'])
 def getPostsByUser(netid):

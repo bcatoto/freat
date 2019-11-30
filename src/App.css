@@ -413,6 +413,11 @@
 
 /* Landing Page */
 
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
 #landing-image {
   position: -webkit-sticky; /* Safari */
   position: sticky;
@@ -442,15 +447,9 @@
   top: 10px; }
 
 #login-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin: 70px 0px; }
 
 .info-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   color: #0066FF; }
   .info-container i {
     font-size: 60px; }
