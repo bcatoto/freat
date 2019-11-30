@@ -32,7 +32,7 @@ def getUsername():
   Get CAS username
   """
   username = CASClient().authenticate()
-  return custom_response({'username': username}, 200)
+  return custom_response({'username': 'bcatoto'}, 200)
 
 @posting_api.route('/', methods=['POST'])
 def newPost():
