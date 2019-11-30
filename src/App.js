@@ -12,7 +12,7 @@ import FormData from "form-data";
 import "bootswatch/dist/flatly/bootstrap.min.css";
 import "./App.css";
 
-require('dotenv').config()
+require("dotenv").config()
 
 export default class App extends React.Component {
   constructor(props) {
@@ -62,7 +62,7 @@ export default class App extends React.Component {
   }
 
   getUserPosts = async () => {
-    axios.get(`/api/v1/posting/`)
+    axios.get(`/api/v1/posting/getByUser/${this.state.user.netid}`)
       .then(res => {
         const userPosts = res.data;
         this.setState({ userPosts });
@@ -197,7 +197,7 @@ export default class App extends React.Component {
             )}
           />
         </Switch>
-        <Route path="/Home"
+        <Route path="/home"
           render={(props) => (
             <Home {...props}
               posts={this.state.posts}

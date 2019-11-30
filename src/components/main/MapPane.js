@@ -8,7 +8,7 @@ require('dotenv').config()
 export default class MapPane extends React.Component {
   generateLink() {
     return "https://maps.googleapis.com/maps/api/js?v=3.exp&key=" +
-      process.env.REACT_APP_API_KEY
+      process.env.REACT_APP_GOOGLE_MAPS_API
   }
 
   renderMarkers() {
