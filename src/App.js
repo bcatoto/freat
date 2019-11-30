@@ -19,7 +19,7 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      netid: "nothing happened",
+      netid: "bcatoto",
       posts:[],
       userPosts: [],
       showAlert: false,
