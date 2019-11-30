@@ -1,5 +1,5 @@
 import React from "react";
-import { GoogleMap, Marker, withScriptjs, withGoogleMap } from "react-google-maps"
+import { GoogleMap, Marker,InfoWindow, withScriptjs, withGoogleMap } from "react-google-maps"
 
 import coordinates from "./../assets/coordinates.json"
 
@@ -7,7 +7,7 @@ require('dotenv').config()
 
 export default class MapPane extends React.Component {
   generateLink() {
-    return "https://maps.googleapis.com/maps/api/js?v=3.exp&key=" +
+    return "https://maps.googleapis.com/maps/api/js?v=3.exp&key=" + 
       process.env.REACT_APP_API_KEY
   }
 
@@ -19,6 +19,17 @@ export default class MapPane extends React.Component {
           lat:coordinates[post.building][0],
           lng:coordinates[post.building][1]
         }}
+        onClick = {() =>(
+          <InfoWindow
+          position = {{
+            lat:coordinates[post.building][0],
+            lng:coordinates[post.building][1]
+          }}
+          >
+          <div>post.title</div>
+          </InfoWindow>
+
+        )}
       />
     );
   }
