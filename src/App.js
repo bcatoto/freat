@@ -1,18 +1,18 @@
-import React from "react"
-import { Switch, Route } from "react-router-dom"
-import Landing from "./components/Landing"
-import NavBar from "./components/NavBar"
-import Home from "./components/Home"
-import Profile from "./components/Profile"
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import Landing from "./components/Landing";
+import NavBar from "./components/NavBar";
+import Home from "./components/Home";
+import Profile from "./components/Profile";
 import PostForm from "./components/PostForm";
 
 import axios from "axios";
-import FormData from "form-data"
+import FormData from "form-data";
 
 import "bootswatch/dist/flatly/bootstrap.min.css";
 import "./App.css";
 
-require('dotenv').config()
+require("dotenv").config()
 
 export default class App extends React.Component {
   constructor(props) {
@@ -35,12 +35,21 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this.authenticate()
-    this.getPosts();
+    this.refreshPosts()
     this.getUserPosts();
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.refresh);
   }
 
   authenticate = async () => {
 
+  }
+
+  refreshPosts = async () => {
+    await this.getPosts();
+    setTimeout(this.refresh, 15 * 60000);
   }
 
   getPosts = async () => {
@@ -53,7 +62,7 @@ export default class App extends React.Component {
   }
 
   getUserPosts = async () => {
-    axios.get(`/api/v1/posting/`)
+    axios.get(`/api/v1/posting/getByUser/${this.state.user.netid}`)
       .then(res => {
         const userPosts = res.data;
         this.setState({ userPosts });
@@ -188,7 +197,7 @@ export default class App extends React.Component {
             )}
           />
         </Switch>
-        <Route path="/Home"
+        <Route path="/home"
           render={(props) => (
             <Home {...props}
               posts={this.state.posts}

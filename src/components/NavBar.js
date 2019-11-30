@@ -24,7 +24,6 @@ export default class NavBar extends React.Component {
           <Dropdown.Toggle as={Button} variant="navbar">
             <i className="fas fa-user p-0 m-0"></i>
           </Dropdown.Toggle>
-
           <Dropdown.Menu className="account-dropdown-menu">
             <Dropdown.Item as={Link} className="btn-profile" to="/profile">
               Profile

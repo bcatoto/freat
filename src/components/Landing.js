@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 export default class Landing extends React.Component {
   handleClick = event => {
     window.location.pathname = '/home'
+    console.log(window.location.pathname)
   }
 
   render() {
@@ -24,13 +25,15 @@ export default class Landing extends React.Component {
             Log in through CAS
           </Button>
         </Container>
-        <Row>
-          <Col>
-            <i className="fas fa-map-marked-alt"></i>
-          </Col>
-          <Col>
-          </Col>
-        </Row>
+        <Container className="info-container">
+          <Row>
+            <Col>
+              <i className="fas fa-map-marked-alt"></i>
+            </Col>
+            <Col>
+            </Col>
+          </Row>
+        </Container>
         <Container fluid id="test" className="vh-100">
         </Container>
       </>

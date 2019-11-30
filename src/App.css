@@ -422,11 +422,12 @@
   background-size: cover;
   background-position: center;
   height: 30vh;
-  text-align: center; }
+  text-align: center;
+  z-index: 10; }
 
 #title-container {
   position: absolute;
-  top: calc(30vh - 91px);
+  top: calc(30vh - 90px);
   color: #fff;
   font-size: 5rem;
   font-weight: 750;
@@ -445,6 +446,14 @@
   align-items: center;
   justify-content: center;
   margin: 70px 0px; }
+
+.info-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0066FF; }
+  .info-container i {
+    font-size: 60px; }
 
 /* Home Page* */
 
