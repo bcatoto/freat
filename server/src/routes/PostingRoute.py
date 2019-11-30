@@ -32,7 +32,6 @@ def newPost():
   Create a new post and add to the database
   """
   req_data = request.get_json()
-  print("DEBUG2!: ",req_data)
   try:
     data = posting_schema.load(req_data['post'])
     ## future check for if the post id already exists
@@ -51,6 +50,7 @@ def postDetails(postid):
   """
   post = PostingModel.get_one_post(postid)
   data = posting_schema.dump(post, many=True)
+  print('debugpineapple, ', data)
   return custom_response(data, 200)
 
 # deletes the post with the id postid, and delete image from cloudinary
@@ -115,7 +115,6 @@ def getPostsByUser(netid):
   """
   Get all available posts of a certain user
   """
-  print("hereeeeee")
   posts = PostingModel.get_by_user(netid)
   data = posting_schema.dump(posts, many=True)
   return custom_response(data, 200)
