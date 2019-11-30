@@ -20,7 +20,7 @@ export default class App extends React.Component {
 
     this.state = {
       netid: "bcatoto",
-      posts:[],
+      posts: [],
       userPosts: [],
       showAlert: false,
       showForm: false,
@@ -32,12 +32,17 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    this.refreshPosts()
+    this.authenticate();
+    this.refreshPosts();
     this.getUserPosts();
   }
 
   componentWillUnmount() {
     clearTimeout(this.refresh);
+  }
+
+  authenticate = async () => {
+
   }
 
   refreshPosts = async () => {
