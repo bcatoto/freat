@@ -38,21 +38,14 @@ def create_app(env_name):
 
 
   @app.route('/')
-  @app.route('/profile')
   def index():
     """
     example endpoint
     """
-    # username = CASClient().authenticate()
-    # print(username)
-    # pprint(vars(cas._app))
-    # print(cas.username)
-    
-    # print(cas.attributes)
-    
     return render_template('index.html')
   
   @app.route('/home')
+  @app.route('/profile')
   def home():
     """
     example endpoint
