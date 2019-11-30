@@ -20,8 +20,7 @@ export default class Landing extends React.Component {
           </Container>
         </Container>
         <Container fluid id="login-container" className="center p-0">
-          <Button variant="landing" size="lg"
-            onClick={this.handleClick}>
+          <Button variant="landing" size="lg" onClick={this.handleClick}>
             Log in through CAS
           </Button>
         </Container>
