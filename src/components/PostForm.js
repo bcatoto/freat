@@ -26,7 +26,7 @@ export default class PostForm extends React.Component {
       desc: "",
       diet: this.initialDiet,
       feeds: "",
-      netid: this.props.user.netid
+      netid: this.props.netid
     };
 
     this.initialValid = {

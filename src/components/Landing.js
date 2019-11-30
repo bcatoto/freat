@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 
 export default class Landing extends React.Component {
   handleClick = event => {
-    window.location.pathname = '/home'
-    console.log(window.location.pathname)
+    window.location.pathname = "/home";
+    window.reload();
   }
 
   render() {
@@ -19,18 +19,22 @@ export default class Landing extends React.Component {
             <span className="title">Freat</span>
           </Container>
         </Container>
-        <Container fluid id="login-container" className="p-0">
-          <Button as={Link} to="/home" variant="landing" size="lg"
-            onChange={this.handleClick}>
+        <Container fluid id="login-container" className="center p-0">
+          <Button variant="landing" size="lg" onClick={this.handleClick}>
             Log in through CAS
           </Button>
         </Container>
         <Container className="info-container">
           <Row>
-            <Col>
-              <i className="fas fa-map-marked-alt"></i>
+            <Col className="center">
+              <Row>
+                <i className="fas fa-map-marked-alt"></i>
+              </Row>
+              <Row>
+              </Row>
             </Col>
-            <Col>
+            <Col className="center">
+              <i className="far fa-plus-square"></i>
             </Col>
           </Row>
         </Container>

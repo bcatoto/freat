@@ -19,9 +19,7 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      user: {
-        netid: "bcatoto"
-      },
+      netid: "bcatoto",
       posts:[],
       userPosts: [],
       showAlert: false,
@@ -34,17 +32,12 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    this.authenticate()
     this.refreshPosts()
     this.getUserPosts();
   }
 
   componentWillUnmount() {
     clearTimeout(this.refresh);
-  }
-
-  authenticate = async () => {
-
   }
 
   refreshPosts = async () => {
@@ -62,7 +55,7 @@ export default class App extends React.Component {
   }
 
   getUserPosts = async () => {
-    axios.get(`/api/v1/posting/getByUser/${this.state.user.netid}`)
+    axios.get(`/api/v1/posting/getByUser/${this.state.netid}`)
       .then(res => {
         const userPosts = res.data;
         this.setState({ userPosts });
@@ -181,7 +174,6 @@ export default class App extends React.Component {
           <Route render={(props) => (
             <>
               <NavBar {...props}
-                user={this.state.user}
                 openForm={this.handleOpenForm}
               />
               <PostForm
@@ -190,8 +182,8 @@ export default class App extends React.Component {
                 editPost={this.editPost}
                 handleClose={this.handleCloseForm}
                 isNew={this.state.form.isNew}
+                netid={this.state.netid}
                 values={this.state.form.values}
-                user={this.state.user}
               />
             </>
             )}
@@ -201,7 +193,6 @@ export default class App extends React.Component {
           render={(props) => (
             <Home {...props}
               posts={this.state.posts}
-              user={this.state.user}
             />
           )}
         />
@@ -212,9 +203,9 @@ export default class App extends React.Component {
               deletePost={this.deletePost}
               openAlert={this.handleOpenAlert}
               openForm={this.handleOpenForm}
+              netid={this.state.netid}
               posts={this.state.userPosts}
               show={this.state.showAlert}
-              user={this.state.user}
             />
           )}
         />

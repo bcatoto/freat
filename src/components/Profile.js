@@ -45,7 +45,7 @@ export default class Profile extends React.Component {
     return (
       <Container fluid id="profile" className="p-0">
         {this.renderAlert()}
-        <h4 id="profile-name">{this.props.user.netid}</h4>
+        <h4 id="profile-name">{this.props.netid}</h4>
         <h5 id="profile-text">{this.renderText()}</h5>
         <Container id="user-feed" className="p-0">
           {this.renderPosts()}
