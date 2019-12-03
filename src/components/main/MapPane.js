@@ -1,11 +1,28 @@
 import React from "react";
-import { GoogleMap, Marker, withScriptjs, withGoogleMap } from "react-google-maps"
+import { GoogleMap, Marker, InfoWindow, withScriptjs, withGoogleMap } from "react-google-maps"
 
 import coordinates from "./../assets/coordinates.json"
 
 require('dotenv').config()
 
 export default class MapPane extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showMarker: false,
+    };
+  }
+
+  handleOpenMarker() {
+    this.setState({ showMarker: true });
+  }
+
+  handleCloseMarker() {
+    this.setState({ showMarker: false });
+  }
+
+
   generateLink() {
     return "https://maps.googleapis.com/maps/api/js?v=3.exp&key=" +
       process.env.REACT_APP_GOOGLE_MAPS_API
@@ -19,6 +36,16 @@ export default class MapPane extends React.Component {
           lat:coordinates[post.building][0],
           lng:coordinates[post.building][1]
         }}
+        onClick = {() => (
+          <InfoWindow
+            position={{
+              lat:coordinates[post.building][0],
+              lng:coordinates[post.building][1]
+            }}
+          >
+          <div>{post.title}</div>
+          </InfoWindow>
+        )}
       />
     );
   }
@@ -36,9 +63,9 @@ export default class MapPane extends React.Component {
     return (
       <WrappedMap className="h-100 w-100"
         googleMapURL={this.generateLink()}
-        loadingElement={<div style={{height : "100%"}} />}
-        containerElement={<div style={{height : "100%"}} />}
-        mapElement={<div style={{height : "100%"}} />}
+        loadingElement={<div style={{height: "100%"}} />}
+        containerElement={<div style={{height: "100%"}} />}
+        mapElement={<div style={{height: "100%"}} />}
       />
     );
   }
