@@ -38,7 +38,7 @@ export default class App extends React.Component {
   }
 
   componentWillUnmount() {
-    clearTimeout(this.refresh);
+    clearTimeout(this.refreshPosts);
   }
 
   authenticate = async () => {
@@ -47,7 +47,7 @@ export default class App extends React.Component {
 
   refreshPosts = async () => {
     await this.getPosts();
-    setTimeout(this.refresh, 15 * 60000);
+    setTimeout(this.refreshPosts, 15 * 60 * 1000);
   }
 
   getPosts = async () => {
@@ -173,7 +173,6 @@ export default class App extends React.Component {
   render() {
     return(
       <div id="app">
-
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route render={(props) => (

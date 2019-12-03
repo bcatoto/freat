@@ -152,7 +152,7 @@ export default class PostForm extends React.Component {
     valid.room = post.room.length > 0;
     valid.building = post.building !== "-- Select building --";
     valid.images = post.images.length > 0;
-    valid.feeds = post.feeds === "" || post.feeds > 0;
+    valid.feeds = post.feeds > 0;
 
     const validForm = valid.title && valid.room && valid.building &&
       valid.images && valid.feeds;
@@ -273,7 +273,7 @@ export default class PostForm extends React.Component {
             </Form.Group>
 
             <Form.Group controlId="input-feeds">
-              <Form.Label>Feeds approximately...</Form.Label>
+              {this.renderRequired("Feeds approximately...")}
               <Form.Control type="number" name="feeds" placeholder="1"
                 value={this.state.post.feeds}
                 onChange={this.handleChange}

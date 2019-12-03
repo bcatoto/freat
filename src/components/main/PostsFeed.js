@@ -25,7 +25,7 @@ export default class PostsFeed extends React.Component {
     else {
       return (
         <Container id="no-food">
-          <i id="heart-broken" class="fas fa-heart-broken"></i>
+          <i id="heart-broken" className="fas fa-heart-broken"></i>
           <h4>Sorry, no free food on campus</h4>
         </Container>
       );

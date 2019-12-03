@@ -57,8 +57,7 @@ export default class UserPost extends Post {
         </Card.Header>
         {this.renderCarousel()}
         <Card.Body>
-          {this.props.post.desc}
-          <br/>
+          {this.renderDesc()}
           <em>Feeds approximately: {this.props.post.feeds}</em>
         </Card.Body>
         <Card.Footer>
