@@ -42,17 +42,18 @@ export default class Post extends React.Component {
     ];
   }
 
-  // Converts time difference to minutes/hours
   getTime() {
     const min = 60 * 1000;
     const hour = min * 60;
+
+    console.log(this.props.post)
 
     const now = Date.now();
     const time = new Date(this.props.post.created_at);
     const diff = now - time;
 
     if (diff > 2 * hour) {
-      this.props.deletePost(this.props.post.id)
+      this.props.deletePost(this.props.post.id);
     }
     else if (diff > hour) {
       return "1 hour ago";
@@ -96,6 +97,20 @@ export default class Post extends React.Component {
     );
   }
 
+  renderDesc() {
+    if (this.props.post.desc === "") {
+      return;
+    }
+    else {
+      return (
+        <>
+          {this.props.post.desc}
+          <br/>
+        </>
+      );
+    }
+  }
+
   renderDietOptions() {
     const diets = this.props.post.diet.map(i => this.diets[i]);
     return diets.map(diet =>
@@ -127,8 +142,7 @@ export default class Post extends React.Component {
         {this.renderCarousel()}
         <Accordion.Collapse eventKey={this.props.post.id}>
           <Accordion.Toggle as={Card.Body} eventKey={this.props.post.id}>
-            {this.props.post.desc}
-            <br/>
+            {this.renderDesc()}
             <em>Feeds approximately: {this.props.post.feeds}</em>
           </Accordion.Toggle>
         </Accordion.Collapse>
