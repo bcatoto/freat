@@ -5,8 +5,13 @@ import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
 
 export default class NavBar extends React.Component {
-  handleClick = event => {
+  handleNewPost = event => {
     this.props.openForm(true, null);
+  }
+
+  handleLogOut = event => {
+    window.location.pathname = "/logout";
+    window.reload();
   }
 
   render() {
@@ -15,7 +20,7 @@ export default class NavBar extends React.Component {
         <Link to="/home"><Navbar.Brand className="ml-2">Freat</Navbar.Brand></Link>
         <Button
           className="mr-auto" variant="navbar"
-          onClick={this.handleClick}
+          onClick={this.handleNewPost}
         >
           <i className="fas fa-plus mr-2"></i>
           New Post
@@ -28,7 +33,7 @@ export default class NavBar extends React.Component {
             <Dropdown.Item as={Link} className="btn-profile" to="/profile">
               Profile
             </Dropdown.Item>
-            <Dropdown.Item>
+            <Dropdown.Item onClick={this.handleLogOut}>
               Log Out
             </Dropdown.Item>
           </Dropdown.Menu>
