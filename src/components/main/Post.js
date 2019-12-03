@@ -76,7 +76,9 @@ export default class Post extends React.Component {
           className="d-block w-100"
           cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}
           publicId={id}
-        />
+        >
+          <Transformation quality="auto" aspectRatio="1:1" crop="crop" />
+        </Image>
       </Carousel.Item>
     );
   }

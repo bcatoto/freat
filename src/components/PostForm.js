@@ -252,7 +252,7 @@ export default class PostForm extends React.Component {
                 onChange={this.handleImageChange}
               />
               <Form.Text className="text-muted mt-1">
-                Please upload landscape photos. Multiple photos can be uploaded.
+                Please center your photo. All images will automatically be cropped to a square.
               </Form.Text>
             </Form.Group>
 
