@@ -52,7 +52,7 @@ export default class Post extends React.Component {
     const diff = now - time;
 
     if (diff > 2 * hour) {
-      return Math.floor(diff / hour) + " hours ago";
+      this.props.deletePost(this.props.post.id)
     }
     else if (diff > hour) {
       return "1 hour ago";

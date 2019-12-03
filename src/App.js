@@ -12,7 +12,7 @@ import FormData from "form-data";
 import "bootswatch/dist/flatly/bootstrap.min.css";
 import "./App.css";
 
-require("dotenv").config()
+require("dotenv").config();
 
 export default class App extends React.Component {
   constructor(props) {
@@ -197,6 +197,7 @@ export default class App extends React.Component {
         <Route path="/home"
           render={(props) => (
             <Home {...props}
+              deletePost={this.deletePost}
               posts={this.state.posts}
             />
           )}

@@ -6,7 +6,11 @@ import Post from "./Post"
 export default class PostsFeed extends React.Component {
   renderPosts() {
     return this.props.posts.map(post =>
-      <Post key={post.id} post={post} />
+      <Post
+        key={post.id}
+        deletePost={this.props.deletePost}
+        post={post}
+      />
     );
   }
 
