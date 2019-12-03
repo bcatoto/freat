@@ -2,7 +2,6 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import UserPost from "./profile/UserPost";
-import Fade from "react-bootstrap/Fade";
 
 export default class Profile extends React.Component {
   handleClose = event => {
