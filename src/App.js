@@ -19,7 +19,7 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      netid: "bcatoto",
+      netid: "",
       posts: [],
       userPosts: [],
       showAlert: false,
@@ -31,41 +31,26 @@ export default class App extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.authenticate();
-    this.refreshPosts();
+  getUserData = async () => {
+    const res = await axios.get(`api/v1/user/getUser`)
+      .catch(err => console.log(err));
+    const netid = res.data.netid;
+    await this.setState({ netid });
     this.getUserPosts();
   }
 
-  componentWillUnmount() {
-    clearTimeout(this.refreshPosts);
-  }
-
-  authenticate = async () => {
-
-  }
-
-  refreshPosts = async () => {
-    await this.getPosts();
-    setTimeout(this.refreshPosts, 15 * 60 * 1000);
-  }
-
   getPosts = async () => {
-    axios.get(`/api/v1/posting/`)
-      .then(res => {
-        const posts = res.data;
-        this.setState({ posts });
-      })
+    const res = await axios.get(`/api/v1/posting/`)
       .catch(err => console.log(err));
+    const posts = res.data;
+    this.setState({ posts });
   }
 
   getUserPosts = async () => {
-    axios.get(`/api/v1/posting/getByUser/${this.state.netid}`)
-      .then(res => {
-        const userPosts = res.data;
-        this.setState({ userPosts });
-      })
+    const res = await axios.get(`/api/v1/posting/getByUser/${this.state.netid}`)
       .catch(err => console.log(err));
+    const userPosts = res.data;
+    this.setState({ userPosts });
   }
 
   addPost = async (post) => {
@@ -76,56 +61,52 @@ export default class App extends React.Component {
     }
     post.images = urls;
 
-    axios.post(`/api/v1/posting/`, { post })
-      .then(res => {
-        if (res.status === 201) {
-          const posts = this.state.posts;
-          const userPosts = this.state.userPosts;
-          posts.unshift(res.data);
-          userPosts.unshift(res.data);
-          this.setState({ posts, userPosts });
-        }
-      })
+    const res = await axios.post(`/api/v1/posting/`, { post })
       .catch(err => console.log(err));
+
+    if (res.status === 201) {
+      const posts = this.state.posts;
+      const userPosts = this.state.userPosts;
+      posts.unshift(res.data);
+      userPosts.unshift(res.data);
+      this.setState({ posts, userPosts });
+    }
   }
 
   editPost = async (postid, post) => {
-    axios.put(`api/v1/posting/${postid}`, { post })
-      .then(res => {
-        const posts = this.state.posts;
-        const userPosts = this.state.userPosts;
-
-        for (let i = 0; i < posts.length; i++) {
-          if (posts[i].id === postid) {
-            posts[i] = Object.assign(posts[i], post);
-          }
-        }
-
-        for (let i = 0; i < userPosts.length; i++) {
-          if (userPosts[i].id === postid) {
-            userPosts[i] = Object.assign(userPosts[i], post);
-          }
-        }
-
-        this.setState({ posts, userPosts });
-      })
+    const res = await axios.put(`api/v1/posting/${postid}`, { post })
       .catch(err => console.log(err));
+    const posts = this.state.posts;
+    const userPosts = this.state.userPosts;
+
+    for (let i = 0; i < posts.length; i++) {
+      if (posts[i].id === postid) {
+        posts[i] = Object.assign(posts[i], post);
+      }
+    }
+
+    for (let i = 0; i < userPosts.length; i++) {
+      if (userPosts[i].id === postid) {
+        userPosts[i] = Object.assign(userPosts[i], post);
+      }
+    }
+
+    this.setState({ posts, userPosts });
   }
 
   deletePost = async (postid) => {
-    axios.delete(`/api/v1/posting/${postid}`)
-      .then(res => {
-        if (res.status === 202 || res.status === 204) {
-          let posts = this.state.posts;
-          posts = posts.filter(post => post.id !== postid);
-          let userPosts = this.state.userPosts;
-          userPosts = userPosts.filter(post => post.id !== postid);
-          this.setState({ posts, userPosts });
-
-          this.handleOpenAlert();
-        }
-      })
+    const res = await axios.delete(`/api/v1/posting/${postid}`)
       .catch(err => console.log(err));
+
+    if (res.status === 202 || res.status === 204) {
+      let posts = this.state.posts;
+      posts = posts.filter(post => post.id !== postid);
+      let userPosts = this.state.userPosts;
+      userPosts = userPosts.filter(post => post.id !== postid);
+      this.setState({ posts, userPosts });
+
+      this.handleOpenAlert();
+    }
   }
 
   uploadImage = async (image) => {
@@ -197,6 +178,8 @@ export default class App extends React.Component {
           render={(props) => (
             <Home {...props}
               deletePost={this.deletePost}
+              getPosts={this.getPosts}
+              getUserData={this.getUserData}
               posts={this.state.posts}
             />
           )}
@@ -206,6 +189,7 @@ export default class App extends React.Component {
             <Profile {...props}
               closeAlert={this.handleCloseAlert}
               deletePost={this.deletePost}
+              getUserData={this.getUserData}
               openAlert={this.handleOpenAlert}
               openForm={this.handleOpenForm}
               netid={this.state.netid}

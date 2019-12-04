@@ -46,8 +46,6 @@ export default class Post extends React.Component {
     const min = 60 * 1000;
     const hour = min * 60;
 
-    console.log(this.props.post)
-
     const now = Date.now();
     const time = new Date(this.props.post.created_at);
     const diff = now - time;
