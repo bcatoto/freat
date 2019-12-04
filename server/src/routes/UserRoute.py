@@ -1,15 +1,25 @@
 from flask import request, json, Response, Blueprint, jsonify
-from PostingRoute import custom_response
 from ..CASClient import CASClient
 
 
-authentication_api = Blueprint('authentication', __name__)
+user_api = Blueprint('user', __name__)
 
-@authentication_api.route('/authenticate', methods=['GET'])
+@user_api.route('/getUser', methods=['GET'])
 def getUsername():
   """
   Get CAS username
   """
   username = CASClient().authenticate().rstrip('\n') # removes ending newline
   return custom_response({'netid': username}, 200)
+
+
+def custom_response(res, status_code):
+  """
+  Custom Response Function
+  """
+  return Response(
+    mimetype="application/json",
+    response=json.dumps(res),
+    status=status_code
+  )
 

@@ -9,6 +9,7 @@ import os
 from .config import app_config
 from .models import db
 from .routes.PostingRoute import posting_api as posting_blueprint
+from .routes.UserRoute import user_api as user_blueprint
 from .models.PostingModel import PostingModel, PostingSchema
 
 from .CASClient import CASClient
@@ -33,6 +34,7 @@ def create_app(env_name):
   db.init_app(app)
 
   app.register_blueprint(posting_blueprint, url_prefix='/api/v1/posting')
+  app.register_blueprint(user_blueprint, url_prefix='/api/v1/user')
 
   posting_schema = PostingSchema()
 
