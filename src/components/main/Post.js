@@ -45,10 +45,7 @@ export default class Post extends React.Component {
   getTime() {
     const min = 60 * 1000;
     const hour = min * 60;
-
-    const now = Date.now();
-    const time = new Date(this.props.post.created_at);
-    const diff = now - time;
+    const diff = Date.now() - this.props.post.created_at;
 
     if (diff > 2 * hour) {
       this.props.deletePost(this.props.post.id);
