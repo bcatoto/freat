@@ -63,7 +63,7 @@ class PostingModel(db.Model):
     
     @staticmethod
     def get_by_user(netid):
-        return PostingModel.query.filter_by(owner_id=netid).all()
+        return PostingModel.query.filter_by(owner_id=netid).order_by(desc(PostingModel.created_at)).all()
     
     def __repr(self):
         return '<id {}>'.format(self.id)

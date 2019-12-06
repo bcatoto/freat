@@ -1,4 +1,4 @@
-from flask import Flask,request, Response, json, render_template
+from flask import Flask,request, Response, json, render_template, session
 from flask_sqlalchemy import SQLAlchemy
 # from flask_cas import CAS
 # from flask_cas import login_required
@@ -61,6 +61,7 @@ def create_app(env_name):
     """
     logout from cas
     """
+    session.clear()
     CASClient().logout()
 
   #@cross_origin(supports_credentials=True)

@@ -50,7 +50,6 @@ def postDetails(postid):
   """
   post = PostingModel.get_one_post(postid)
   data = posting_schema.dump(post, many=True)
-  print('debugpineapple, ', data)
   return custom_response(data, 200)
 
 # deletes the post with the id postid, and delete image from cloudinary
