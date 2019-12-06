@@ -26,8 +26,7 @@ export default class PostForm extends React.Component {
       desc: "",
       diet: this.initialDiet,
       feeds: "",
-      netid: "",
-      created_at: null
+      netid: ""
     };
 
     this.initialValid = {
@@ -35,6 +34,7 @@ export default class PostForm extends React.Component {
       room: false,
       building: false,
       images: false,
+      desc: true,
       feeds: true
     };
 
@@ -123,7 +123,7 @@ export default class PostForm extends React.Component {
     this.props.handleClose();
     this.setState({
       post: this.cleanPost(),
-      valid:  this.initialValid,
+      valid: this.initialValid,
       validForm: false
     });
   }
@@ -135,7 +135,6 @@ export default class PostForm extends React.Component {
     const post = this.state.post;
     post.diet = this.dietToList(this.state.post.diet);
     post.netid = this.props.netid;
-    post.created_at = Date.now();
 
     if (this.props.isNew) {
       this.props.addPost(post);
@@ -155,10 +154,11 @@ export default class PostForm extends React.Component {
     valid.room = post.room.length > 0;
     valid.building = post.building !== "-- Select building --";
     valid.images = post.images.length > 0;
+    valid.desc = post.desc.length < 251;
     valid.feeds = post.feeds > 0;
 
     const validForm = valid.title && valid.room && valid.building &&
-      valid.images && valid.feeds;
+      valid.images && valid.desc && valid.feeds;
     this.setState({ validForm });
   }
 
@@ -265,6 +265,9 @@ export default class PostForm extends React.Component {
                 value={this.state.post.desc}
                 onChange={this.handleChange}
               />
+              <Form.Text className="text-muted mt-1">
+                {this.state.post.desc.length}/250 characters
+              </Form.Text>
             </Form.Group>
 
             <Form.Group controlId="input-diet">
