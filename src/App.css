@@ -264,7 +264,7 @@
     border-bottom-left-radius: 0.75rem; }
   @media (max-width: 576px) {
     .card {
-      margin: 25px 30px; }
+      margin: 25px 50px; }
     .card:last-child {
       margin-bottom: 25px; } }
 

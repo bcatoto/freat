@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 
-import buildings from "./assets/buildings.json";
+import buildings from "../assets/buildings.json";
 
 export default class PostForm extends React.Component {
   constructor(props) {
