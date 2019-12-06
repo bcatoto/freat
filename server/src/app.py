@@ -65,6 +65,7 @@ def create_app(env_name):
     """
     logout from cas
     """
+    session.clear()
     CASClient().logout()
 
   #@cross_origin(supports_credentials=True)
