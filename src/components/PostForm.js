@@ -35,7 +35,7 @@ export default class PostForm extends React.Component {
       building: false,
       images: false,
       desc: true,
-      feeds: true
+      feeds: false
     };
 
     this.diets = [
@@ -85,6 +85,7 @@ export default class PostForm extends React.Component {
         valid.room = true;
         valid.building = true;
         valid.images = true;
+        valid.feeds = true;
 
         this.setState({
           post,
@@ -155,7 +156,7 @@ export default class PostForm extends React.Component {
     valid.building = post.building !== "-- Select building --";
     valid.images = post.images.length > 0;
     valid.desc = post.desc.length < 251;
-    valid.feeds = post.feeds > 0;
+    valid.feeds = post.feeds !== "" && post.feeds > 0;
 
     const validForm = valid.title && valid.room && valid.building &&
       valid.images && valid.desc && valid.feeds;
@@ -193,6 +194,19 @@ export default class PostForm extends React.Component {
     else {
       return (
         <Form.Label className="red">{label}*</Form.Label>
+      );
+    }
+  }
+
+  renderLabel(label, name) {
+    if (this.state.valid[name]) {
+      return (
+        <Form.Label>{label}</Form.Label>
+      );
+    }
+    else {
+      return (
+        <Form.Label className="red">{label}</Form.Label>
       );
     }
   }
@@ -256,7 +270,7 @@ export default class PostForm extends React.Component {
             </Form.Row>
 
             <Form.Group>
-              {this.renderRequired("Image", "image")}
+              {this.renderRequired("Image", "images")}
               <Form.Control type="file" multiple
                 accept="image/png, image/jpeg"
                 onChange={this.handleImageChange}
@@ -267,7 +281,7 @@ export default class PostForm extends React.Component {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>Description</Form.Label>
+              {this.renderLabel("Description", "desc")}
               <Form.Control as="textarea" name="desc" rows="3"
                 value={this.state.post.desc}
                 onChange={this.handleChange}
@@ -287,6 +301,9 @@ export default class PostForm extends React.Component {
 
             <Form.Group controlId="input-feeds">
               {this.renderRequired("Feeds approximately...", "feeds")}
+              <Form.Text className="text-muted">
+                Please enter a positive number.
+              </Form.Text>
               <Form.Control type="number" name="feeds" placeholder="1"
                 value={this.state.post.feeds}
                 onChange={this.handleChange}
