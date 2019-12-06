@@ -36,9 +36,10 @@ class UserModel(db.Model):
     def get_all_users():
         return UserModel.query.all()
     
-    @staticmethod
-    def get_user_posts(netid):
-        return ""
+    def get_user_byNetId(value):
+        return bool(UserModel.query.filter_by(netid='gilront').first())
+
+    
 
 class UserSchema(Schema):
     netid = fields.Str()

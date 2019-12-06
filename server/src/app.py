@@ -1,4 +1,4 @@
-from flask import Flask,request, Response, json, render_template, session
+from flask import Flask,request, Response, json, render_template
 from flask_sqlalchemy import SQLAlchemy
 # from flask_cas import CAS
 # from flask_cas import login_required
@@ -11,6 +11,8 @@ from .models import db
 from .routes.PostingRoute import posting_api as posting_blueprint
 from .routes.UserRoute import user_api as user_blueprint
 from .models.PostingModel import PostingModel, PostingSchema
+from .models.UserModel import UserModel, UserSchema
+
 
 from .CASClient import CASClient
 
@@ -52,8 +54,10 @@ def create_app(env_name):
     """
     example endpoint
     """
-    username = CASClient().authenticate()
-    
+    CASClient().authenticate()
+    # if not UserModel.get_user_byNetId(username):
+    #   user = UserModel({"netid":username})
+    #   user.save()
     return render_template('index.html')
 
   @app.route('/logout')
@@ -61,7 +65,6 @@ def create_app(env_name):
     """
     logout from cas
     """
-    session.clear()
     CASClient().logout()
 
   #@cross_origin(supports_credentials=True)
