@@ -37,7 +37,7 @@ class UserModel(db.Model):
         return UserModel.query.all()
     
     def get_user_byNetId(value):
-        return bool(UserModel.query.filter_by(netid='gilront').first())
+        return bool(UserModel.query.filter_by(netid=vale).first())
 
     
 
