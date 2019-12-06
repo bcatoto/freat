@@ -65,7 +65,6 @@ def deletePost(postid):
     return custom_response({'error': 'post not found'}, 404)
 
   # this checks ownership...
-  # data = posting_schema.dump(post, many=True)
   # if data.get('owner_id') != g.user.get('id'):
   #   return custom_response({'error': 'permission denied'}, 400)
 
