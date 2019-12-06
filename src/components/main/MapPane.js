@@ -1,7 +1,7 @@
 import React from "react";
 import { GoogleMap, Marker, InfoWindow, withScriptjs, withGoogleMap } from "react-google-maps"
 
-import coordinates from "./../assets/coordinates.json"
+import coordinates from "../../assets/coordinates.json"
 
 require('dotenv').config()
 
