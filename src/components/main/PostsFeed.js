@@ -1,5 +1,4 @@
 import React from "react";
-import Accordion from "react-bootstrap/Accordion"
 import Container from "react-bootstrap/Container"
 import Post from "./Post"
 
@@ -17,9 +16,9 @@ export default class PostsFeed extends React.Component {
   renderFeed() {
     if (this.props.posts.length > 0) {
       return (
-        <Accordion>
+        <Container id="post-feed">
           {this.renderPosts()}
-        </Accordion>
+        </Container>
       );
     }
     else {

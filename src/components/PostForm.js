@@ -184,10 +184,17 @@ export default class PostForm extends React.Component {
     return post;
   }
 
-  renderRequired(label) {
-    return (
-      <Form.Label>{label}<span className="red">*</span></Form.Label>
-    );
+  renderRequired(label, name) {
+    if (this.state.valid[name]) {
+      return (
+        <Form.Label>{label}<span className="red">*</span></Form.Label>
+      );
+    }
+    else {
+      return (
+        <Form.Label className="red">{label}*</Form.Label>
+      );
+    }
   }
 
   renderBuildings() {
@@ -219,7 +226,7 @@ export default class PostForm extends React.Component {
         <Form onSubmit={this.handleSubmit}>
           <Modal.Body>
             <Form.Group>
-              {this.renderRequired("Title")}
+              {this.renderRequired("Title", "title")}
               <Form.Control type="text" name="title"
                 placeholder="Enter title"
                 value={this.state.post.title}
@@ -229,7 +236,7 @@ export default class PostForm extends React.Component {
 
             <Form.Row>
               <Form.Group as={Col}>
-                {this.renderRequired("Room")}
+                {this.renderRequired("Room", "room")}
                 <Form.Control type="text" name="room"
                   placeholder="Enter room"
                   value={this.state.post.room}
@@ -237,8 +244,8 @@ export default class PostForm extends React.Component {
                 />
               </Form.Group>
 
-              <Form.Group as={Col} controlId="input-building">
-                {this.renderRequired("Building")}
+              <Form.Group as={Col}>
+                {this.renderRequired("Building", "building")}
                 <Form.Control as="select" name="building"
                   value={this.state.post.building}
                   onChange={this.handleChange}
@@ -248,8 +255,8 @@ export default class PostForm extends React.Component {
               </Form.Group>
             </Form.Row>
 
-            <Form.Group controlId="input-image">
-              {this.renderRequired("Image")}
+            <Form.Group>
+              {this.renderRequired("Image", "image")}
               <Form.Control type="file" multiple
                 accept="image/png, image/jpeg"
                 onChange={this.handleImageChange}
@@ -259,7 +266,7 @@ export default class PostForm extends React.Component {
               </Form.Text>
             </Form.Group>
 
-            <Form.Group controlId="input-desc">
+            <Form.Group>
               <Form.Label>Description</Form.Label>
               <Form.Control as="textarea" name="desc" rows="3"
                 value={this.state.post.desc}
@@ -279,7 +286,7 @@ export default class PostForm extends React.Component {
             </Form.Group>
 
             <Form.Group controlId="input-feeds">
-              {this.renderRequired("Feeds approximately...")}
+              {this.renderRequired("Feeds approximately...", "feeds")}
               <Form.Control type="number" name="feeds" placeholder="1"
                 value={this.state.post.feeds}
                 onChange={this.handleChange}
