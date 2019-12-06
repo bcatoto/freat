@@ -26,8 +26,7 @@ export default class PostForm extends React.Component {
       desc: "",
       diet: this.initialDiet,
       feeds: "",
-      netid: "",
-      created_at: null
+      netid: ""
     };
 
     this.initialValid = {
@@ -135,7 +134,6 @@ export default class PostForm extends React.Component {
     const post = this.state.post;
     post.diet = this.dietToList(this.state.post.diet);
     post.netid = this.props.netid;
-    post.created_at = Date.now();
 
     if (this.props.isNew) {
       this.props.addPost(post);
