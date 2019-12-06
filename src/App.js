@@ -32,7 +32,7 @@ export default class App extends React.Component {
   }
 
   getUserData = async () => {
-    const res = await axios.get(`api/v1/user/getUser`)
+    const res = await axios.get(`api/v1/user/getCurrentUser`)
       .catch(err => console.log(err));
     const netid = res.data.netid;
     await this.setState({ netid });
