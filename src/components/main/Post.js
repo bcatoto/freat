@@ -1,5 +1,4 @@
 import React from "react";
-import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Carousel from "react-bootstrap/Carousel";
@@ -55,7 +54,7 @@ export default class Post extends React.Component {
       this.props.deletePost(this.props.post.id);
     }
     else if (diff > hour) {
-      return "1 hour ago";
+      return "1 hour, " + Math.floor((diff - hour) / min) + " min. ago";
     }
     else if (diff > min){
       return Math.floor(diff / min) + " minutes ago";
@@ -117,10 +116,18 @@ export default class Post extends React.Component {
     );
   }
 
+  renderGoing() {
+    return (
+      <Button variant="going-on">
+        <i className="fas fa-walking"></i> Going
+      </Button>
+    );
+  }
+
   render() {
     return (
       <Card>
-        <Accordion.Toggle as={Card.Header} eventKey={this.props.post.id}>
+        <Card.Header>
           <Container fluid className="p-0">
             <Row noGutters="true">
               <Col className="card-title-container mr-auto p-0">
@@ -137,17 +144,23 @@ export default class Post extends React.Component {
               </Button>
             </Row>
           </Container>
-        </Accordion.Toggle>
+        </Card.Header>
         {this.renderCarousel()}
-        <Accordion.Collapse eventKey={this.props.post.id}>
-          <Accordion.Toggle as={Card.Body} eventKey={this.props.post.id}>
-            {this.renderDesc()}
-            <em>Feeds approximately: {this.props.post.feeds}</em>
-          </Accordion.Toggle>
-        </Accordion.Collapse>
-        <Accordion.Toggle as={Card.Footer} eventKey={this.props.post.id}>
-          {this.renderDietOptions()}
-        </Accordion.Toggle>
+        <Card.Body>
+          {this.renderDesc()}
+          <em>Feeds approximately: {this.props.post.feeds}</em>
+        </Card.Body>
+        <Card.Footer>
+          <Row noGutters="true">
+            <Col>
+              {this.renderDietOptions()}
+            </Col>
+            <Col className="card-going p-0" xs={3} sm={3}>
+              4
+              {this.renderGoing()}
+            </Col>
+          </Row>
+        </Card.Footer>
       </Card>
     );
   }
