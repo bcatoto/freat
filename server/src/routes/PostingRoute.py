@@ -59,7 +59,6 @@ def deletePost(postid):
   """
   post = PostingModel.get_one_post(postid)
   data = posting_schema.dump(post, many=True)
-  print("DEBUG3: ", data)
   if (len(data) == 0):
     return custom_response({'error': 'post not found'}, 404)
 
