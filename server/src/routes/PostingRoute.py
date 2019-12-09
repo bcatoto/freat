@@ -20,7 +20,7 @@ def getPostings():
     """
     Get all the available postings
     """
-    username = CASClient().authenticate()
+    # username = CASClient().authenticate()
 
     posts = PostingModel.get_all_postings()
     data = posting_schema.dump(posts, many=True)
@@ -34,7 +34,6 @@ def newPost():
   req_data = request.get_json()
   try:
     data = posting_schema.load(req_data['post'])
-    ## future check for if the post id already exists
     post = PostingModel(data)
     post.save()
     data = posting_schema.dump(post)
@@ -60,19 +59,15 @@ def deletePost(postid):
   """
   post = PostingModel.get_one_post(postid)
   data = posting_schema.dump(post, many=True)
-
+  print("DEBUG3: ", data)
   if (len(data) == 0):
     return custom_response({'error': 'post not found'}, 404)
 
-  # this checks ownership...
-  # if data.get('owner_id') != g.user.get('id'):
+  # # check ownership
+  # if data[0]['owner_id'] != CASClient().authenticate().rstrip():
   #   return custom_response({'error': 'permission denied'}, 400)
 
   for public_id in data[0]['images']:
-    # parsed = urlparse(image_url)
-    # split1 = parsed.path.split('/')
-    # split2 = split1[5].split('.')
-    # cloudinary.uploader.destroy(split2[0])
     cloudinary.uploader.destroy(public_id)
 
   post[0].delete()
@@ -92,9 +87,9 @@ def updatePost(postid):
   if (len(data) == 0):
     return custom_response({'error': 'post not found'}, 404)
 
-  # make sure this is only accessible by the creator user
-  # if data.get('owner_id') != g.user.get('id'):
-  # return custom_response({'error': 'permission denied'}, 400)
+  # # check ownership
+  # if data[0]['owner_id'] != CASClient().authenticate().rstrip():
+  #   return custom_response({'error': 'permission denied'}, 400)
 
   try:
     del req_data["post"]["id"] # attempt....

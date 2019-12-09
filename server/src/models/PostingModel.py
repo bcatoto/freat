@@ -4,9 +4,6 @@ import datetime
 from marshmallow import fields, Schema
 from . import db
 from sqlalchemy import desc # allows sorting sqlalchemy query
-#from pytz import timezone
-
-#eastern = timezone('US/Eastern')
 
 class PostingModel(db.Model):
     """
