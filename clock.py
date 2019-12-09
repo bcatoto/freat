@@ -12,7 +12,22 @@ sched = BlockingScheduler()
 @sched.scheduled_job('interval', minutes=2)
 def timed_job():
     print('This job is run every two minutes.')
-    deleteOldPost() # call this function
+    """
+    Delete any posts older than 2 hours
+    """
+    posts = PostingModel.get_all_postings()
+    data = posting_schema.dump(posts, many=True)
+    oldPosts = []
+
+    for post in data[0]:
+        if post['created_at'] == '2019-12-09T17:12:37.758369':
+            oldPosts.append(post) # add to list of things to delete
+
+    for i in range(len(oldPosts)):
+        oldPosts[i][0].delete()
+        for public_id in data[i][0]['images']:
+            cloudinary.uploader.destroy(public_id)
+
 sched.start()
 
 
