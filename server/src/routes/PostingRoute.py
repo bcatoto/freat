@@ -10,8 +10,6 @@ from urllib.parse import urlparse # to deal w/ image urls
 # configures cloudinary. note: should we move cloud name, etc. to config.py?
 cloudinary.config(cloud_name = 'hadg27jul', api_key = '752588741865624', api_secret = 'Q0JigeE-1yXsch3qqfkMWvHJoiI')
 
-posting_schema = PostingSchema()
-
 posting_api = Blueprint('posting', __name__)
 posting_schema = PostingSchema()
 
@@ -69,32 +67,6 @@ def deletePost(postid):
 
   post[0].delete()
   return custom_response({'message': 'deleted'}, 204)
-
-
-
-
-
-def deleteOldPost():
-  """
-  Delete any posts older than 2 hours
-  """
-  posts = PostingModel.get_all_postings()
-  data = posting_schema.dump(posts, many=True)
-  oldPosts = []
-
-  for post in data[0]:
-    if post['created_at'] == '2019-12-09T14:52:39.702031' # check old-ness
-      oldPosts.append(post) # add to list of things to delete
-
-  for i in range len(oldPosts):
-    oldPosts[i][0].delete()
-    for public_id in data[i][0]['images']:
-      cloudinary.uploader.destroy(public_id)
-
-  return custom_response({'message': 'deleted'}, 204)
-
-
-
 
 
 # updates fields of a post with the corresponding postid
