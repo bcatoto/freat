@@ -37,11 +37,11 @@ export default class UserPost extends Post {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu className="card-dropdown-menu">
-                    <Dropdown.Item onClick={() => this.handleEdit()}>
+                    <Dropdown.Item onClick={this.handleEdit}>
                       Edit
                     </Dropdown.Item>
                     <Dropdown.Item className="red"
-                      onClick={() => this.handleDelete()}
+                      onClick={this.handleDelete}
                     >
                       Delete
                     </Dropdown.Item>

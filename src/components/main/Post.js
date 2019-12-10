@@ -54,7 +54,7 @@ export default class Post extends React.Component {
       this.props.deletePost(this.props.post.id);
     }
     else if (diff > hour) {
-      return "1 hour, " + Math.floor((diff - hour) / min) + " min. ago";
+      return "1 hr., " + Math.floor((diff - hour) / min) + " min. ago";
     }
     else if (diff > min){
       return Math.floor(diff / min) + " minutes ago";
@@ -152,12 +152,12 @@ export default class Post extends React.Component {
         </Card.Body>
         <Card.Footer>
           <Row noGutters="true">
-            <Col>
-              {this.renderDietOptions()}
-            </Col>
             <Col className="card-going p-0" xs={3} sm={3}>
               4
               {this.renderGoing()}
+            </Col>
+            <Col>
+              {this.renderDietOptions()}
             </Col>
           </Row>
         </Card.Footer>

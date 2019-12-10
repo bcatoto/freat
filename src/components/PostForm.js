@@ -103,7 +103,7 @@ export default class PostForm extends React.Component {
     const post = this.state.post;
     post[name] = value;
     this.setState({ post });
-    this.validate()
+    this.validate();
   }
 
   handleImageChange = event => {
@@ -120,13 +120,10 @@ export default class PostForm extends React.Component {
     this.setState({ post });
   }
 
-  close = () => {
+  close = async () => {
     this.props.handleClose();
-    this.setState({
-      post: this.cleanPost(),
-      valid: this.initialValid,
-      validForm: false
-    });
+    await this.setState({ post: this.cleanPost() });
+    this.validate();
   }
 
   handleSubmit = event => {

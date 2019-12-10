@@ -23,17 +23,19 @@ export default class Landing extends React.Component {
             Log in through CAS
           </Button>
         </Container>
-        <Container className="info-container">
+        <Container fluid className="info-container">
           <Row>
-            <Col className="center">
-              <Row>
-                <i className="fas fa-map-marked-alt"></i>
-              </Row>
-              <Row>
-              </Row>
+            <Col className="info-col center">
+              <i className="fas fa-map-marked-alt"></i>
+              <span className="center mt-2">
+                Find out about free food anywhere on campus!
+              </span>
             </Col>
-            <Col className="center">
+            <Col className="info-col center">
               <i className="far fa-plus-square"></i>
+              <span className="center mt-2">
+                Have leftovers? Simply post a title, photo, and location to share with hungry students!
+              </span>
             </Col>
           </Row>
         </Container>

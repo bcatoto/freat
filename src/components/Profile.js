@@ -4,7 +4,6 @@ import Alert from "react-bootstrap/Alert";
 import UserPost from "./profile/UserPost";
 
 export default class Profile extends React.Component {
-
   componentDidMount() {
     this.props.getUserData();
   }
