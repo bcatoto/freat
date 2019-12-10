@@ -1,6 +1,6 @@
+from server.src.models.PostingModel import PostingModel, PostingSchema
 from apscheduler.schedulers.blocking import BlockingScheduler
 import requests
-from server.src.models.PostingModel import PostingModel, PostingSchema
 from datetime import datetime
 
 URL = 'https://freat.herokuapp.com/api/vi/posting'
