@@ -76,7 +76,12 @@ export default class Post extends React.Component {
           cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}
           publicId={id}
         >
-          <Transformation quality="auto" aspectRatio="1:1" crop="crop" />
+          <Transformation
+            quality="auto:best"
+            flags="progressive"
+            aspectRatio="1:1"
+            crop="crop"
+          />
         </Image>
       </Carousel.Item>
     );

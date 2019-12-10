@@ -33,7 +33,6 @@ export default class App extends React.Component {
       userPosts: [],
       notifs: [],
       notifCount: 0,
-      showAlert: false,
       showForm: false,
       form: {
         isNew: true,
@@ -71,12 +70,7 @@ export default class App extends React.Component {
   }
 
   addPost = async (post) => {
-    const urls = [];
-    for (let i = 0; i < post.images.length; i++) {
-      const url = await this.uploadImage(post.images.item(i));
-      urls.push(url);
-    }
-    post.images = urls;
+    post.images = await this.getImageUrls(post.images);
 
     await axios.post(`/api/v1/posting/`, { post })
       .then(res => {
@@ -92,6 +86,8 @@ export default class App extends React.Component {
   }
 
   editPost = async (postid, post) => {
+    post.images = await this.getImageUrls(post.images);
+
     await axios.put(`api/v1/posting/${postid}`, { post })
       .then(res => {
         if (res.status === 200) {
@@ -150,13 +146,13 @@ export default class App extends React.Component {
     return res.data.public_id;
   }
 
-  handleOpenAlert = () => {
-    this.setState({ showAlert: true });
-    setTimeout(this.handleCloseAlert, 5000);
-  }
-
-  handleCloseAlert = () => {
-    this.setState({ showAlert: false });
+  getImageUrls = async (images) => {
+    const urls = [];
+    for (let i = 0; i < images.length; i++) {
+      const url = await this.uploadImage(images.item(i));
+      urls.push(url);
+    }
+    return urls;
   }
 
   handleOpenForm = (isNew, values) => {
@@ -235,14 +231,11 @@ export default class App extends React.Component {
         <Route path="/profile"
           render={(props) => (
             <Profile {...props}
-              closeAlert={this.handleCloseAlert}
               deletePost={this.deletePost}
               getUserData={this.getUserData}
-              openAlert={this.handleOpenAlert}
               openForm={this.handleOpenForm}
               netid={this.state.netid}
               posts={this.state.userPosts}
-              show={this.state.showAlert}
             />
           )}
         />
