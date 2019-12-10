@@ -17,6 +17,8 @@ def timed_job():
     for post in data[0]:
         diff = datetime.now() - post['created_at']
         mins_elapsed = diff.total_seconds()/60
+        print("DEBUG ID: ", post['id'])
+        print("DEBUG TIMEDIFF ", mins_elapsed)
 
         if mins_elapsed > 120:
             PARAMS = {'postid':post['id']} 
