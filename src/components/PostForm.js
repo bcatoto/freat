@@ -70,6 +70,7 @@ export default class PostForm extends React.Component {
       post: this.cleanPost(),
       valid: this.initialValid,
       validForm: false,
+      oldPost: null,
       prevProps: this.props
     };
   }
@@ -90,7 +91,8 @@ export default class PostForm extends React.Component {
         this.setState({
           post,
           valid,
-          validForm: true
+          validForm: true,
+          oldPost: Object.assign({}, post)
         });
       }
       this.setState({ prevProps: this.props });
@@ -103,7 +105,7 @@ export default class PostForm extends React.Component {
     const post = this.state.post;
     post[name] = value;
     this.setState({ post });
-    this.validate()
+    this.validate();
   }
 
   handleImageChange = event => {
@@ -120,13 +122,10 @@ export default class PostForm extends React.Component {
     this.setState({ post });
   }
 
-  close = () => {
+  close = async () => {
     this.props.handleClose();
-    this.setState({
-      post: this.cleanPost(),
-      valid: this.initialValid,
-      validForm: false
-    });
+    await this.setState({ post: this.cleanPost() });
+    this.validate();
   }
 
   handleSubmit = event => {
@@ -141,7 +140,14 @@ export default class PostForm extends React.Component {
       this.props.addPost(post);
     }
     else {
-      this.props.editPost(post.id, post);
+      const oldPost = this.state.oldPost;
+      let newPost = {};
+      for (const key in post) {
+        if (post[key] !== oldPost[key]) {
+          newPost[key] = post[key];
+        }
+      }
+      this.props.editPost(oldPost.id, newPost);
     }
 
     this.close();
