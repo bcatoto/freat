@@ -107,6 +107,47 @@ def getPostsByUser(netid):
   data = posting_schema.dump(posts, many=True)
   return custom_response(data, 200)
 
+# add an is-going to the number
+@posting_api.route('/addGoing/<int:postid>', methods=['POST'])
+def addGoing(postid):
+  """
+  increment the number
+  """
+  post = PostingModel.get_one_post(postid)
+  data = posting_schema.dump(post, many=True)
+
+  if (len(data) == 0):
+    return custom_response({'error': 'post not found'}, 404)
+
+  try:
+    post[0]['num_going'] = post[0]['num_going'] + 1 # increment
+    data = posting_schema.dump(post)
+    return custom_response(data, 201)
+
+  except Exception as err:
+    return custom_response({'message': err}, 400)
+
+
+# subtract an is-going from the number
+@posting_api.route('/addGoing/<int:postid>', methods=['POST'])
+def addGoing(postid):
+  """
+  increment the number
+  """
+  post = PostingModel.get_one_post(postid)
+  data = posting_schema.dump(post, many=True)
+
+  if (len(data) == 0):
+    return custom_response({'error': 'post not found'}, 404)
+
+  try:
+    post[0]['num_going'] = post[0]['num_going'] - 1 # decrement
+    data = posting_schema.dump(post)
+    return custom_response(data, 201)
+
+  except Exception as err:
+    return custom_response({'message': err}, 400)
+
 def custom_response(res, status_code):
   """
   Custom Response Function
