@@ -121,6 +121,8 @@ def addGoing(postid):
     return custom_response({'error': 'post not found'}, 404)
 
   try:
+    print("DEBUG_POSTING_ROUTE: ", post[0]['num_going'])
+    print("DEBUG_POSTING_ROUTE_2: ", post[0])
     post[0]['num_going'] = post[0]['num_going'] + 1 # increment
     data = posting_schema.dump(post)
     return custom_response(data, 201)
