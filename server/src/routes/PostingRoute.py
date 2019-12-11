@@ -129,8 +129,8 @@ def addGoing(postid):
 
 
 # subtract an is-going from the number
-@posting_api.route('/addGoing/<int:postid>', methods=['POST'])
-def addGoing(postid):
+@posting_api.route('/removeGoing/<int:postid>', methods=['POST'])
+def removeGoing(postid):
   """
   increment the number
   """
