@@ -176,10 +176,10 @@
   font-size: 1rem;
   padding: 0px;
   margin-left: 5px;
-  color: #95a5a6;
+  color: #0066ff;
   text-decoration: none; }
   .btn-going-on:hover {
-    color: #454c4d;
+    color: #0052cc;
     text-decoration: none; }
 
 .btn-edit {
@@ -470,13 +470,21 @@
   padding: 0px;
   color: #0066ff; }
 
-/* Landing Page */
-
 .center {
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center; }
+
+.right {
+  display: flex;
+  text-align: right;
+  align-items: right;
+  justify-content: right; }
+
+/* Landing Page */
+
+
 
 #landing-image {
   position: -webkit-sticky; /* Safari */

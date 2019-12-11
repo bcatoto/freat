@@ -5,6 +5,12 @@ import PostsFeed from "./main/PostsFeed";
 import MapPane from "./main/MapPane";
 
 export default class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: this.props.posts
+    };
+  }
 
   componentDidMount() {
     this.props.getUserData();
@@ -17,7 +23,10 @@ export default class Home extends React.Component {
 
   refreshPosts = async () => {
     await this.props.getPosts();
-    setTimeout(this.refreshPosts, 15 * 60 * 1000);
+    if (this.props.posts !== this.state.posts) {
+      await this.setState({ posts: this.props.posts });
+    }
+    setTimeout(this.refreshPosts, 60 * 1000);
   }
 
   render() {
@@ -26,11 +35,14 @@ export default class Home extends React.Component {
         <Col id="post-pane" xs={12} sm={5}>
           <PostsFeed
             deletePost={this.props.deletePost}
-            posts={this.props.posts}
+            likePost={this.props.likePost}
+            likes={this.props.likes}
+            posts={this.state.posts}
+            unlikePost={this.props.unlikePost}
           />
         </Col>
         <Col id="map-pane">
-          <MapPane posts={this.props.posts} />
+          <MapPane posts={this.state.posts} />
         </Col>
       </Row>
     );

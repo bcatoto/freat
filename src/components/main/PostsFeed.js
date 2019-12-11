@@ -8,7 +8,9 @@ export default class PostsFeed extends React.Component {
       <Post
         key={post.id}
         deletePost={this.props.deletePost}
+        likePost={this.props.likePost}
         post={post}
+        unlikePost={this.props.unlikePost}
       />
     );
   }
