@@ -20,7 +20,7 @@ To build the React app, execute:
 npm run build
 ```
 
-To run the app, go into the `server` folder and run `run.py`. Environment variables must be exported in order for the server to run. Environment variables include `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`, `CLOUDINARY_CLOUDNAME`, `DATABASE_URL`, and `FLASK_ENV`:
+To run the app, environment variables must be exported in order for the server to run. Environment variables include `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`, `CLOUDINARY_CLOUDNAME`, `DATABASE_URL`, and `FLASK_ENV`. Once environment variables are exported, go into the `server` folder and run `run.py`:
 
 ```
 cd server
