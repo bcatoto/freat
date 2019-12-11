@@ -1,3 +1,4 @@
+import os
 from flask import request, json, Response, Blueprint, jsonify
 from ..models.PostingModel import PostingModel, PostingSchema
 # from flask_cas import login_required
@@ -8,7 +9,9 @@ import cloudinary.api
 from urllib.parse import urlparse # to deal w/ image urls
 
 # configures cloudinary. note: should we move cloud name, etc. to config.py?
-cloudinary.config(cloud_name = 'hadg27jul', api_key = '752588741865624', api_secret = 'Q0JigeE-1yXsch3qqfkMWvHJoiI')
+cloudinary.config(cloud_name = os.getenv('CLOUDINARY_CLOUDNAME'),
+    api_key = os.getenv('CLOUDINARY_API_KEY'),
+    api_secret = os.getenv('CLOUDINARY_API_SECRET'))
 
 posting_api = Blueprint('posting', __name__)
 posting_schema = PostingSchema()
