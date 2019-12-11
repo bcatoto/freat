@@ -19,62 +19,27 @@ def getUsername():
   return custom_response({'netid': username}, 200)
 
 
-# @user_api.route('/addUserGoing/<string:netid>', methods=['POST'])
-# def addGoing(netid):
-#   """
-#   add postid to show a user's going
-#   """
+@user_api.route('/addUserGoing/<string:netid>', methods=['POST'])
+def addGoing(netid):
+  """
+  add postid to show a user's going
+  """
 
-#   # will get sent an int (the postid)
+  # will get sent an int (the postid)
+  postid = request.get_json()
 
-#   try 
+  user = UserModel.get_user_byNetId(netid)
 
+  try:
+    print("DEBUG_USER_ROUTE: ", user['posts_going'])
+    user['posts_going'].append(postid) # append the new postid to the array
+    data = user['posts_going']
+    return custom_response(data, 201)
 
+  except Exception as err:
+    return custom_response({'message': err}, 400)
 
-
-#   return custom_response({'netid': username}, 201)
-
-
-#   ////
-
-# req_data = request.get_json()
-
-#   post = PostingModel.get_one_post(postid)
-#   data = posting_schema.dump(post, many=True)
-
-#   if (len(data) == 0):
-#     return custom_response({'error': 'post not found'}, 404)
-
-#   # # check ownership
-#   # if data[0]['owner_id'] != CASClient().authenticate().rstrip():
-#   #   return custom_response({'error': 'permission denied'}, 400)
-
-#   try:
-#     data = posting_schema.load(req_data['post'], partial=True)
-#     post[0].update(data) # need post[0] b/c the PostingModel.get_one_post(postid) list/only way to get sqlalchemy to return an object
-#     data = posting_schema.dump(post)
-#     return custom_response(data, 200)
-
-#   except Exception as err:
-#     return custom_response({'message': err}, 400)
-#   ////
-
-
-
-
-
-
-
-# @user_api.route('/removeUserGoing', methods=['POST'])
-# def removeGoing():
-#   """
-#   remove postid to show a user's not going
-#   """
-
-#   return custom_response({'netid': username}, 201)
-
-
-
+    
 
 def custom_response(res, status_code):
   """
