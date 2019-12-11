@@ -44,7 +44,7 @@ export default class App extends React.Component {
 
   getUserData = async () => {
     await this.getUser();
-    await this.getUserPosts();
+    this.getUserPosts();
     this.getUserLikes();
   }
 
@@ -58,7 +58,7 @@ export default class App extends React.Component {
   }
 
   getUserLikes = async () => {
-    await axios.get(`api/v1/user/getCurrentUser`)
+    await axios.get(`api/v1/user/getUserGoing/${this.state.netid}`)
       .then(res => {
         const likes = res.data;
         this.setState({ likes });
@@ -70,7 +70,9 @@ export default class App extends React.Component {
     await axios.get(`/api/v1/posting/`)
       .then(res => {
         const posts = res.data;
-        this.setState({ posts });
+        if (posts !== this.state.posts) {
+          this.setState({ posts });
+        }
       })
       .catch(err => console.log(err));
   }
@@ -157,6 +159,15 @@ export default class App extends React.Component {
     await axios.post(`/api/v1/posting/removeGoing/${postid}`)
       .then(res => {
         console.log(res)
+      })
+      .catch(err => console.log(err));
+  }
+
+  toggleUserLikes = async (postid) => {
+    await axios.post(`/api/v1/user/addUserGoing`, { postid })
+      .then(res => {
+        const likes = res.data;
+        this.setState({ likes });
       })
       .catch(err => console.log(err));
   }

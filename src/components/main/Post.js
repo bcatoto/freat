@@ -41,17 +41,30 @@ export default class Post extends React.Component {
     ];
 
     this.state = {
+      likes: this.props.likes,
       liked: this.props.likes !== undefined &&
         this.props.likes.includes(this.props.post.id)
     };
   }
 
+  componentDidUpdate() {
+    if (this.props.likes !== this.state.likes) {
+      this.setState({
+        likes: this.props.likes,
+        liked: this.props.likes !== undefined &&
+          this.props.likes.includes(this.props.post.id)
+      })
+    }
+  }
+
   handleGoing = event => {
     if (this.state.liked) {
       this.props.unlikePost(this.props.post.id);
+      this.setState({ liked: false });
     }
     else {
       this.props.likePost(this.props.post.id);
+      this.setState({ liked: true });
     }
   }
 

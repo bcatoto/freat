@@ -57,8 +57,14 @@ export default class UserPost extends Post {
         </Card.Header>
         {this.renderCarousel()}
         <Card.Body>
-          {this.renderDesc()}
-          <em>Feeds approximately: {this.props.post.feeds}</em>
+          <Row noGutters="true">
+            <Col className="mr-auto">
+              {this.renderDietOptions()}
+            </Col>
+            <Col className="card-going p-0" xs={3} sm={3}>
+              {this.props.post.num_going} {this.renderGoing()}
+            </Col>
+          </Row>
         </Card.Body>
         <Card.Footer>
           {this.renderDietOptions()}
