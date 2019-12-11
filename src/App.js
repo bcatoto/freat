@@ -150,7 +150,7 @@ export default class App extends React.Component {
       .then(res => {
         console.log(res)
       })
-      .catch(err => this.addNotification("del-fail", false));
+      .catch(err => console.log(err));
   }
 
   unlikePost = async (postid) => {
@@ -158,7 +158,7 @@ export default class App extends React.Component {
       .then(res => {
         console.log(res)
       })
-      .catch(err => this.addNotification("del-fail", false));
+      .catch(err => console.log(err));
   }
 
   uploadImage = async (image) => {
