@@ -39,10 +39,20 @@ export default class Post extends React.Component {
         "color": "gluten",
       }
     ];
+
+    this.state = {
+      liked: this.props.likes !== undefined &&
+        this.props.likes.includes(this.props.post.id)
+    };
   }
 
   handleGoing = event => {
-    console.log("click")
+    if (this.state.liked) {
+      this.props.unlikePost(this.props.post.id);
+    }
+    else {
+      this.props.likePost(this.props.post.id);
+    }
   }
 
   getTime() {
@@ -126,11 +136,20 @@ export default class Post extends React.Component {
   }
 
   renderGoing() {
-    return (
-      <Button variant="going-on" onClick={this.handleGoing}>
-        <i className="fas fa-walking"></i> Going
-      </Button>
-    );
+    if (this.state.liked) {
+      return (
+        <Button variant="going-on" onClick={this.handleGoing}>
+          <i className="fas fa-walking"></i> Going
+        </Button>
+      );
+    }
+    else {
+      return (
+        <Button variant="going-off" onClick={this.handleGoing}>
+          <i className="fas fa-walking"></i> Going
+        </Button>
+      );
+    }
   }
 
   render() {
@@ -161,12 +180,11 @@ export default class Post extends React.Component {
         </Card.Body>
         <Card.Footer>
           <Row noGutters="true">
-            <Col className="card-going p-0" xs={3} sm={3}>
-              {this.props.post.num_going}
-              {this.renderGoing()}
-            </Col>
-            <Col>
+            <Col className="mr-auto">
               {this.renderDietOptions()}
+            </Col>
+            <Col className="card-going p-0" xs={3} sm={3}>
+              {this.props.post.num_going} {this.renderGoing()}
             </Col>
           </Row>
         </Card.Footer>

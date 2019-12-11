@@ -31,6 +31,7 @@ export default class App extends React.Component {
       netid: "",
       posts: [],
       userPosts: [],
+      likes: [],
       notifs: [],
       notifCount: 0,
       showForm: false,
@@ -42,11 +43,25 @@ export default class App extends React.Component {
   }
 
   getUserData = async () => {
+    await this.getUser();
+    await this.getUserPosts();
+    this.getUserLikes();
+  }
+
+  getUser = async () => {
     await axios.get(`api/v1/user/getCurrentUser`)
-      .then(async res => {
+      .then(res => {
         const netid = res.data.netid;
-        await this.setState({ netid });
-        this.getUserPosts();
+        this.setState({ netid });
+      })
+      .catch(err => console.log(err));
+  }
+
+  getUserLikes = async () => {
+    await axios.get(`api/v1/user/getCurrentUser`)
+      .then(res => {
+        const likes = res.data;
+        this.setState({ likes });
       })
       .catch(err => console.log(err));
   }
@@ -130,6 +145,22 @@ export default class App extends React.Component {
       .catch(err => this.addNotification("del-fail", false));
   }
 
+  likePost = async (postid) => {
+    await axios.post(`/api/v1/posting/addGoing/${postid}`)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => this.addNotification("del-fail", false));
+  }
+
+  unlikePost = async (postid) => {
+    await axios.post(`/api/v1/posting/removeGoing/${postid}`)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => this.addNotification("del-fail", false));
+  }
+
   uploadImage = async (image) => {
     const formData = new FormData();
     formData.append('file', image);
@@ -183,7 +214,7 @@ export default class App extends React.Component {
   }
 
   addNotification(mode, success) {
-    const notifs = this.state.notifs.filter(notif => notif.show == true);
+    const notifs = this.state.notifs.filter(notif => notif.show === true);
     const notif = {
       id: this.state.notifCount,
       show: true,
@@ -226,7 +257,10 @@ export default class App extends React.Component {
               deletePost={this.deletePost}
               getPosts={this.getPosts}
               getUserData={this.getUserData}
+              likePost={this.likePost}
+              likes={this.state.likes}
               posts={this.state.posts}
+              unlikePost={this.unlikePost}
             />
           )}
         />
