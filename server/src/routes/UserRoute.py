@@ -27,20 +27,53 @@ def addGoing(netid):
   """
 
   # will get sent an int (the postid)
-  postid = request.get_json()
+  postid = request.get_json() # does this work??
+  print("Pineapple1 ", postid) # idk what format this will be in.
   user = UserModel.get_user_byNetId(netid)
-  data = user_schema.dump(user, many=True)
+  data = user_schema.dump(user, many=True) # get all this user's data
+
+  if (len(data) == 0):
+    return custom_response({'error': 'user not found'}, 404)
 
   try:
-    print("DEBUG_USER_ROUTE: ", user['posts_going'])
-    user['posts_going'].append(postid) # append the new postid to the array
-    data = user['posts_going']
+    print("DEBUG_USER_ROUTE_ADD: ", data[0]['posts_going'])
+    posts_going = data[0]['posts_going']
+    posts_going.append(postid)
+    data = {'posts_going': posts_going} # the new postid array
+    user[0].update(data) 
+    data = user_schema.dump(user)
     return custom_response(data, 201)
 
   except Exception as err:
     return custom_response({'message': err}, 400)
 
-    
+@user_api.route('/removeUserGoing/<string:netid>', methods=['POST'])
+def removeGoing(netid):
+  """
+  remove postid to show a user's not going anymore
+  """
+
+  # will get sent an int (the postid)
+  postid = request.get_json() # does this work??
+  print("Pineapple2 ", postid) # idk what format this will be in.
+  user = UserModel.get_user_byNetId(netid)
+  data = user_schema.dump(user, many=True) # get all this user's data
+
+  if (len(data) == 0):
+    return custom_response({'error': 'user not found'}, 404)
+
+  try:
+    print("DEBUG_USER_ROUTE_REMOVE: ", data[0]['posts_going'])
+    posts_going = data[0]['posts_going']
+    posts_going.remove(postid) # remove that postid
+    data = {'posts_going': posts_going} # the new postid array
+    user[0].update(data) 
+    data = user_schema.dump(user)
+    return custom_response(data, 201)
+
+  except Exception as err:
+    return custom_response({'message': err}, 400)
+
 
 def custom_response(res, status_code):
   """

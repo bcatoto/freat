@@ -26,7 +26,6 @@ class UserModel(db.Model):
     
     def update(self, data):
         for key, item in data.items():
-            print("hit update with key: ", key)
             setattr(self, key, item)
         db.session.commit()
     
