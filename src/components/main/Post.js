@@ -41,6 +41,10 @@ export default class Post extends React.Component {
     ];
   }
 
+  handleGoing = event => {
+    console.log("click")
+  }
+
   getTime() {
     const min = 60 * 1000;
     const hour = min * 60;
@@ -123,7 +127,7 @@ export default class Post extends React.Component {
 
   renderGoing() {
     return (
-      <Button variant="going-on">
+      <Button variant="going-on" onClick={this.handleGoing}>
         <i className="fas fa-walking"></i> Going
       </Button>
     );
@@ -158,7 +162,7 @@ export default class Post extends React.Component {
         <Card.Footer>
           <Row noGutters="true">
             <Col className="card-going p-0" xs={3} sm={3}>
-              4
+              {this.props.post.num_going}
               {this.renderGoing()}
             </Col>
             <Col>
