@@ -86,7 +86,9 @@ export default class App extends React.Component {
   }
 
   editPost = async (postid, post) => {
-    post.images = await this.getImageUrls(post.images);
+    if ("images" in post) {
+      post.images = await this.getImageUrls(post.images);
+    }
 
     await axios.put(`api/v1/posting/${postid}`, { post })
       .then(res => {

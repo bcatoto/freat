@@ -70,6 +70,7 @@ export default class PostForm extends React.Component {
       post: this.cleanPost(),
       valid: this.initialValid,
       validForm: false,
+      oldPost: null,
       prevProps: this.props
     };
   }
@@ -90,7 +91,8 @@ export default class PostForm extends React.Component {
         this.setState({
           post,
           valid,
-          validForm: true
+          validForm: true,
+          oldPost: Object.assign({}, post)
         });
       }
       this.setState({ prevProps: this.props });
@@ -138,7 +140,14 @@ export default class PostForm extends React.Component {
       this.props.addPost(post);
     }
     else {
-      this.props.editPost(post.id, post);
+      const oldPost = this.state.oldPost;
+      let newPost = {};
+      for (const key in post) {
+        if (post[key] !== oldPost[key]) {
+          newPost[key] = post[key];
+        }
+      }
+      this.props.editPost(oldPost.id, newPost);
     }
 
     this.close();
