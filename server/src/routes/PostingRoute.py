@@ -121,9 +121,8 @@ def addGoing(postid):
     return custom_response({'error': 'post not found'}, 404)
 
   try:
-    print("DEBUG_POSTING_ROUTE: ", post[0]['num_going'])
-    print("DEBUG_POSTING_ROUTE_2: ", post[0])
-    post[0]['num_going'] = post[0]['num_going'] + 1 # increment
+    data = {'num_going': data[0]['num_going'] + 1}
+    post[0].update(data) 
     data = posting_schema.dump(post)
     return custom_response(data, 201)
 
@@ -135,7 +134,7 @@ def addGoing(postid):
 @posting_api.route('/removeGoing/<int:postid>', methods=['POST'])
 def removeGoing(postid):
   """
-  increment the number
+  decrement the number
   """
   post = PostingModel.get_one_post(postid)
   data = posting_schema.dump(post, many=True)
@@ -144,7 +143,8 @@ def removeGoing(postid):
     return custom_response({'error': 'post not found'}, 404)
 
   try:
-    post[0]['num_going'] = post[0]['num_going'] - 1 # decrement
+    data = {'num_going': data[0]['num_going'] - 1}
+    post[0].update(data) 
     data = posting_schema.dump(post)
     return custom_response(data, 201)
 

@@ -4,6 +4,7 @@ from ..models.UserModel import UserModel, UserSchema
 
 
 user_api = Blueprint('user', __name__)
+user_schema = UserSchema()
 
 @user_api.route('/getCurrentUser', methods=['GET'])
 def getUsername():
@@ -27,8 +28,8 @@ def addGoing(netid):
 
   # will get sent an int (the postid)
   postid = request.get_json()
-
   user = UserModel.get_user_byNetId(netid)
+  data = user_schema.dump(user, many=True)
 
   try:
     print("DEBUG_USER_ROUTE: ", user['posts_going'])
