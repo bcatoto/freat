@@ -23,6 +23,7 @@ class PostingModel(db.Model):
     feeds = db.Column(db.Integer)
     images = db.Column(db.ARRAY(db.String(128)))
     owner_id = db.Column(db.String(20), db.ForeignKey('users.netid'), nullable=False)
+    num_going = db.Column(db.Integer)
 
     def __init__(self,data):
         self.title = data.get('title')
@@ -34,6 +35,7 @@ class PostingModel(db.Model):
         self.feeds = data.get('feeds')
         self.images= data.get('images')
         self.owner_id = data.get('netid')
+        self.num_going = data.get('num_going')
 
     def save(self):
         db.session.add(self)
@@ -79,5 +81,6 @@ class PostingSchema(Schema):
   feeds = fields.Int()
   images = fields.List(fields.Str())
   netid = fields.Str()
+  num_going = fields.Int()
 
   
