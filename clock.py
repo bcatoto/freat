@@ -7,7 +7,7 @@ import json
 import time
 
 tz_offset = time.timezone
-URL = 'https://freat.herokuapp.com/api/vi/posting/'
+URL = 'https://freat.herokuapp.com/api/v1/posting/'
 local_URL = 'http://localhost:5000/api/v1/posting/'
 sched = BlockingScheduler()
 
@@ -24,7 +24,7 @@ def timed_job():
         date_time_obj = datetime.strptime(post['created_at'], '%Y-%m-%dT%H:%M:%S.%f')
         diff = datetime.now() - date_time_obj
         mins_elapsed = (diff.total_seconds() + tz_offset)/60
-        
+
         if mins_elapsed > 120:
             postid = post['id']
             # new_url = local_URL + str(postid)
