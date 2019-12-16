@@ -30,14 +30,5 @@ def timed_job():
             # new_url = local_URL + str(postid)
             new_url = URL + str(postid)
             requests.delete(url = new_url) # send a delete request
-
-        # test case!
-        if mins_elapsed > 3:
-            postid = post['id']
-            print('postid ', postid)
-            # new_url = local_URL + str(postid)
-            new_url = URL + str(postid)
-            requests.delete(url = new_url) # send a delete request
-
         
 sched.start()
