@@ -1,27 +1,34 @@
-from server.src.models.PostingModel import PostingModel, PostingSchema
+#from server.src.models.PostingModel import PostingModel, PostingSchema
 from apscheduler.schedulers.blocking import BlockingScheduler
 import requests
 from datetime import datetime
+from flask import request, json, Response, Blueprint, jsonify
+import json
+import time
 
-URL = 'https://freat.herokuapp.com/api/vi/posting'
+tz_offset = time.timezone
+URL = 'https://freat.herokuapp.com/api/v1/posting/'
+local_URL = 'http://localhost:5000/api/v1/posting/'
 sched = BlockingScheduler()
-posting_schema = PostingSchema()
 
 
 @sched.scheduled_job('interval', minutes=1)
 def timed_job():
-    print('This job is run every two minutes.')
-    posts = PostingModel.get_all_postings()
-    data = posting_schema.dump(posts, many=True)
+    print("Job runs every 1 minute")
 
-    for post in data[0]:
-        diff = datetime.now() - post['created_at']
-        mins_elapsed = diff.total_seconds()/60
-        print("DEBUG ID: ", post['id'])
-        print("DEBUG TIMEDIFF ", mins_elapsed)
+    # get all the postings
+    # postings = json.loads(requests.get(url = local_URL).text)
+    postings = json.loads(requests.get(url = URL).text)
+
+    for post in postings:
+        date_time_obj = datetime.strptime(post['created_at'], '%Y-%m-%dT%H:%M:%S.%f')
+        diff = datetime.now() - date_time_obj
+        mins_elapsed = (diff.total_seconds() + tz_offset)/60
 
         if mins_elapsed > 120:
-            PARAMS = {'postid':post['id']} 
-            requests.delete(url = URL, params = PARAMS) # send a delete request
-
+            postid = post['id']
+            # new_url = local_URL + str(postid)
+            new_url = URL + str(postid)
+            requests.delete(url = new_url) # send a delete request
+        
 sched.start()
