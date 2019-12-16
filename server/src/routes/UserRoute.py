@@ -21,7 +21,7 @@ def getUsername():
       user.save()
   return custom_response({'netid': username}, 200)
 
-@user_api.route('/going/<string:netid>', methods=['POST'])
+@user_api.route('/updateGoing/<string:netid>', methods=['POST'])
 def updateGoing(netid):
   """
   Update that this user has clicked going
