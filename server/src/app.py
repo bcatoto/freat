@@ -33,7 +33,10 @@ def create_app(env_name):
 
   app.config.from_object(app_config[env_name])
 
-  db.init_app(app)
+  # db.init_app(app)
+
+  # with app.app_context():
+  #   db.create_all()
 
   app.register_blueprint(posting_blueprint, url_prefix='/api/v1/posting')
   app.register_blueprint(user_blueprint, url_prefix='/api/v1/user')
