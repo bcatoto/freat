@@ -1,0 +1,50 @@
+from flask import request, json, Response, Blueprint
+from ..CASClient import CASClient
+from ..models.AttendingModel import AttendingModel, AttendingSchema
+
+attneding_api = Blueprint('attendance', __name__)
+attending_schema = AttendingSchema()
+
+@attneding_api.route('/', methods=['POST'])
+def going():
+    """
+    Update that user is going to an event/posting
+    """
+    req_data = request.get_json()
+    try:
+        data = attending_schema.load(req_data['data'])
+        ### add a check for user id and postid
+        attending = AttendingModel(data)
+        attending.save()
+        return custom_response({'message':'successfully added'}, 204)
+    except Exception as err:
+        return custom_response({'message': err}, 400)
+
+
+
+@attneding_api.route('/', methods=['DELETE'])
+def notgoing():
+    """
+    Update that user is not going to an event/posting
+    """
+    req_data =request.get_json()
+    try:
+        data = attending_schema.load(req_data['data'])
+        attending = AttendingModel.get_single_attending(data['user_id'], data['post_id'])
+        if attending is None:
+            return custom_response({'message':'userid is not signed up for the correspdoning postid'}, 400)
+        attending.delete()
+        return custom_response({'message':'successfully deleted'}, 204)
+    except Exception as err:
+        return custom_response({'message': err}, 400)
+        
+
+def custom_response(res, status_code):
+  """
+  Custom Response Function
+  """
+  return Response(
+    mimetype="application/json",
+    response=json.dumps(res),
+    status=status_code
+  )

@@ -4,6 +4,8 @@ import datetime
 from marshmallow import fields, Schema
 from . import db
 from sqlalchemy import desc # allows sorting sqlalchemy query
+from .AttendingModel import AttendingModel
+
 
 class PostingModel(db.Model):
     """
@@ -23,7 +25,6 @@ class PostingModel(db.Model):
     feeds = db.Column(db.Integer)
     images = db.Column(db.ARRAY(db.String(128)))
     owner_id = db.Column(db.String(20), db.ForeignKey('users.netid'), nullable=False)
-    num_going = db.Column(db.Integer)
 
     def __init__(self,data):
         self.title = data.get('title')
@@ -35,7 +36,6 @@ class PostingModel(db.Model):
         self.feeds = data.get('feeds')
         self.images= data.get('images')
         self.owner_id = data.get('netid')
-        self.num_going = data.get('num_going')
 
     def save(self):
         db.session.add(self)
@@ -81,6 +81,9 @@ class PostingSchema(Schema):
   feeds = fields.Int()
   images = fields.List(fields.Str())
   netid = fields.Str()
-  num_going = fields.Int()
+  num_going = fields.Method("get_num_of_going")
+
+  def get_num_of_going(self, obj):
+      return AttendingModel.get_going_num(obj.id)
 
   

@@ -14,7 +14,7 @@ class UserModel(db.Model):
 
     netid = db.Column(db.String(20), primary_key=True)
     posts = db.relationship('PostingModel', backref='posts')
-    posts_going = db.Column(db.ARRAY(db.Integer)) # postids of posts liked
+    # posts_going = db.Column(db.ARRAY(db.Integer)) # postids of posts liked
 
     def __init__(self, data):
         self.netid = data.get('netid')
@@ -43,8 +43,10 @@ class UserModel(db.Model):
     
 
 class UserSchema(Schema):
+    """
+    User Schema
+    """
     netid = fields.Str()
     posts = fields.Nested(PostingSchema, many=True)
-    posts_going = fields.List(fields.Int)
 
         

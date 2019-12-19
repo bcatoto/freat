@@ -1,7 +1,7 @@
 import os
 from flask import request, json, Response, Blueprint, jsonify
 from ..models.PostingModel import PostingModel, PostingSchema
-# from flask_cas import login_required
+from ..models.AttendingModel import AttendingModel
 from ..CASClient import CASClient
 import cloudinary
 import cloudinary.uploader
@@ -110,48 +110,6 @@ def getPostsByUser(netid):
   data = posting_schema.dump(posts, many=True)
   return custom_response(data, 200)
 
-# add an is-going to the number
-@posting_api.route('/addGoing/<int:postid>', methods=['POST'])
-def addGoing(postid):
-  """
-  increment the number
-  """
-  post = PostingModel.get_one_post(postid)
-  data = posting_schema.dump(post, many=True)
-
-  if (len(data) == 0):
-    return custom_response({'error': 'post not found'}, 404)
-
-  try:
-    data = {'num_going': data[0]['num_going'] + 1}
-    post[0].update(data) 
-    data = posting_schema.dump(post)
-    return custom_response(data, 201)
-
-  except Exception as err:
-    return custom_response({'message': err}, 400)
-
-
-# subtract an is-going from the number
-@posting_api.route('/removeGoing/<int:postid>', methods=['POST'])
-def removeGoing(postid):
-  """
-  decrement the number
-  """
-  post = PostingModel.get_one_post(postid)
-  data = posting_schema.dump(post, many=True)
-
-  if (len(data) == 0):
-    return custom_response({'error': 'post not found'}, 404)
-
-  try:
-    data = {'num_going': data[0]['num_going'] - 1}
-    post[0].update(data) 
-    data = posting_schema.dump(post)
-    return custom_response(data, 201)
-
-  except Exception as err:
-    return custom_response({'message': err}, 400)
 
 def custom_response(res, status_code):
   """

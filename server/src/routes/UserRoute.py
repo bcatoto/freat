@@ -1,7 +1,7 @@
 from flask import request, json, Response, Blueprint, jsonify
 from ..CASClient import CASClient
 from ..models.UserModel import UserModel, UserSchema
-import requests
+# import requests
 
 
 user_api = Blueprint('user', __name__)
