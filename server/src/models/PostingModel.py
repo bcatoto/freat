@@ -80,6 +80,7 @@ class PostingSchema(Schema):
   diet = fields.List(fields.Int)
   feeds = fields.Int()
   images = fields.List(fields.Str())
+  owner_id = fields.Str(dump_only=True)
   netid = fields.Str()
   num_going = fields.Method("get_num_of_going")
 

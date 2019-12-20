@@ -5,6 +5,19 @@ from ..models.AttendingModel import AttendingModel, AttendingSchema
 attneding_api = Blueprint('attendance', __name__)
 attending_schema = AttendingSchema()
 
+@attneding_api.route('/', methods=['GET'])
+def getUserGoingPosts():
+    val = request.args.get('userid')
+    try:
+        if val is not None:
+            posts =  AttendingModel.get_user_going_posts(val)
+            data = attending_schema.dump(posts, many=True)
+            return custom_response(data, 200)
+    except Exception as err:
+        return custom_response({'message': err}, 400)
+    return custom_response({}, 200)
+        
+
 @attneding_api.route('/', methods=['POST'])
 def going():
     """
@@ -16,10 +29,9 @@ def going():
         ### add a check for user id and postid
         attending = AttendingModel(data)
         attending.save()
-        return custom_response({'message':'successfully added'}, 204)
+        return custom_response({'message':'successfully added'}, 200)
     except Exception as err:
         return custom_response({'message': err}, 400)
-
 
 
 @attneding_api.route('/', methods=['DELETE'])
