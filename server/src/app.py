@@ -29,7 +29,7 @@ def create_app(env_name):
   app.secret_key = b'\xcdt\x8dn\xe1\xbdW\x9d[}yJ\xfc\xa3~/'
   app.config.from_object(app_config[env_name])
 
-  # db.init_app(app)
+  db.init_app(app)
 
   # adding all routes to main route
   app.register_blueprint(posting_blueprint, url_prefix='/api/v1/posting')
