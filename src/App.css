@@ -550,8 +550,8 @@
   display: flex;
   flex-direction: column;
   height: calc(100vh - 54.38px);
-  max-width: 576px;
-  min-width: 400px; }
+  min-width: 400px;
+  max-width: 500px; }
   @media (max-width: 576px) {
     #post-pane {
       min-width: 320px;
