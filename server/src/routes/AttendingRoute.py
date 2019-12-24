@@ -2,10 +2,10 @@ from flask import request, json, Response, Blueprint
 from ..CASClient import CASClient
 from ..models.AttendingModel import AttendingModel, AttendingSchema
 
-attneding_api = Blueprint('attendance', __name__)
+attending_api = Blueprint('attendance', __name__)
 attending_schema = AttendingSchema()
 
-@attneding_api.route('/', methods=['GET'])
+@attending_api.route('/', methods=['GET'])
 def getUserGoingPosts():
     val = request.args.get('userid')
     try:
@@ -16,9 +16,9 @@ def getUserGoingPosts():
     except Exception as err:
         return custom_response({'message': err}, 400)
     return custom_response({}, 200)
-        
 
-@attneding_api.route('/', methods=['POST'])
+
+@attending_api.route('/', methods=['POST'])
 def going():
     """
     Update that user is going to an event/posting
@@ -34,7 +34,7 @@ def going():
         return custom_response({'message': err}, 400)
 
 
-@attneding_api.route('/', methods=['DELETE'])
+@attending_api.route('/', methods=['DELETE'])
 def notgoing():
     """
     Update that user is not going to an event/posting
@@ -49,7 +49,7 @@ def notgoing():
         return custom_response({'message':'successfully deleted'}, 204)
     except Exception as err:
         return custom_response({'message': err}, 400)
-        
+
 
 def custom_response(res, status_code):
   """

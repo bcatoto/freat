@@ -39,33 +39,10 @@ export default class Post extends React.Component {
         "color": "gluten",
       }
     ];
-
-    this.state = {
-      likes: this.props.likes,
-      liked: this.props.likes !== undefined &&
-        this.props.likes.includes(this.props.post.id)
-    };
-  }
-
-  componentDidUpdate() {
-    if (this.props.likes !== this.state.likes) {
-      this.setState({
-        likes: this.props.likes,
-        liked: this.props.likes !== undefined &&
-          this.props.likes.includes(this.props.post.id)
-      })
-    }
   }
 
   handleGoing = event => {
-    if (this.state.liked) {
-      this.props.unlikePost(this.props.post.id);
-      this.setState({ liked: false });
-    }
-    else {
-      this.props.likePost(this.props.post.id);
-      this.setState({ liked: true });
-    }
+    this.props.unlikePost(this.props.post.id);
   }
 
   getTime() {
@@ -78,10 +55,10 @@ export default class Post extends React.Component {
     const diff = now - time + tz;
 
     if (diff > 2 * hour) {
-      this.props.deletePost(this.props.post.id);
+      return "2 hours ago"
     }
-    else if (diff > hour) {
-      return "1 hr., " + Math.floor((diff - hour) / min) + " min. ago";
+    if (diff > hour) {
+      return "1h " + Math.floor((diff - hour) / min) + "m ago";
     }
     else if (diff > min){
       return Math.floor(diff / min) + " minutes ago";
@@ -149,20 +126,11 @@ export default class Post extends React.Component {
   }
 
   renderGoing() {
-    if (this.state.liked) {
-      return (
-        <Button variant="going-on" onClick={this.handleGoing}>
-          <i className="fas fa-walking"></i> Going
-        </Button>
-      );
-    }
-    else {
-      return (
-        <Button variant="going-off" onClick={this.handleGoing}>
-          <i className="fas fa-walking"></i> Going
-        </Button>
-      );
-    }
+    return (
+      <Button variant="going-off" onClick={this.handleGoing}>
+        <i className="fas fa-walking"></i> Going
+      </Button>
+    );
   }
 
   render() {

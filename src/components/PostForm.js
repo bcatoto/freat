@@ -26,8 +26,7 @@ export default class PostForm extends React.Component {
       desc: "",
       diet: this.initialDiet,
       feeds: "",
-      netid: "",
-      num_going: 0
+      netid: ""
     };
 
     this.initialValid = {
@@ -298,7 +297,7 @@ export default class PostForm extends React.Component {
               </Form.Text>
             </Form.Group>
 
-            <Form.Group controlId="input-diet">
+            <Form.Group>
               <Form.Label>Dietary Options</Form.Label>
               <Form.Text className="text-muted">
                 Please select if any food fits a dietary option.
@@ -306,7 +305,7 @@ export default class PostForm extends React.Component {
               {this.renderDietOptions()}
             </Form.Group>
 
-            <Form.Group controlId="input-feeds">
+            <Form.Group>
               {this.renderRequired("Feeds approximately...", "feeds")}
               <Form.Text className="text-muted">
                 Please enter a positive number.

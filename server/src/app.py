@@ -10,7 +10,7 @@ from .config import app_config
 from .models import db
 from .routes.PostingRoute import posting_api as posting_blueprint
 from .routes.UserRoute import user_api as user_blueprint
-from .routes.AttendingRoute import attneding_api as attending_blueprint
+from .routes.AttendingRoute import attending_api as attending_blueprint
 from .models.PostingModel import PostingModel, PostingSchema
 from .models.UserModel import UserModel, UserSchema
 
@@ -45,7 +45,7 @@ def create_app(env_name):
     example endpoint
     """
     return render_template('index.html')
-  
+
   @app.route('/home')
   @app.route('/profile')
   def home():
