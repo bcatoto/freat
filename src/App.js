@@ -167,9 +167,9 @@ export default class App extends React.Component {
       "post_id": postid
     }
 
-    await axios.delete(`/api/v1/attendance/`, { data })
+    await axios.delete(`/api/v1/attendance/`, { data: { data } })
       .then(res => {
-        if (res.status === 200) {
+        if (res.status === 202 || res.status === 204) {
           let posts = this.state.posts;
           let post = posts.find(post => post.id === postid);
           post.num_going -= 1;
