@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Carousel from "react-bootstrap/Carousel";
 import { Image, Transformation } from 'cloudinary-react';
 import Badge from "react-bootstrap/Badge";
+import Skeleton from "react-loading-skeleton";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -39,6 +40,33 @@ export default class Post extends React.Component {
         "color": "gluten",
       }
     ];
+
+    this.state = {
+      liked: false,
+      prevLikes: []
+    };
+  }
+
+  componentDidUpdate() {
+    let likes = this.props.likes;
+    if (likes !== undefined && likes !== this.state.prevLikes) {
+      const liked = likes.find(item => item.post_id === this.props.post.id) !== undefined;
+      this.setState({
+        liked,
+        prevLikes: likes
+      })
+    }
+  }
+
+  handleGoing = event => {
+    const liked = this.state.liked;
+    if (liked) {
+      this.props.unlikePost(this.props.post.id);
+    }
+    else {
+      this.props.likePost(this.props.post.id);
+    }
+    this.setState({ liked: !liked })
   }
 
   getTime() {
@@ -51,10 +79,10 @@ export default class Post extends React.Component {
     const diff = now - time + tz;
 
     if (diff > 2 * hour) {
-      this.props.deletePost(this.props.post.id);
+      return "2 hours ago"
     }
-    else if (diff > hour) {
-      return "1 hr., " + Math.floor((diff - hour) / min) + " min. ago";
+    if (diff > hour) {
+      return "1h " + Math.floor((diff - hour) / min) + "m ago";
     }
     else if (diff > min){
       return Math.floor(diff / min) + " minutes ago";
@@ -89,7 +117,8 @@ export default class Post extends React.Component {
 
   renderCarousel() {
     let controls = false;
-    if (this.props.post.images.length > 1) {
+    if (this.props.post.images !== undefined &&
+      this.props.post.images.length > 1) {
       controls = true;
     }
 
@@ -122,51 +151,88 @@ export default class Post extends React.Component {
   }
 
   renderGoing() {
-    return (
-      <Button variant="going-on">
-        <i className="fas fa-walking"></i> Going
-      </Button>
+    if (this.state.liked) {
+      return (
+        <Button variant="going-on" onClick={this.handleGoing}>
+          <i className="fas fa-walking"></i> Going
+        </Button>
+      );
+    }
+    else {
+      return (
+        <Button variant="going-off" onClick={this.handleGoing}>
+          <i className="fas fa-walking"></i> Going
+        </Button>
+      );
+    }
+  }
+
+  renderSkeleton() {
+    return(
+      <Card>
+        <Card.Header>
+          <Skeleton width={100}/>
+        </Card.Header>
+        <Skeleton height={250} />
+        <Card.Body>
+          <Skeleton />
+        </Card.Body>
+        <Card.Footer>
+          <Skeleton />
+        </Card.Footer>
+      </Card>
     );
   }
 
   render() {
-    return (
-      <Card>
-        <Card.Header>
-          <Container fluid className="p-0">
+    if (this.props.post.id === "sk") {
+      return (
+        <>
+          {this.renderSkeleton()}
+        </>
+      );
+    }
+    else {
+      return (
+        <Card>
+          <Card.Header>
+            <Container fluid className="p-0">
+              <Row noGutters="true">
+                <Col className="card-title-container mr-auto p-0">
+                  <Card.Title>{this.props.post.title}</Card.Title>
+                </Col>
+                <Col className="card-time p-0" xs={3} sm={3}>
+                  {this.getTime()}
+                </Col>
+              </Row>
+              <Row noGutters="true" className="mt-1">
+                <Button variant="location">
+                  <i className="fas fa-map-marker-alt mr-1"></i>
+                  {this.props.post.room}, {this.props.post.building}
+                </Button>
+              </Row>
+            </Container>
+          </Card.Header>
+          {this.renderCarousel()}
+          <Card.Body>
+            {this.renderDesc()}
+            <em>Feeds approximately: {this.props.post.feeds}</em>
+          </Card.Body>
+          <Card.Footer>
             <Row noGutters="true">
-              <Col className="card-title-container mr-auto p-0">
-                <Card.Title>{this.props.post.title}</Card.Title>
+              <Col className="mr-auto">
+                {this.renderDietOptions()}
               </Col>
-              <Col className="card-time p-0" xs={3} sm={3}>
-                {this.getTime()}
+              <Col className="card-num p-0">
+                {this.props.post.num_going}
+              </Col>
+              <Col className="card-going p-0">
+                {this.renderGoing()}
               </Col>
             </Row>
-            <Row noGutters="true" className="mt-1">
-              <Button variant="location">
-                <i className="fas fa-map-marker-alt mr-1"></i>
-                {this.props.post.room}, {this.props.post.building}
-              </Button>
-            </Row>
-          </Container>
-        </Card.Header>
-        {this.renderCarousel()}
-        <Card.Body>
-          {this.renderDesc()}
-          <em>Feeds approximately: {this.props.post.feeds}</em>
-        </Card.Body>
-        <Card.Footer>
-          <Row noGutters="true">
-            <Col className="card-going p-0" xs={3} sm={3}>
-              4
-              {this.renderGoing()}
-            </Col>
-            <Col>
-              {this.renderDietOptions()}
-            </Col>
-          </Row>
-        </Card.Footer>
-      </Card>
-    );
+          </Card.Footer>
+        </Card>
+      );
+    }
   }
 }

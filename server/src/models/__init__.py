@@ -7,3 +7,4 @@ db = SQLAlchemy()
 
 from .PostingModel import PostingModel
 from .UserModel import UserModel
+from .AttendingModel import AttendingModel

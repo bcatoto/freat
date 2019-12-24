@@ -137,7 +137,7 @@ export default class PostForm extends React.Component {
     post.netid = this.props.netid;
 
     if (this.props.isNew) {
-      this.props.addPost(post);
+      this.props.newPost(post);
     }
     else {
       const oldPost = this.state.oldPost;
@@ -170,6 +170,10 @@ export default class PostForm extends React.Component {
   }
 
   dietToDict(diet) {
+    if (diet === undefined) {
+      return this.initialDiet;
+    }
+    
     const dict = Object.assign({}, this.initialDiet);
     diet.forEach(i => dict[this.diets[i].name] = true);
     return dict;
@@ -297,7 +301,7 @@ export default class PostForm extends React.Component {
               </Form.Text>
             </Form.Group>
 
-            <Form.Group controlId="input-diet">
+            <Form.Group>
               <Form.Label>Dietary Options</Form.Label>
               <Form.Text className="text-muted">
                 Please select if any food fits a dietary option.
@@ -305,7 +309,7 @@ export default class PostForm extends React.Component {
               {this.renderDietOptions()}
             </Form.Group>
 
-            <Form.Group controlId="input-feeds">
+            <Form.Group>
               {this.renderRequired("Feeds approximately...", "feeds")}
               <Form.Text className="text-muted">
                 Please enter a positive number.

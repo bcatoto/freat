@@ -1,5 +1,4 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
 import Toast from "react-bootstrap/Toast";
 
 export default class Notifications extends React.Component {

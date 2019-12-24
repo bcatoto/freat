@@ -10,6 +10,7 @@ from .config import app_config
 from .models import db
 from .routes.PostingRoute import posting_api as posting_blueprint
 from .routes.UserRoute import user_api as user_blueprint
+from .routes.AttendingRoute import attending_api as attending_blueprint
 from .models.PostingModel import PostingModel, PostingSchema
 from .models.UserModel import UserModel, UserSchema
 
@@ -26,20 +27,14 @@ def create_app(env_name):
     template_folder='./../../build')
 
   app.secret_key = b'\xcdt\x8dn\xe1\xbdW\x9d[}yJ\xfc\xa3~/'
-  # CAS Authentication setup
-  # cas = CAS(app, '/cas')
-  # app.config['CAS_SERVER'] = 'https://fed.princeton.edu/cas/' 
-  # app.config['CAS_AFTER_LOGIN'] = 'index'
-
   app.config.from_object(app_config[env_name])
 
   # db.init_app(app)
 
-  # with app.app_context():
-  #   db.create_all()
-
+  # adding all routes to main route
   app.register_blueprint(posting_blueprint, url_prefix='/api/v1/posting')
   app.register_blueprint(user_blueprint, url_prefix='/api/v1/user')
+  app.register_blueprint(attending_blueprint, url_prefix='/api/v1/attendance')
 
   posting_schema = PostingSchema()
 
@@ -50,7 +45,7 @@ def create_app(env_name):
     example endpoint
     """
     return render_template('index.html')
-  
+
   @app.route('/home')
   @app.route('/profile')
   def home():
@@ -58,9 +53,6 @@ def create_app(env_name):
     example endpoint
     """
     CASClient().authenticate()
-    # if not UserModel.get_user_byNetId(username):
-    #   user = UserModel({"netid":username})
-    #   user.save()
     return render_template('index.html')
 
   @app.route('/logout')
@@ -70,17 +62,6 @@ def create_app(env_name):
     """
     session.clear()
     CASClient().logout()
-
-  #@cross_origin(supports_credentials=True)
-  @app.route('/test', methods=['GET'])
-  def getPostings():
-    """
-    Get all the available postings
-    """
-    posts = PostingModel.get_all_postings()
-    data = posting_schema.dump(posts, many=True)
-    print(data)
-    return custom_response(data, 200)
 
   def custom_response(res, status_code):
     """

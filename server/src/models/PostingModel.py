@@ -4,6 +4,8 @@ import datetime
 from marshmallow import fields, Schema
 from . import db
 from sqlalchemy import desc # allows sorting sqlalchemy query
+from .AttendingModel import AttendingModel
+
 
 class PostingModel(db.Model):
     """
@@ -55,7 +57,7 @@ class PostingModel(db.Model):
 
     @staticmethod
     def get_one_post(postid):
-        return PostingModel.query.filter_by(id=postid)
+        return PostingModel.query.filter_by(id=postid).first()
     
     @staticmethod
     def get_by_user(netid):
@@ -78,6 +80,12 @@ class PostingSchema(Schema):
   diet = fields.List(fields.Int)
   feeds = fields.Int()
   images = fields.List(fields.Str())
+  owner_id = fields.Str(dump_only=True)
   netid = fields.Str()
+  num_going = fields.Method("get_num_of_going")
+
+  def get_num_of_going(self, obj):
+    if obj.id:
+        return AttendingModel.get_going_num(obj.id)
 
   

@@ -164,22 +164,20 @@
   text-align: left;
   font-size: 1rem;
   padding: 0px;
-  margin-left: 5px;
   color: #95a5a6;
   text-decoration: none; }
   .btn-going-off:hover {
-    color: #454c4d;
+    color: #737e80;
     text-decoration: none; }
 
 .btn-going-on {
   text-align: left;
   font-size: 1rem;
   padding: 0px;
-  margin-left: 5px;
-  color: #95a5a6;
+  color: #0066ff;
   text-decoration: none; }
   .btn-going-on:hover {
-    color: #454c4d;
+    color: #0052cc;
     text-decoration: none; }
 
 .btn-edit {
@@ -297,12 +295,18 @@
   max-width: 110px;
 }
 
-.card-going {
-  text-align: left;
+.card-num {
+  text-align: right;
   font-size: 1rem;
   color: #95a5a6;
-  min-width: 80px;
-  max-width: 90px;
+  max-width: 20px;
+}
+
+.card-going {
+  text-align: right;
+  font-size: 1rem;
+  min-width: 60px;
+  max-width: 65px;
 }
 
 .card-title-container {
@@ -470,13 +474,21 @@
   padding: 0px;
   color: #0066ff; }
 
-/* Landing Page */
-
 .center {
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center; }
+
+.right {
+  display: flex;
+  text-align: right;
+  align-items: right;
+  justify-content: right; }
+
+/* Landing Page */
+
+
 
 #landing-image {
   position: -webkit-sticky; /* Safari */
@@ -538,8 +550,8 @@
   display: flex;
   flex-direction: column;
   height: calc(100vh - 54.38px);
-  max-width: 576px;
-  min-width: 400px; }
+  min-width: 400px;
+  max-width: 500px; }
   @media (max-width: 576px) {
     #post-pane {
       min-width: 320px;

@@ -1,7 +1,7 @@
 import os
 from flask import request, json, Response, Blueprint, jsonify
 from ..models.PostingModel import PostingModel, PostingSchema
-# from flask_cas import login_required
+from ..models.AttendingModel import AttendingModel
 from ..CASClient import CASClient
 import cloudinary
 import cloudinary.uploader
@@ -57,7 +57,7 @@ def deletePost(postid):
   Delete the post with id postid
   """
   post = PostingModel.get_one_post(postid)
-  data = posting_schema.dump(post, many=True)
+  data = posting_schema.dump(post)
   if (len(data) == 0):
     return custom_response({'error': 'post not found'}, 404)
 
@@ -65,10 +65,10 @@ def deletePost(postid):
   # if data[0]['owner_id'] != CASClient().authenticate().rstrip():
   #   return custom_response({'error': 'permission denied'}, 400)
 
-  for public_id in data[0]['images']:
+  for public_id in data['images']:
     cloudinary.uploader.destroy(public_id)
 
-  post[0].delete()
+  post.delete()
   return custom_response({'message': 'deleted'}, 204)
 
 
@@ -81,7 +81,7 @@ def updatePost(postid):
   req_data = request.get_json()
 
   post = PostingModel.get_one_post(postid)
-  data = posting_schema.dump(post, many=True)
+  data = posting_schema.dump(post)
 
   if (len(data) == 0):
     return custom_response({'error': 'post not found'}, 404)
@@ -92,7 +92,7 @@ def updatePost(postid):
 
   try:
     data = posting_schema.load(req_data['post'], partial=True)
-    post[0].update(data) # need post[0] b/c the PostingModel.get_one_post(postid) list/only way to get sqlalchemy to return an object
+    post.update(data) 
     data = posting_schema.dump(post)
     return custom_response(data, 200)
 
@@ -109,6 +109,7 @@ def getPostsByUser(netid):
   posts = PostingModel.get_by_user(netid)
   data = posting_schema.dump(posts, many=True)
   return custom_response(data, 200)
+
 
 def custom_response(res, status_code):
   """

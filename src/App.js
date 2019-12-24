@@ -31,6 +31,7 @@ export default class App extends React.Component {
       netid: "",
       posts: [],
       userPosts: [],
+      likes: [],
       notifs: [],
       notifCount: 0,
       showForm: false,
@@ -42,11 +43,25 @@ export default class App extends React.Component {
   }
 
   getUserData = async () => {
+    await this.getUser();
+    this.getUserPosts();
+    this.getUserLikes();
+  }
+
+  getUser = async () => {
     await axios.get(`api/v1/user/getCurrentUser`)
-      .then(async res => {
+      .then(res => {
         const netid = res.data.netid;
-        await this.setState({ netid });
-        this.getUserPosts();
+        this.setState({ netid });
+      })
+      .catch(err => console.log(err));
+  }
+
+  getUserLikes = async () => {
+    await axios.get(`api/v1/attendance?userid=${this.state.netid}`)
+      .then(res => {
+        const likes = res.data;
+        this.setState({ likes });
       })
       .catch(err => console.log(err));
   }
@@ -55,7 +70,9 @@ export default class App extends React.Component {
     await axios.get(`/api/v1/posting/`)
       .then(res => {
         const posts = res.data;
-        this.setState({ posts });
+        if (posts !== this.state.posts) {
+          this.setState({ posts });
+        }
       })
       .catch(err => console.log(err));
   }
@@ -69,14 +86,27 @@ export default class App extends React.Component {
       .catch(err => console.log(err));
   }
 
+  newPost = (post) => {
+    this.addPost(post);
+    const skPost = {
+      id: "sk",
+      building: post.building
+    }
+    const posts = this.state.posts;
+    const userPosts = this.state.userPosts;
+    posts.unshift(skPost);
+    userPosts.unshift(skPost);
+    this.setState({ posts, userPosts });
+  }
+
   addPost = async (post) => {
     post.images = await this.getImageUrls(post.images);
 
     await axios.post(`/api/v1/posting/`, { post })
       .then(res => {
         if (res.status === 201) {
-          const posts = this.state.posts;
-          const userPosts = this.state.userPosts;
+          const posts = this.state.posts.filter(post => post.id !== "sk");
+          const userPosts = this.state.userPosts.filter(post => post.id !== "sk");
           posts.unshift(res.data);
           userPosts.unshift(res.data);
           this.setState({ posts, userPosts });
@@ -93,21 +123,10 @@ export default class App extends React.Component {
     await axios.put(`api/v1/posting/${postid}`, { post })
       .then(res => {
         if (res.status === 200) {
-          const posts = this.state.posts;
-          const userPosts = this.state.userPosts;
-
-          for (let i = 0; i < posts.length; i++) {
-            if (posts[i].id === postid) {
-              posts[i] = Object.assign(posts[i], post);
-            }
-          }
-
-          for (let i = 0; i < userPosts.length; i++) {
-            if (userPosts[i].id === postid) {
-              userPosts[i] = Object.assign(userPosts[i], post);
-            }
-          }
-
+          let posts = this.state.posts;
+          posts = this.replacePost(posts, postid, post)
+          let userPosts = this.state.userPosts;
+          userPosts = this.replacePost(userPosts, postid, post)
           this.setState({ posts, userPosts });
           this.addNotification("edit-succ", true);
         }
@@ -123,11 +142,62 @@ export default class App extends React.Component {
           posts = posts.filter(post => post.id !== postid);
           let userPosts = this.state.userPosts;
           userPosts = userPosts.filter(post => post.id !== postid);
+
           this.setState({ posts, userPosts });
           this.addNotification("del-succ", true);
         }
       })
       .catch(err => this.addNotification("del-fail", false));
+  }
+
+  likePost = async (postid) => {
+    const data = {
+      "user_id" : this.state.netid,
+      "post_id": postid
+    }
+
+    await axios.post(`/api/v1/attendance/`, { data })
+      .then(res => {
+        if (res.status === 200) {
+          let posts = this.state.posts;
+          const post = posts.find(post => post.id === postid);
+          const newPost = {
+            num_going: post.num_going + 1
+          }
+          posts = this.replacePost(posts, postid, newPost);
+
+          let likes = this.state.likes;
+          likes.push(data);
+
+          this.setState({ posts, likes });
+        }
+      })
+      .catch(err => console.log(err));
+  }
+
+  unlikePost = async (postid) => {
+    const data = {
+      "user_id" : this.state.netid,
+      "post_id": postid
+    }
+
+    await axios.delete(`/api/v1/attendance/`, { data: { data } })
+      .then(res => {
+        if (res.status === 202 || res.status === 204) {
+          let posts = this.state.posts;
+          const post = posts.find(post => post.id === postid);
+          const newPost = {
+            num_going: post.num_going - 1
+          }
+          posts = this.replacePost(posts, postid, newPost);
+
+          let likes = this.state.likes;
+          likes = likes.filter(like => like.post_id !== postid);
+
+          this.setState({ posts, likes });
+        }
+      })
+      .catch(err => console.log(err));
   }
 
   uploadImage = async (image) => {
@@ -183,7 +253,7 @@ export default class App extends React.Component {
   }
 
   addNotification(mode, success) {
-    const notifs = this.state.notifs.filter(notif => notif.show == true);
+    const notifs = this.state.notifs.filter(notif => notif.show === true);
     const notif = {
       id: this.state.notifCount,
       show: true,
@@ -195,6 +265,21 @@ export default class App extends React.Component {
       notifs,
       notifCount: this.state.notifCount + 1
     });
+  }
+
+
+
+  replacePost(posts, postid, newPost) {
+    const newPosts = [];
+    posts.forEach(post => {
+      if (post.id === postid) {
+        newPosts.push(Object.assign(post, newPost));
+      }
+      else {
+        newPosts.push(post);
+      }
+    });
+    return newPosts;
   }
 
   render() {
@@ -209,7 +294,7 @@ export default class App extends React.Component {
               />
               <PostForm
                 show={this.state.showForm}
-                addPost={this.addPost}
+                newPost={this.newPost}
                 editPost={this.editPost}
                 handleClose={this.handleCloseForm}
                 isNew={this.state.form.isNew}
@@ -226,7 +311,11 @@ export default class App extends React.Component {
               deletePost={this.deletePost}
               getPosts={this.getPosts}
               getUserData={this.getUserData}
+              likePost={this.likePost}
+              likes={this.state.likes}
+              netid={this.state.netid}
               posts={this.state.posts}
+              unlikePost={this.unlikePost}
             />
           )}
         />
@@ -235,9 +324,12 @@ export default class App extends React.Component {
             <Profile {...props}
               deletePost={this.deletePost}
               getUserData={this.getUserData}
+              likePost={this.likePost}
+              likes={this.state.likes}
               openForm={this.handleOpenForm}
               netid={this.state.netid}
               posts={this.state.userPosts}
+              unlikePost={this.unlikePost}
             />
           )}
         />

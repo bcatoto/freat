@@ -2,8 +2,8 @@ from flask import request, json, Response, Blueprint, jsonify
 from ..CASClient import CASClient
 from ..models.UserModel import UserModel, UserSchema
 
-
 user_api = Blueprint('user', __name__)
+user_schema = UserSchema()
 
 @user_api.route('/getCurrentUser', methods=['GET'])
 def getUsername():
@@ -17,9 +17,6 @@ def getUsername():
       user = UserModel({"netid":username})
       user.save()
   return custom_response({'netid': username}, 200)
-
-# @user_api.route('/', methods=['POST'])
-# def newUser():
 
 
 def custom_response(res, status_code):

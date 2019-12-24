@@ -14,9 +14,11 @@ class UserModel(db.Model):
 
     netid = db.Column(db.String(20), primary_key=True)
     posts = db.relationship('PostingModel', backref='posts')
+    # posts_going = db.Column(db.ARRAY(db.Integer)) # postids of posts liked
 
     def __init__(self, data):
         self.netid = data.get('netid')
+        self.posts_going = data.get('posts_going')
     
     def save(self):
         db.session.add(self)
@@ -24,7 +26,6 @@ class UserModel(db.Model):
     
     def update(self, data):
         for key, item in data.items():
-            print("hit update with key: ", key)
             setattr(self, key, item)
         db.session.commit()
     
@@ -42,6 +43,9 @@ class UserModel(db.Model):
     
 
 class UserSchema(Schema):
+    """
+    User Schema
+    """
     netid = fields.Str()
     posts = fields.Nested(PostingSchema, many=True)
 
