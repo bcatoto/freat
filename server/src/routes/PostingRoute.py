@@ -57,7 +57,7 @@ def deletePost(postid):
   Delete the post with id postid
   """
   post = PostingModel.get_one_post(postid)
-  data = posting_schema.dump(post, many=True)
+  data = posting_schema.dump(post)
   if (len(data) == 0):
     return custom_response({'error': 'post not found'}, 404)
 
@@ -65,10 +65,10 @@ def deletePost(postid):
   # if data[0]['owner_id'] != CASClient().authenticate().rstrip():
   #   return custom_response({'error': 'permission denied'}, 400)
 
-  for public_id in data[0]['images']:
+  for public_id in data['images']:
     cloudinary.uploader.destroy(public_id)
 
-  post[0].delete()
+  post.delete()
   return custom_response({'message': 'deleted'}, 204)
 
 
@@ -92,7 +92,7 @@ def updatePost(postid):
 
   try:
     data = posting_schema.load(req_data['post'], partial=True)
-    post.update(data) # need post[0] b/c the PostingModel.get_one_post(postid) list/only way to get sqlalchemy to return an object
+    post.update(data) 
     data = posting_schema.dump(post)
     return custom_response(data, 200)
 
