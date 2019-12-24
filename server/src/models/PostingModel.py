@@ -57,7 +57,7 @@ class PostingModel(db.Model):
 
     @staticmethod
     def get_one_post(postid):
-        return PostingModel.query.filter_by(id=postid)
+        return PostingModel.query.filter_by(id=postid).first()
     
     @staticmethod
     def get_by_user(netid):
@@ -85,6 +85,7 @@ class PostingSchema(Schema):
   num_going = fields.Method("get_num_of_going")
 
   def get_num_of_going(self, obj):
-      return AttendingModel.get_going_num(obj.id)
+    if obj.id:
+        return AttendingModel.get_going_num(obj.id)
 
   

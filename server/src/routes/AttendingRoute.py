@@ -24,6 +24,7 @@ def going():
     Update that user is going to an event/posting
     """
     req_data = request.get_json()
+    print(req_data)
     try:
         data = attending_schema.load(req_data['data'])
         ### add a check for user id and postid
@@ -40,6 +41,7 @@ def notgoing():
     Update that user is not going to an event/posting
     """
     req_data =request.get_json()
+    print(req_data)
     try:
         data = attending_schema.load(req_data['data'])
         attending = AttendingModel.get_single_attending(data['user_id'], data['post_id'])

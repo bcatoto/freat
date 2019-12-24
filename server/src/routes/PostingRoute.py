@@ -81,7 +81,7 @@ def updatePost(postid):
   req_data = request.get_json()
 
   post = PostingModel.get_one_post(postid)
-  data = posting_schema.dump(post, many=True)
+  data = posting_schema.dump(post)
 
   if (len(data) == 0):
     return custom_response({'error': 'post not found'}, 404)
@@ -92,7 +92,7 @@ def updatePost(postid):
 
   try:
     data = posting_schema.load(req_data['post'], partial=True)
-    post[0].update(data) # need post[0] b/c the PostingModel.get_one_post(postid) list/only way to get sqlalchemy to return an object
+    post.update(data) # need post[0] b/c the PostingModel.get_one_post(postid) list/only way to get sqlalchemy to return an object
     data = posting_schema.dump(post)
     return custom_response(data, 200)
 
