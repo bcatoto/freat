@@ -1,72 +1,71 @@
-import React from "react";
-import { GoogleMap, Marker, InfoWindow, withScriptjs, withGoogleMap } from "react-google-maps"
+import React, { useState, useEffect } from "react";
+import ReactMapGL, { Marker, Popup } from "react-map-gl";
 
-import coordinates from "../../assets/coordinates.json"
-
-require('dotenv').config()
+import coordinates from "../../assets/coordinates.json";
 
 export default class MapPane extends React.Component {
   constructor(props) {
-    super(props);
-
-    this.state = {
-      showMarker: false,
-    };
+      super(props);
   }
 
-  handleOpenMarker() {
-    this.setState({ showMarker: true });
-  }
-
-  handleCloseMarker() {
-    this.setState({ showMarker: false });
-  }
-
-
-  generateLink() {
-    return "https://maps.googleapis.com/maps/api/js?v=3.exp&key=" +
-      process.env.REACT_APP_GOOGLE_MAPS_API
-  }
-
-  renderMarkers() {
-    return this.props.posts.map(post =>
-      <Marker
-        key={post.id}
-        position={{
-          lat:coordinates[post.building][0],
-          lng:coordinates[post.building][1]
-        }}
-        onClick = {() => (
-          <InfoWindow
-            position={{
-              lat:coordinates[post.building][0],
-              lng:coordinates[post.building][1]
+  renderMarkers(selectedPark, setSelectedPark) {
+    return this.props.posts.map(post => (
+      <>
+        <Marker
+          key={post.id}
+          latitude={coordinates[post.building][0]}
+          longitude={coordinates[post.building][1]}
+        >
+          <button
+            className="marker-btn"
+            onClick={e => {
+              e.preventDefault();
+              setSelectedPark(selectedPark);
             }}
           >
-          <div>{post.title}</div>
-          </InfoWindow>
-        )}
-      />
-    );
+          </button>
+        </Marker>
+        {selectedPark ? (
+          <Popup
+            latitude={coordinates[post.building][0]}
+            longitude={coordinates[post.building][0]}
+            onClose={() => setSelectedPark(null)}
+          >
+            <div>
+              <h2>{selectedPark.properties.NAME}</h2>
+              <p>{selectedPark.properties.DESCRIPTIO}</p>
+            </div>
+          </Popup>
+        ) : null}
+      </>
+    ));
   }
 
   render() {
-    const WrappedMap = withScriptjs(withGoogleMap(props => (
-      <GoogleMap
-        defaultZoom={16}
-        defaultCenter={{lat:40.346760, lng:-74.655187}}
-      >
-        {this.renderMarkers()}
-      </GoogleMap>
-    )));
+    const [viewport, setViewport] = useState({
+      latitude: 40.346760,
+      longitude: -74.655187,
+      zoom: 16
+    });
+
+    const [selectedPark, setSelectedPark] = useState(null);
 
     return (
-      <WrappedMap className="h-100 w-100"
-        googleMapURL={this.generateLink()}
-        loadingElement={<div style={{height: "100%"}} />}
-        containerElement={<div style={{height: "100%"}} />}
-        mapElement={<div style={{height: "100%"}} />}
-      />
+      <>
+        <ReactMapGL
+          {...viewport}
+          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+          mapStyle="mapbox://styles/mapbox/streets-v11"
+          onViewportChange={viewport => setViewport(viewport)}
+        >
+          {this.renderMarkers(selectedPark, setSelectedPark)}
+        </ReactMapGL>
+        <WrappedMap className="h-100 w-100"
+          loadingElement={<div style={{height : "100%"}} />}
+          containerElement={<div style={{height : "100%"}} />}
+          mapElement={<div style={{height : "100%"}} />}
+        />
+      </>
     );
   }
 }
