@@ -39,10 +39,21 @@ export default class Post extends React.Component {
         "color": "gluten",
       }
     ];
+
+    this.state = {
+      liked: this.props.likes.includes(this.props.post.id)
+    };
   }
 
   handleGoing = event => {
-    this.props.unlikePost(this.props.post.id);
+    const liked = this.state.liked;
+    if (liked) {
+      this.props.unlikePost(this.props.post.id);
+    }
+    else {
+      this.props.likePost(this.props.post.id);
+    }
+    this.setState({ liked: !liked })
   }
 
   getTime() {
@@ -126,11 +137,20 @@ export default class Post extends React.Component {
   }
 
   renderGoing() {
-    return (
-      <Button variant="going-off" onClick={this.handleGoing}>
-        <i className="fas fa-walking"></i> Going
-      </Button>
-    );
+    if (this.state.liked) {
+      return (
+        <Button variant="going-on" onClick={this.handleGoing}>
+          <i className="fas fa-walking"></i> Going
+        </Button>
+      );
+    }
+    else {
+      return (
+        <Button variant="going-off" onClick={this.handleGoing}>
+          <i className="fas fa-walking"></i> Going
+        </Button>
+      );
+    }
   }
 
   render() {
