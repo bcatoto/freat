@@ -27,6 +27,7 @@ export default class Home extends React.Component {
             deletePost={this.props.deletePost}
             likePost={this.props.likePost}
             likes={this.props.likes}
+            netid={this.props.netid}
             posts={this.props.posts}
             unlikePost={this.props.unlikePost}
           />

@@ -58,9 +58,11 @@ export default class App extends React.Component {
   }
 
   getUserLikes = async () => {
-    await axios.get(`api/v1/attendance/`, { "userid": this.state.netid } )
+    await axios.get(`api/v1/attendance?userid=${this.state.netid}`)
       .then(res => {
-        console.log(res)
+        const likes = res.data;
+        console.log(likes)
+        this.setState({ likes });
       })
       .catch(err => console.log(err));
   }
@@ -149,7 +151,11 @@ export default class App extends React.Component {
           let post = posts.find(post => post.id === postid);
           post.num_going += 1;
           posts = this.replacePost(posts, postid, post);
-          this.setState({ posts });
+
+          let likes = this.state.likes;
+          likes.push(data);
+
+          this.setState({ posts, likes });
         }
       })
       .catch(err => console.log(err));
@@ -168,7 +174,11 @@ export default class App extends React.Component {
           let post = posts.find(post => post.id === postid);
           post.num_going -= 1;
           posts = this.replacePost(posts, postid, post);
-          this.setState({ posts });
+
+          let likes = this.state.likes;
+          likes = likes.filter(like => like.post_id !== postid);
+
+          this.setState({ posts, likes });
         }
       })
       .catch(err => console.log(err));
@@ -285,6 +295,7 @@ export default class App extends React.Component {
               getUserData={this.getUserData}
               likePost={this.likePost}
               likes={this.state.likes}
+              netid={this.state.netid}
               posts={this.state.posts}
               unlikePost={this.unlikePost}
             />
@@ -295,9 +306,12 @@ export default class App extends React.Component {
             <Profile {...props}
               deletePost={this.deletePost}
               getUserData={this.getUserData}
+              likePost={this.likePost}
+              likes={this.state.likes}
               openForm={this.handleOpenForm}
               netid={this.state.netid}
               posts={this.state.userPosts}
+              unlikePost={this.unlikePost}
             />
           )}
         />

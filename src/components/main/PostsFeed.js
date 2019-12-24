@@ -10,6 +10,7 @@ export default class PostsFeed extends React.Component {
         deletePost={this.props.deletePost}
         likePost={this.props.likePost}
         likes={this.props.likes}
+        netid={this.props.netid}
         post={post}
         unlikePost={this.props.unlikePost}
       />

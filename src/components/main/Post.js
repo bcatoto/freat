@@ -41,8 +41,20 @@ export default class Post extends React.Component {
     ];
 
     this.state = {
-      liked: this.props.likes.includes(this.props.post.id)
+      liked: false,
+      prevLikes: []
     };
+  }
+
+  componentDidUpdate() {
+    let likes = this.props.likes;
+    if (likes !== undefined && likes !== this.state.prevLikes) {
+      const liked = likes.find(item => item.post_id === this.props.post.id) !== undefined;
+      this.setState({
+        liked,
+        prevLikes: likes
+      })
+    }
   }
 
   handleGoing = event => {
