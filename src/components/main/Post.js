@@ -117,7 +117,8 @@ export default class Post extends React.Component {
 
   renderCarousel() {
     let controls = false;
-    if (this.props.post.images.length > 1) {
+    if (this.props.post.images !== undefined &&
+      this.props.post.images.length > 1) {
       controls = true;
     }
 

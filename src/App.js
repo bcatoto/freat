@@ -160,9 +160,11 @@ export default class App extends React.Component {
       .then(res => {
         if (res.status === 200) {
           let posts = this.state.posts;
-          let post = posts.find(post => post.id === postid);
-          post.num_going += 1;
-          posts = this.replacePost(posts, postid, post);
+          const post = posts.find(post => post.id === postid);
+          const newPost = {
+            num_going: post.num_going + 1
+          }
+          posts = this.replacePost(posts, postid, newPost);
 
           let likes = this.state.likes;
           likes.push(data);
@@ -183,9 +185,11 @@ export default class App extends React.Component {
       .then(res => {
         if (res.status === 202 || res.status === 204) {
           let posts = this.state.posts;
-          let post = posts.find(post => post.id === postid);
-          post.num_going -= 1;
-          posts = this.replacePost(posts, postid, post);
+          const post = posts.find(post => post.id === postid);
+          const newPost = {
+            num_going: post.num_going - 1
+          }
+          posts = this.replacePost(posts, postid, newPost);
 
           let likes = this.state.likes;
           likes = likes.filter(like => like.post_id !== postid);
@@ -263,11 +267,13 @@ export default class App extends React.Component {
     });
   }
 
+
+
   replacePost(posts, postid, newPost) {
     const newPosts = [];
     posts.forEach(post => {
       if (post.id === postid) {
-        newPosts.push(newPost);
+        newPosts.push(Object.assign(post, newPost));
       }
       else {
         newPosts.push(post);
