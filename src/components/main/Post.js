@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Carousel from "react-bootstrap/Carousel";
 import { Image, Transformation } from 'cloudinary-react';
 import Badge from "react-bootstrap/Badge";
+import Skeleton from "react-loading-skeleton";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -166,42 +167,63 @@ export default class Post extends React.Component {
   }
 
   render() {
-    return (
-      <Card>
-        <Card.Header>
-          <Container fluid className="p-0">
+    if (this.props.post.id === "sk") {
+      return (
+        <Card>
+          <Card.Header>
+            <Skeleton width={100}/>
+          </Card.Header>
+          <Skeleton height={250} />
+          <Card.Body>
+            <Skeleton />
+          </Card.Body>
+          <Card.Footer>
+            <Skeleton />
+          </Card.Footer>
+        </Card>
+      );
+    }
+    else {
+      return (
+        <Card>
+          <Card.Header>
+            <Container fluid className="p-0">
+              <Row noGutters="true">
+                <Col className="card-title-container mr-auto p-0">
+                  <Card.Title>{this.props.post.title}</Card.Title>
+                </Col>
+                <Col className="card-time p-0" xs={3} sm={3}>
+                  {this.getTime()}
+                </Col>
+              </Row>
+              <Row noGutters="true" className="mt-1">
+                <Button variant="location">
+                  <i className="fas fa-map-marker-alt mr-1"></i>
+                  {this.props.post.room}, {this.props.post.building}
+                </Button>
+              </Row>
+            </Container>
+          </Card.Header>
+          {this.renderCarousel()}
+          <Card.Body>
+            {this.renderDesc()}
+            <em>Feeds approximately: {this.props.post.feeds}</em>
+          </Card.Body>
+          <Card.Footer>
             <Row noGutters="true">
-              <Col className="card-title-container mr-auto p-0">
-                <Card.Title>{this.props.post.title}</Card.Title>
+              <Col className="mr-auto">
+                {this.renderDietOptions()}
               </Col>
-              <Col className="card-time p-0" xs={3} sm={3}>
-                {this.getTime()}
+              <Col className="card-num p-0">
+                {this.props.post.num_going}
+              </Col>
+              <Col className="card-going p-0">
+                {this.renderGoing()}
               </Col>
             </Row>
-            <Row noGutters="true" className="mt-1">
-              <Button variant="location">
-                <i className="fas fa-map-marker-alt mr-1"></i>
-                {this.props.post.room}, {this.props.post.building}
-              </Button>
-            </Row>
-          </Container>
-        </Card.Header>
-        {this.renderCarousel()}
-        <Card.Body>
-          {this.renderDesc()}
-          <em>Feeds approximately: {this.props.post.feeds}</em>
-        </Card.Body>
-        <Card.Footer>
-          <Row noGutters="true">
-            <Col className="mr-auto">
-              {this.renderDietOptions()}
-            </Col>
-            <Col className="card-going p-0" xs={3} sm={3}>
-              {this.props.post.num_going} {this.renderGoing()}
-            </Col>
-          </Row>
-        </Card.Footer>
-      </Card>
-    );
+          </Card.Footer>
+        </Card>
+      );
+    }
   }
 }

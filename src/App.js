@@ -87,14 +87,27 @@ export default class App extends React.Component {
       .catch(err => console.log(err));
   }
 
+  newPost = (post) => {
+    this.addPost(post);
+    const skPost = {
+      id: "sk",
+      building: post.building
+    }
+    const posts = this.state.posts;
+    const userPosts = this.state.userPosts;
+    posts.unshift(skPost);
+    userPosts.unshift(skPost);
+    this.setState({ posts, userPosts });
+  }
+
   addPost = async (post) => {
     post.images = await this.getImageUrls(post.images);
 
     await axios.post(`/api/v1/posting/`, { post })
       .then(res => {
         if (res.status === 201) {
-          const posts = this.state.posts;
-          const userPosts = this.state.userPosts;
+          const posts = this.state.posts.filter(post => post.id !== "sk");
+          const userPosts = this.state.userPosts.filter(post => post.id !== "sk");
           posts.unshift(res.data);
           userPosts.unshift(res.data);
           this.setState({ posts, userPosts });
@@ -276,7 +289,7 @@ export default class App extends React.Component {
               />
               <PostForm
                 show={this.state.showForm}
-                addPost={this.addPost}
+                newPost={this.newPost}
                 editPost={this.editPost}
                 handleClose={this.handleCloseForm}
                 isNew={this.state.form.isNew}

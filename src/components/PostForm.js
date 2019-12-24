@@ -137,7 +137,7 @@ export default class PostForm extends React.Component {
     post.netid = this.props.netid;
 
     if (this.props.isNew) {
-      this.props.addPost(post);
+      this.props.newPost(post);
     }
     else {
       const oldPost = this.state.oldPost;
