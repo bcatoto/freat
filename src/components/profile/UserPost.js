@@ -3,7 +3,6 @@ import Post from "./../main/Post"
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
-import Skeleton from "react-loading-skeleton";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -20,18 +19,9 @@ export default class UserPost extends Post {
   render() {
     if (this.props.post.id === "sk") {
       return (
-        <Card>
-          <Card.Header>
-            <Skeleton width={100}/>
-          </Card.Header>
-          <Skeleton height={250} />
-          <Card.Body>
-            <Skeleton />
-          </Card.Body>
-          <Card.Footer>
-            <Skeleton />
-          </Card.Footer>
-        </Card>
+        <>
+          {this.renderSkeleton()}
+        </>
       );
     }
     else {

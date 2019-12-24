@@ -170,6 +170,10 @@ export default class PostForm extends React.Component {
   }
 
   dietToDict(diet) {
+    if (diet === undefined) {
+      return this.initialDiet;
+    }
+    
     const dict = Object.assign({}, this.initialDiet);
     diet.forEach(i => dict[this.diets[i].name] = true);
     return dict;

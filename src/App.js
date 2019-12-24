@@ -61,7 +61,6 @@ export default class App extends React.Component {
     await axios.get(`api/v1/attendance?userid=${this.state.netid}`)
       .then(res => {
         const likes = res.data;
-        console.log(likes)
         this.setState({ likes });
       })
       .catch(err => console.log(err));

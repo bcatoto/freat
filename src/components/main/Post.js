@@ -166,21 +166,29 @@ export default class Post extends React.Component {
     }
   }
 
+  renderSkeleton() {
+    return(
+      <Card>
+        <Card.Header>
+          <Skeleton width={100}/>
+        </Card.Header>
+        <Skeleton height={250} />
+        <Card.Body>
+          <Skeleton />
+        </Card.Body>
+        <Card.Footer>
+          <Skeleton />
+        </Card.Footer>
+      </Card>
+    );
+  }
+
   render() {
     if (this.props.post.id === "sk") {
       return (
-        <Card>
-          <Card.Header>
-            <Skeleton width={100}/>
-          </Card.Header>
-          <Skeleton height={250} />
-          <Card.Body>
-            <Skeleton />
-          </Card.Body>
-          <Card.Footer>
-            <Skeleton />
-          </Card.Footer>
-        </Card>
+        <>
+          {this.renderSkeleton()}
+        </>
       );
     }
     else {
