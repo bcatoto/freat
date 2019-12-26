@@ -101,7 +101,7 @@ export default class Landing extends React.Component {
         <Container fluid>
           <Row>
             <Col sm={8} className="center">
-              <img id="app-image" src={app} />
+              <img alt="Freat app" id="app-image" src={app} />
             </Col>
             <Col sm={4}>
               <ul id="features">
@@ -121,22 +121,22 @@ export default class Landing extends React.Component {
           <Container fluid className="p-0">
             <Row className="center">
               <Col sm className="dev-col center" >
-                <img src={bianca} />
+                <img alt="Bianca Catoto" src={bianca} />
                 <strong>Bianca Catoto</strong>
                 <span className="dev-info">BSE Computer Science '21</span>
               </Col>
               <Col sm className="dev-col center">
-                <img src={claire} />
+                <img alt="Claire Dong" src={claire} />
                 <strong>Claire Dong</strong>
                 <span className="dev-info">BSE Electrical Engineering '21</span>
               </Col>
               <Col sm className="dev-col center">
-                <img src={ibrahim} />
+                <img alt="Ibrahim Hashmi" src={ibrahim} />
                 <strong>Ibrahim Hashmi</strong>
                 <span className="dev-info">BSE Electrical Engineering '21</span>
               </Col>
               <Col sm className="dev-col center">
-                <img src={gilron} />
+                <img alt="Gilron Tsabkevich" src={gilron} />
                 <strong>Gilron Tsabkevich</strong>
                 <span className="dev-info">BSE Computer Science '21</span>
               </Col>

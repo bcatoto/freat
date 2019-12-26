@@ -150,51 +150,49 @@ export default class App extends React.Component {
       .catch(err => this.addNotification("del-fail", false));
   }
 
-  likePost = async (postid) => {
+  likePost = async (post) => {
     const data = {
       "user_id" : this.state.netid,
-      "post_id": postid
+      "post_id": post.id
     }
 
     await axios.post(`/api/v1/attendance/`, { data })
       .then(res => {
         if (res.status === 200) {
           let posts = this.state.posts;
-          const post = posts.find(post => post.id === postid);
-          const newPost = {
-            num_going: post.num_going + 1
-          }
-          posts = this.replacePost(posts, postid, newPost);
+          let userPosts = this.state.userPosts;
+          post.num_going += 1;
+          posts = this.replacePost(posts, post.id, post);
+          userPosts = this.replacePost(userPosts, post.id, post);
 
           let likes = this.state.likes;
           likes.push(data);
 
-          this.setState({ posts, likes });
+          this.setState({ posts, userPosts, likes });
         }
       })
       .catch(err => console.log(err));
   }
 
-  unlikePost = async (postid) => {
+  unlikePost = async (post) => {
     const data = {
       "user_id" : this.state.netid,
-      "post_id": postid
+      "post_id": post.id
     }
 
     await axios.delete(`/api/v1/attendance/`, { data: { data } })
       .then(res => {
         if (res.status === 202 || res.status === 204) {
           let posts = this.state.posts;
-          const post = posts.find(post => post.id === postid);
-          const newPost = {
-            num_going: post.num_going - 1
-          }
-          posts = this.replacePost(posts, postid, newPost);
+          let userPosts = this.state.userPosts;
+          post.num_going -= 1;
+          posts = this.replacePost(posts, post.id, post);
+          userPosts = this.replacePost(userPosts, post.id, post);
 
           let likes = this.state.likes;
-          likes = likes.filter(like => like.post_id !== postid);
+          likes = likes.filter(like => like.post_id !== post.id);
 
-          this.setState({ posts, likes });
+          this.setState({ posts, userPosts, likes });
         }
       })
       .catch(err => console.log(err));

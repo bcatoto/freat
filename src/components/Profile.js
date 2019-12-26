@@ -22,6 +22,7 @@ export default class Profile extends React.Component {
         key={post.id}
         deletePost={this.props.deletePost}
         likePost={this.props.likePost}
+        likes={this.props.likes}
         openForm={this.props.openForm}
         post={post}
         unlikePost={this.props.unlikePost}
