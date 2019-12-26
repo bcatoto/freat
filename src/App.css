@@ -531,12 +531,25 @@
   padding-top: 30px; }
 
 .dev-col {
+  display: flex;
+  flex-flow: column;
   color: #fff;
   font-size: 0.1rem;
   max-width: 400px;
   line-height: 1.2;
   font-size: 24px;
   margin: 30px 0px; }
+  .dev-col img {
+    width: 15vw;
+    margin-bottom: 10px; }
+  @media (max-width: 576px) {
+    .dev-col {
+      margin: 15px 0px; }
+    .dev-col img {
+      width: 30vw; } }
+
+.dev-info {
+  font-size: 18px; }
 
 /* App */
 

@@ -4,7 +4,11 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
-import app from "../assets/app.png"; // with import
+import app from "../assets/app.png";
+import bianca from "../assets/bianca_circle.png";
+import claire from "../assets/claire_circle.png";
+import ibrahim from "../assets/ibrahim_circle.png";
+import gilron from "../assets/gilron_circle.png";
 
 export default class Landing extends React.Component {
   constructor(props) {
@@ -101,9 +105,10 @@ export default class Landing extends React.Component {
             </Col>
             <Col sm={4}>
               <ul id="features">
-                <li>Coffee</li>
-                <li>Tea</li>
-                <li>Milk</li>
+                <li>Find fresh free food by browsing through posts ordered by most recent post</li>
+                <li>See locations of all current free food listings all at once</li>
+                <li>Know how many people are "going" to grab free food</li>
+                <li>Indicate to others you're "going" to grab food</li>
               </ul>
             </Col>
           </Row>
@@ -115,26 +120,24 @@ export default class Landing extends React.Component {
           <Container fluid className="p-0">
             <Row className="center">
               <Col sm className="dev-col center" >
-                <span className="center">
-                  <strong>Bianca Catoto</strong><br/>
-                  BSE Computer Science '21
-                </span>
+                <img src={bianca} />
+                <strong>Bianca Catoto</strong>
+                <span className="dev-info">BSE Computer Science '21</span>
               </Col>
               <Col sm className="dev-col center">
-                <span className="center">
-                  <strong>Claire Dong</strong><br/>
-                  BSE Electrical Engineering '21
-                </span>
+                <img src={claire} />
+                <strong>Claire Dong</strong>
+                <span className="dev-info">BSE Electrical Engineering '21</span>
               </Col>
               <Col sm className="dev-col center">
-                <span className="center">
-                  <strong>Ibrahim Hashmi</strong><br/>
-                  BSE Electrical Engineering '21
-                </span>
+                <img src={ibrahim} />
+                <strong>Ibrahim Hashmi</strong>
+                <span className="dev-info">BSE Electrical Engineering '21</span>
               </Col>
               <Col sm className="dev-col center">
-                <strong>Gilron Tsabkevich</strong><br/>
-                BSE Computer Science '21
+                <img src={gilron} />
+                <strong>Gilron Tsabkevich</strong>
+                <span className="dev-info">BSE Computer Science '21</span>
               </Col>
             </Row>
           </Container>
