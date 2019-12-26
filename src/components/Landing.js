@@ -105,6 +105,7 @@ export default class Landing extends React.Component {
             </Col>
             <Col sm={4}>
               <ul id="features">
+                <li>Get rid of leftover food by posting its location, picture, amount, and more</li>
                 <li>Find fresh free food by browsing through posts ordered by most recent post</li>
                 <li>See locations of all current free food listings all at once</li>
                 <li>Know how many people are "going" to grab free food</li>
@@ -141,6 +142,9 @@ export default class Landing extends React.Component {
               </Col>
             </Row>
           </Container>
+        </Container>
+        <Container fluid id="users-guide" className="center">
+          <a href="empty">User's Guide</a>
         </Container>
       </Container>
     );

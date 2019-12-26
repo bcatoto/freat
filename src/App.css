@@ -403,7 +403,6 @@
   background-clip: padding-box;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
 
-
 .toast-success {
   color: #0c6251;
   background-color: rgba(209, 242, 235, 0.85);
@@ -456,6 +455,11 @@
   text-align: right;
   align-items: right;
   justify-content: right; }
+
+a {
+  color: #0066ff; }
+  a:hover {
+    color: #0052cc; }
 
 /* Landing Page */
 
@@ -550,6 +554,11 @@
 
 .dev-info {
   font-size: 18px; }
+
+#users-guide {
+  font-size: 18px;
+  color: #95a5a6;
+  margin: 10px 0px; }
 
 /* App */
 
