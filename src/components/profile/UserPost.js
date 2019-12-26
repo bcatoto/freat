@@ -73,9 +73,6 @@ export default class UserPost extends Post {
               <Col className="mr-auto">
                 {this.renderDietOptions()}
               </Col>
-              <Col className="card-num p-0" xs={1} sm={1}>
-                {this.props.post.num_going}
-              </Col>
               <Col className="card-going p-0" xs={2}>
                 {this.renderGoing()}
               </Col>

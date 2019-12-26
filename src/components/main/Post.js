@@ -41,14 +41,17 @@ export default class Post extends React.Component {
       }
     ];
 
+    const likes = this.props.likes;
+
     this.state = {
-      liked: false,
+      liked: likes !== undefined &&
+        likes.find(item => item.post_id === this.props.post.id) !== undefined,
       prevLikes: []
     };
   }
 
   componentDidUpdate() {
-    let likes = this.props.likes;
+    const likes = this.props.likes;
     if (likes !== undefined && likes !== this.state.prevLikes) {
       const liked = likes.find(item => item.post_id === this.props.post.id) !== undefined;
       this.setState({
@@ -61,10 +64,10 @@ export default class Post extends React.Component {
   handleGoing = event => {
     const liked = this.state.liked;
     if (liked) {
-      this.props.unlikePost(this.props.post.id);
+      this.props.unlikePost(this.props.post);
     }
     else {
-      this.props.likePost(this.props.post.id);
+      this.props.likePost(this.props.post);
     }
     this.setState({ liked: !liked })
   }
