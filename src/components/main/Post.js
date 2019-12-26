@@ -154,14 +154,18 @@ export default class Post extends React.Component {
     if (this.state.liked) {
       return (
         <Button variant="going-on" onClick={this.handleGoing}>
-          <i className="fas fa-walking"></i> Going
+          <span className="card-num">{this.props.post.num_going}</span>
+          <i className="fas fa-heart"></i>
+          Going
         </Button>
       );
     }
     else {
       return (
         <Button variant="going-off" onClick={this.handleGoing}>
-          <i className="fas fa-walking"></i> Going
+          <span className="card-num">{this.props.post.num_going}</span>
+          <i className="far fa-heart"></i>
+          Going
         </Button>
       );
     }
@@ -222,9 +226,6 @@ export default class Post extends React.Component {
             <Row noGutters="true">
               <Col className="mr-auto">
                 {this.renderDietOptions()}
-              </Col>
-              <Col className="card-num p-0">
-                {this.props.post.num_going}
               </Col>
               <Col className="card-going p-0">
                 {this.renderGoing()}
