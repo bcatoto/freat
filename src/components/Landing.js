@@ -5,23 +5,76 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
 export default class Landing extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      scroll: 0
+    };
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.scrollEvent)
+  }
+
   handleClick = event => {
     window.location.pathname = "/home";
     window.reload();
   }
 
+  scrollEvent = event => {
+    if (window.scrollY < 500) {
+      this.setState({ scroll: window.scrollY });
+    }
+  }
+
+  renderNavbarButton() {
+    const button = (this.state.scroll - 90) / 200;
+
+    if (window.innerWidth < 576) {
+      return (
+        <Button variant="landing-navbar"
+          style={{ opacity: button }}
+          onClick={this.handleClick}
+        >
+          <i className="fas fa-sign-in-alt"></i>
+        </Button>
+      );
+    }
+    else {
+      return (
+        <Button variant="landing-navbar"
+          style={{ opacity: button }}
+          onClick={this.handleClick}
+        >
+          Log in through CAS
+        </Button>
+      );
+    }
+  }
+
   render() {
+    const tagline = 1 - this.state.scroll / 40;
+    const button = 1 - (this.state.scroll - 65) / 50;
+
     return (
-      <>
+      <Container fluid className="p-0">
         <Container fluid id="landing-image" className="p-0">
-          <Container fluid id="title-container" className="p-0">
-            <span className="title">Freat</span>
+          <Container fluid id="title">
+            Freat
           </Container>
-        </Container>
-        <Container fluid id="login-container" className="center">
-          <Button variant="landing" size="lg" onClick={this.handleClick}>
-            Log in through CAS
-          </Button>
+          <Container fluid id="tagline" style={{ opacity: tagline }}>
+            Find free food fast.
+          </Container>
+          <Container fluid id="login-container">
+            <Button variant="landing"
+              style={{ opacity: button }}
+              onClick={this.handleClick}
+            >
+              Log in through CAS
+            </Button>
+          </Container>
+          {this.renderNavbarButton()}
         </Container>
         <Container fluid>
           <Row className="center">
@@ -67,7 +120,9 @@ export default class Landing extends React.Component {
             </Row>
           </Container>
         </Container>
-      </>
+        <Container className="vh-100">
+        </Container>
+      </Container>
     );
   }
 }
