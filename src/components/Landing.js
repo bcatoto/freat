@@ -4,6 +4,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
+import app from "../assets/app.png"; // with import
+
 export default class Landing extends React.Component {
   constructor(props) {
     super(props);
@@ -92,7 +94,24 @@ export default class Landing extends React.Component {
             </Col>
           </Row>
         </Container>
+        <Container fluid>
+          <Row>
+            <Col sm={8} className="center">
+              <img id="app-image" src={app} />
+            </Col>
+            <Col sm={4}>
+              <ul id="features">
+                <li>Coffee</li>
+                <li>Tea</li>
+                <li>Milk</li>
+              </ul>
+            </Col>
+          </Row>
+        </Container>
         <Container fluid id="dev-container">
+          <Container fluid id="dev" className="center">
+            Developers
+          </Container>
           <Container fluid className="p-0">
             <Row className="center">
               <Col sm className="dev-col center" >
@@ -119,8 +138,6 @@ export default class Landing extends React.Component {
               </Col>
             </Row>
           </Container>
-        </Container>
-        <Container className="vh-100">
         </Container>
       </Container>
     );
