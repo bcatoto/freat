@@ -79,7 +79,7 @@ export default class PostForm extends React.Component {
     if (this.state.prevProps !== this.props && this.props.show) {
       if (!this.props.isNew) {
         const post = this.props.values;
-        post.diet = this.dietToDict(this.props.values.diet);
+        post.diet = Object.assign({}, this.dietToDict(post.diet));
 
         const valid = this.initialValid;
         valid.title = true;
@@ -173,10 +173,14 @@ export default class PostForm extends React.Component {
     if (diet === undefined) {
       return this.initialDiet;
     }
-    
-    const dict = Object.assign({}, this.initialDiet);
-    diet.forEach(i => dict[this.diets[i].name] = true);
-    return dict;
+    else if (Array.isArray(diet)) {
+      const dict = Object.assign({}, this.initialDiet);
+      diet.forEach(i => dict[this.diets[i].name] = true);
+      return dict;
+    }
+    else {
+      return diet;
+    }
   }
 
   dietToList(diet) {
