@@ -161,24 +161,38 @@
     pointer-events: none; }
 
 .btn-going-off {
-  text-align: left;
   font-size: 1rem;
-  padding: 0px;
+  border-radius: 5rem;
+  padding: 0px 7px;
   color: #95a5a6;
-  text-decoration: none; }
+  background-color: #fff;
+  border-color: #95a5a6; }
   .btn-going-off:hover {
     color: #737e80;
-    text-decoration: none; }
+    background-color: #fff;
+    border-color: #737e80; }
+  .btn-going-off:focus, .btn-going-off.focus {
+    box-shadow: none; }
+  .btn-going-off:disabled, .btn-going-off.disabled {
+    color: #95a5a6;
+    pointer-events: none; }
 
 .btn-going-on {
-  text-align: left;
   font-size: 1rem;
-  padding: 0px;
-  color: #0066ff;
-  text-decoration: none; }
+  border-radius: 5rem;
+  padding: 0px 7px;
+  color: #fff;
+  background-color: #0066ff;
+  border-color: #0066ff; }
   .btn-going-on:hover {
-    color: #0052cc;
-    text-decoration: none; }
+    color: #fff;
+    background-color: #0052cc;
+    border-color: #0052cc; }
+  .btn-going-on:focus, .btn-going-on.focus {
+    box-shadow: none; }
+  .btn-going-on:disabled, .btn-going-on.disabled {
+    color: #fff;
+    pointer-events: none; }
 
 .btn-edit {
   padding: 0px;
@@ -305,8 +319,8 @@
 .card-going {
   text-align: right;
   font-size: 1rem;
-  min-width: 60px;
-  max-width: 65px;
+  min-width: 75px;
+  max-width: 80px;
 }
 
 .card-title-container {
@@ -488,7 +502,8 @@
 
 /* Landing Page */
 
-
+#landing-container {
+  overflow: auto; }
 
 #landing-image {
   position: -webkit-sticky; /* Safari */
@@ -519,7 +534,13 @@
   top: 10px; }
 
 #login-container {
-  margin: 70px 0px; }
+  margin: 100px 0px 50px 0px }
+  @media (max-width: 576px) {
+    #login-container {
+      margin: 70px 0px; } }
+
+#dev-container {
+  background-color: #0066ff; }
 
 .info-col {
   color: #0066FF;
@@ -527,13 +548,20 @@
   max-width: 400px;
   line-height: 1.2;
   font-size: 24px;
-  margin: 15px 0px; }
+  margin: 50px 0px 100px 0px }
   .info-col i {
     font-size: 60px; }
+  @media (max-width: 576px) {
+    .info-col {
+      margin: 15px 0px; } }
 
-.info-text {
-  text-align: center;
-  padding: 20px 30px; }
+.dev-col {
+  color: #fff;
+  font-size: 0.1rem;
+  max-width: 400px;
+  line-height: 1.2;
+  font-size: 24px;
+  margin: 30px 0px; }
 
 /* App */
 
