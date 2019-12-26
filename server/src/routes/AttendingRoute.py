@@ -28,6 +28,10 @@ def going():
     try:
         data = attending_schema.load(req_data['data'])
         ### add a check for user id and postid
+        attending = AttendingModel.get_single_attending(data['user_id'], data['post_id'])
+        if attending is not None:
+            return custom_response({'message':'userid is already signed up for the correspdoning postid'}, 403)
+
         attending = AttendingModel(data)
         attending.save()
         return custom_response({'message':'successfully added'}, 200)
@@ -46,7 +50,7 @@ def notgoing():
         data = attending_schema.load(req_data['data'])
         attending = AttendingModel.get_single_attending(data['user_id'], data['post_id'])
         if attending is None:
-            return custom_response({'message':'userid is not signed up for the correspdoning postid'}, 400)
+            return custom_response({'message':'userid is not signed up for the correspdoning postid'}, 403)
         attending.delete()
         return custom_response({'message':'successfully deleted'}, 204)
     except Exception as err:
