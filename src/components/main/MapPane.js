@@ -8,7 +8,10 @@ export default class MapPane extends React.Component {
       super(props);
   }
 
-  renderMarkers(selectedPark, setSelectedPark) {
+  renderMarkers() {
+
+    const [selectedPark, setSelectedPark] = useState(null);
+
     return this.props.posts.map(post => (
       <>
         <Marker
@@ -32,8 +35,7 @@ export default class MapPane extends React.Component {
             onClose={() => setSelectedPark(null)}
           >
             <div>
-              <h2>{selectedPark.properties.NAME}</h2>
-              <p>{selectedPark.properties.DESCRIPTIO}</p>
+              <h3>{selectedPark.title}</h3> 
             </div>
           </Popup>
         ) : null}
@@ -48,8 +50,6 @@ export default class MapPane extends React.Component {
       zoom: 16
     });
 
-    const [selectedPark, setSelectedPark] = useState(null);
-
     return (
       <>
         <ReactMapGL
@@ -57,14 +57,13 @@ export default class MapPane extends React.Component {
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
           mapStyle="mapbox://styles/mapbox/streets-v11"
           onViewportChange={viewport => setViewport(viewport)}
-        >
-          {this.renderMarkers(selectedPark, setSelectedPark)}
-        </ReactMapGL>
-        <WrappedMap className="h-100 w-100"
+
           loadingElement={<div style={{height : "100%"}} />}
           containerElement={<div style={{height : "100%"}} />}
           mapElement={<div style={{height : "100%"}} />}
-        />
+        >
+          {this.renderMarkers()}
+        </ReactMapGL>
       </>
     );
   }
