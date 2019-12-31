@@ -1,4 +1,4 @@
-from flask import Flask, request, Response, json, render_template, session
+from flask import Flask, request, Response, json, render_template, send_from_directory, session
 from flask_sqlalchemy import SQLAlchemy
 # from flask_cas import CAS
 # from flask_cas import login_required
@@ -38,11 +38,26 @@ def create_app(env_name):
 
   posting_schema = PostingSchema()
 
+  @app.route('/manifest.json')
+  def manifest():
+    return send_from_directory('./../../build', 'manifest.json')
+
+  @app.route('/favicon.ico')
+  def favicon():
+    return send_from_directory('./../../build', 'favicon.ico')
+
+  @app.route('/logo192.png')
+  def logo192():
+    return send_from_directory('./../../build', 'logo192.png')
+
+  @app.route('/logo512.png')
+  def logo512():
+    return send_from_directory('./../../build', 'logo512.png')
 
   @app.route('/')
   def index():
     """
-    example endpoint
+    Landing page endpoint
     """
     return render_template('index.html')
 
@@ -50,7 +65,7 @@ def create_app(env_name):
   @app.route('/profile')
   def home():
     """
-    example endpoint
+    Home and profile endpoint (with CAS authentication barrier)
     """
     CASClient().authenticate()
     return render_template('index.html')
@@ -58,7 +73,7 @@ def create_app(env_name):
   @app.route('/logout')
   def casLogout():
     """
-    logout from cas
+    Logout from CAS
     """
     session.clear()
     CASClient().logout()
