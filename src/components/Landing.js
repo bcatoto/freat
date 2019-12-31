@@ -49,7 +49,7 @@ export default class Landing extends React.Component {
 
     if (window.innerWidth < 576) {
       tagline = 1 - this.state.scroll / 30;
-      button = 1 - (this.state.scroll - 50) / 40;
+      button = 1 - (this.state.scroll - 40) / 40;
     }
 
     return (
