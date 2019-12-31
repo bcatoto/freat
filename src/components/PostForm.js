@@ -2,6 +2,7 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 
 import buildings from "../assets/buildings.json";
@@ -245,6 +246,19 @@ export default class PostForm extends React.Component {
     );
   }
 
+  renderSubmitMessage() {
+    if (this.state.validForm) {
+      return;
+    }
+    else {
+      return (
+        <Container className="form-warning p-0">
+          Please properly fill out the fields in red.
+        </Container>
+      );
+    }
+  }
+
   render() {
     return (
       <Modal show={this.props.show}>
@@ -290,7 +304,11 @@ export default class PostForm extends React.Component {
                 onChange={this.handleImageChange}
               />
               <Form.Text className="text-muted mt-1">
-                Please center your photo. All images will automatically be cropped to a square.
+                <ul>
+                 <li>Please center your photo.</li>
+                 <li>Multiple photos can be uploaded.</li>
+                 <li>All images will automatically be cropped to a square.</li>
+                </ul>
               </Form.Text>
             </Form.Group>
 
@@ -325,6 +343,7 @@ export default class PostForm extends React.Component {
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
+            {this.renderSubmitMessage()}
             <Button variant="cancel" className="mr-1"
               onClick={this.close}>
               Cancel
