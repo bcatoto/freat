@@ -9,6 +9,16 @@ export default class NavBar extends React.Component {
     this.props.openForm(true, null);
   }
 
+  handleHelp = event => {
+    const url = "https://docs.google.com/document/d/1ZcYP3hfcf65dW5c_q96ewH-gWtcj4WHrgK-nxapdxes/edit?usp=sharing"
+    window.open(url, '_blank');
+  }
+
+  handleFeedback = event => {
+    const url = "https://docs.google.com/forms/d/e/1FAIpQLSe2XUCkr4xcpSsqwmo2cEHwrBPaI7G7Dh8kmoWjAo7r7uo4Gw/viewform"
+    window.open(url, '_blank');
+  }
+
   handleLogOut = event => {
     window.location.pathname = "/logout";
     window.reload();
@@ -18,12 +28,17 @@ export default class NavBar extends React.Component {
     return (
       <Navbar className="p-2" variant="dark" expand="lg">
         <Link to="/home"><Navbar.Brand className="ml-2">Freat</Navbar.Brand></Link>
-        <Button
-          className="mr-auto" variant="navbar"
+        <Button className="mr-auto" variant="navbar"
           onClick={this.handleNewPost}
         >
           <i className="fas fa-plus mr-2"></i>
           New Post
+        </Button>
+        <Button variant="navbar-icon" onClick={this.handleHelp}>
+          <i className="far fa-question-circle"></i>
+        </Button>
+        <Button variant="navbar-icon" onClick={this.handleFeedback}>
+          <i className="far fa-comment-dots"></i>
         </Button>
         <Dropdown alignRight>
           <Dropdown.Toggle as={Button} variant="navbar">

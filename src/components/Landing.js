@@ -1,14 +1,12 @@
 import React from "react";
+import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import { Image, Transformation } from 'cloudinary-react';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-
-import app from "../assets/app.png";
-import bianca from "../assets/bianca_circle.png";
-import claire from "../assets/claire_circle.png";
-import ibrahim from "../assets/ibrahim_circle.png";
-import gilron from "../assets/gilron_circle.png";
 
 export default class Landing extends React.Component {
   constructor(props) {
@@ -23,9 +21,19 @@ export default class Landing extends React.Component {
     window.addEventListener('scroll', this.scrollEvent)
   }
 
-  handleClick = event => {
+  handleLogin = event => {
     window.location.pathname = "/home";
     window.reload();
+  }
+
+  handleHelp = event => {
+    const url = "https://docs.google.com/document/d/1ZcYP3hfcf65dW5c_q96ewH-gWtcj4WHrgK-nxapdxes/edit?usp=sharing"
+    window.open(url, '_blank');
+  }
+
+  handleFeedback = event => {
+    const url = "https://docs.google.com/forms/d/e/1FAIpQLSe2XUCkr4xcpSsqwmo2cEHwrBPaI7G7Dh8kmoWjAo7r7uo4Gw/viewform"
+    window.open(url, '_blank');
   }
 
   scrollEvent = event => {
@@ -34,39 +42,15 @@ export default class Landing extends React.Component {
     }
   }
 
-  renderNavbarButton() {
-    const button = (this.state.scroll - 90) / 200;
-
-    if (window.innerWidth < 576) {
-      return (
-        <Button variant="landing-navbar"
-          style={{ opacity: button }}
-          onClick={this.handleClick}
-        >
-          <i className="fas fa-sign-in-alt"></i>
-        </Button>
-      );
-    }
-    else {
-      return (
-        <Button variant="landing-navbar"
-          style={{ opacity: button }}
-          onClick={this.handleClick}
-        >
-          Log in through CAS
-        </Button>
-      );
-    }
-  }
-
   render() {
     const tagline = 1 - this.state.scroll / 40;
     const button = 1 - (this.state.scroll - 65) / 50;
+    const dropdown = (this.state.scroll - 90) / 200;
 
     return (
       <Container fluid className="p-0">
         <Container fluid id="landing-image" className="p-0">
-          <Container fluid id="title">
+          <Container fluid id="landing-title">
             Freat
           </Container>
           <Container fluid id="tagline" style={{ opacity: tagline }}>
@@ -75,12 +59,31 @@ export default class Landing extends React.Component {
           <Container fluid id="login-container">
             <Button variant="landing"
               style={{ opacity: button }}
-              onClick={this.handleClick}
+              onClick={this.handleLogin}
             >
               Log in through CAS
             </Button>
           </Container>
-          {this.renderNavbarButton()}
+          <Dropdown as={ButtonGroup} alignRight className="landing-dropdown"
+            style={{ opacity: dropdown }}
+          >
+            <Button variant="landing-navbar" onClick={this.handleLogin}>
+              Login
+            </Button>
+            <Dropdown.Toggle split variant="landing-navbar-dropdown"/>
+            <Dropdown.Menu className="landing-dropdown-menu">
+              <Dropdown.Item className="landing-dropdown-item"
+                onClick={this.handleHelp}
+              >
+                Help
+              </Dropdown.Item>
+              <Dropdown.Item className="landing-dropdown-item"
+                onClick={this.handleFeedback}
+              >
+                Feedback
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Container>
         <Container fluid>
           <Row className="center">
@@ -101,7 +104,16 @@ export default class Landing extends React.Component {
         <Container fluid>
           <Row>
             <Col sm={8} className="center">
-              <img alt="Freat app" id="app-image" src={app} />
+              <Image
+                id="app-image"
+                cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}
+                publicId="assets/app_xhwzwd.png"
+              >
+                <Transformation
+                  quality="auto:best"
+                  flags="progressive"
+                />
+              </Image>
             </Col>
             <Col sm={4}>
               <ul id="features">
@@ -114,37 +126,70 @@ export default class Landing extends React.Component {
             </Col>
           </Row>
         </Container>
-        <Container fluid id="dev-container">
-          <Container fluid id="dev" className="center">
+        <Container fluid id="developers">
+          <Container fluid id="dev-title" className="center">
             Developers
           </Container>
           <Container fluid className="p-0">
             <Row className="center">
               <Col sm className="dev-col center" >
-                <img alt="Bianca Catoto" src={bianca} />
+                <Image
+                  className="dev"
+                  cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}
+                  publicId="assets/bianca_circle_vqtti9.png"
+                >
+                  <Transformation
+                    quality="auto:best"
+                    flags="progressive"
+                  />
+                </Image>
                 <strong>Bianca Catoto</strong>
                 <span className="dev-info">BSE Computer Science '21</span>
               </Col>
               <Col sm className="dev-col center">
-                <img alt="Claire Dong" src={claire} />
+                <Image
+                  className="dev"
+                  cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}
+                  publicId="assets/claire_circle_nlx3ru.png"
+                >
+                  <Transformation
+                    quality="auto:best"
+                    flags="progressive"
+                  />
+                </Image>
                 <strong>Claire Dong</strong>
                 <span className="dev-info">BSE Electrical Engineering '21</span>
               </Col>
               <Col sm className="dev-col center">
-                <img alt="Ibrahim Hashmi" src={ibrahim} />
+                <Image
+                  className="dev"
+                  cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}
+                  publicId="assets/ibrahim_circle_mnsfhq.png"
+                >
+                  <Transformation
+                    quality="auto:best"
+                    flags="progressive"
+                  />
+                </Image>
                 <strong>Ibrahim Hashmi</strong>
                 <span className="dev-info">BSE Electrical Engineering '21</span>
               </Col>
               <Col sm className="dev-col center">
-                <img alt="Gilron Tsabkevich" src={gilron} />
+                <Image
+                  className="dev"
+                  cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}
+                  publicId="assets/gilron_circle_dvmqvd.png"
+                >
+                  <Transformation
+                    quality="auto:best"
+                    flags="progressive"
+                  />
+                </Image>
                 <strong>Gilron Tsabkevich</strong>
                 <span className="dev-info">BSE Computer Science '21</span>
               </Col>
             </Row>
           </Container>
-        </Container>
-        <Container fluid id="users-guide" className="center">
-          <a href="empty">User's Guide</a>
         </Container>
       </Container>
     );
