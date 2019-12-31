@@ -43,9 +43,14 @@ export default class Landing extends React.Component {
   }
 
   render() {
-    const tagline = 1 - this.state.scroll / 40;
-    const button = 1 - (this.state.scroll - 65) / 50;
+    let tagline = 1 - this.state.scroll / 40;
+    let button = 1 - (this.state.scroll - 65) / 50;
     const dropdown = (this.state.scroll - 90) / 200;
+
+    if (window.innerWidth < 576) {
+      tagline = 1 - this.state.scroll / 30;
+      button = 1 - (this.state.scroll - 50) / 40;
+    }
 
     return (
       <Container fluid className="p-0">
@@ -181,7 +186,7 @@ export default class Landing extends React.Component {
                   publicId="assets/gilron_circle_dvmqvd.png"
                 >
                   <Transformation
-                    quality="auto:best"
+                    quality="auto:good"
                     flags="progressive"
                   />
                 </Image>
