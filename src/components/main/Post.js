@@ -61,15 +61,15 @@ export default class Post extends React.Component {
     }
   }
 
-  handleGoing = event => {
+  handleGoing = async event => {
     const liked = this.state.liked;
     if (liked) {
-      this.props.unlikePost(this.props.post);
+      await this.props.unlikePost(this.props.post);
     }
     else {
-      this.props.likePost(this.props.post);
+      await this.props.likePost(this.props.post);
     }
-    this.setState({ liked: !liked })
+    await this.setState({ liked: !liked })
   }
 
   getTime() {
