@@ -49,21 +49,16 @@ export default class MapPane extends React.Component {
     }
   }
 
-  renderPopupText(post) {
-    return (
-      <>
-        <Container id="popup-building" className="p-0">
-          <strong>{post.building}</strong>
-        </Container>
-        <Container className="p-0">
-          {post.title}
-        </Container>
-      </>
+  renderPopupPosts(post) {
+    const posts = this.props.posts.filter(item => item.building === post.building)
+    return posts.map(post =>
+      <Container className="p-0">
+        {post.title}, <em>{post.room}</em>
+      </Container>
     );
   }
 
-  renderPopupHover() {
-    const post = this.state.popupHover;
+  renderPopup(post) {
     return (
       post && (
         <Popup
@@ -75,30 +70,23 @@ export default class MapPane extends React.Component {
           closeButton={false}
           closeOnClick={false}
         >
-          {this.renderPopupText(post)}
+          <Container className="popup-building p-0">
+            <strong>{post.building}</strong>
+          </Container>
+          {this.renderPopupPosts(post)}
         </Popup>
       )
     );
   }
 
+  renderPopupHover() {
+    const post = this.state.popupHover;
+    return this.renderPopup(post);
+  }
+
   renderPopupSelect() {
     const post = this.state.popupSelect;
-    return (
-      post && (
-        <Popup
-          tipSize={5}
-          anchor="bottom"
-          offsetTop={-30}
-          longitude={coordinates[post.building][1]}
-          latitude={coordinates[post.building][0]}
-          closeButton={false}
-          closeOnClick={true}
-          onClose={this.clickPin}
-        >
-          {this.renderPopupText(post)}
-        </Popup>
-      )
-    );
+    return this.renderPopup(post);
   }
 
   render() {
@@ -119,8 +107,8 @@ export default class MapPane extends React.Component {
           onMouseEnter={this.hoverPin}
           onMouseLeave={this.unhoverPin}
         />
-        {this.renderPopupHover()}
         {this.renderPopupSelect()}
+        {this.renderPopupHover()}
         <div id="nav">
           <NavigationControl onViewportChange={this.onViewportChange} />
         </div>
