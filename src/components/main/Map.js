@@ -13,7 +13,7 @@ export default class MapPane extends React.Component {
       viewport: {
         latitude: 40.346760,
         longitude: -74.655187,
-        zoom: 16,
+        zoom: 15.5,
         width: 1025,
         height:700
       },
@@ -50,10 +50,10 @@ export default class MapPane extends React.Component {
   }
 
   renderPopupPosts(post) {
-    const posts = this.props.posts.filter(item => item.building === post.building)
+    const posts = this.props.posts.filter(item => item.building === post.building && item.id !== "sk")
     return posts.map(post =>
       <Container className="p-0">
-        {post.title}, <em>{post.room}</em>
+        {post.title}, <em>Room: {post.room}</em>
       </Container>
     );
   }
@@ -70,7 +70,7 @@ export default class MapPane extends React.Component {
           closeButton={false}
           closeOnClick={false}
         >
-          <Container className="popup-building p-0">
+          <Container className="popup-title p-0">
             <strong>{post.building}</strong>
           </Container>
           {this.renderPopupPosts(post)}
