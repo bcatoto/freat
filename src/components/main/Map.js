@@ -1,12 +1,9 @@
 import React from "react";
-import ReactMapGL, { NavigationControl, Marker, Popup } from "react-map-gl";
+import ReactMapGL, { NavigationControl, Popup } from "react-map-gl";
+import Container from "react-bootstrap/Container";
 import Pins from './Pins';
 
 import coordinates from "../../assets/coordinates.json";
-
-const PIN = `M20.2,15.7L20.2,15.7c1.1-1.6,1.8-3.6,1.8-5.7c0-5.6-4.5-10-10-10S2,4.5,2,10c0,2,0.6,3.9,1.6,5.4c0,0.1,0.1,0.2,0.2,0.3
-  c0,0,0.1,0.1,0.1,0.2c0.2,0.3,0.4,0.6,0.7,0.9c2.6,3.1,7.4,7.6,7.4,7.6s4.8-4.5,7.4-7.5c0.2-0.3,0.5-0.6,0.7-0.9
-  C20.1,15.8,20.2,15.8,20.2,15.7z`;
 
 export default class MapPane extends React.Component {
   constructor(props) {
@@ -20,33 +17,88 @@ export default class MapPane extends React.Component {
         width: 1025,
         height:700
       },
-      popup: null
+      popupHover: null,
+      popupSelect: null
     };
   }
 
   onViewportChange = viewport => this.setState({ viewport });
 
-  onClickPin = post => {
-    this.setState({ popup: post });
-  };
-
-  renderPopup(index) {
-    const post = this.props.post;
-    if (post === undefined) {
+  hoverPin = post => {
+    if (this.state.popupSelect === post) {
       return;
     }
     else {
-      return (
-        <Popup tipSize={5}
-          anchor="bottom-right"
+      this.setState({ popupHover: post });
+    }
+  };
+
+  unhoverPin = () => {
+    this.setState({ popupHover: null });
+  };
+
+  clickPin = post => {
+    if (this.state.popupSelect === post) {
+      this.setState({ popupSelect: null });
+    }
+    else {
+      this.setState({
+        popupSelect: post,
+        popupHover: null
+      });
+    }
+  }
+
+  renderPopupText(post) {
+    return (
+      <>
+        <Container id="popup-building" className="p-0">
+          <strong>{post.building}</strong>
+        </Container>
+        <Container className="p-0">
+          {post.title}
+        </Container>
+      </>
+    );
+  }
+
+  renderPopupHover() {
+    const post = this.state.popupHover;
+    return (
+      post && (
+        <Popup
+          tipSize={5}
+          anchor="bottom"
+          offsetTop={-30}
           longitude={coordinates[post.building][1]}
           latitude={coordinates[post.building][0]}
-          onMouseLeave={() => this.setState({popupInfo: null})}
-          closeOnClick={true}>
-          <div>food</div>
+          closeButton={false}
+          closeOnClick={false}
+        >
+          {this.renderPopupText(post)}
         </Popup>
-      );
-    }
+      )
+    );
+  }
+
+  renderPopupSelect() {
+    const post = this.state.popupSelect;
+    return (
+      post && (
+        <Popup
+          tipSize={5}
+          anchor="bottom"
+          offsetTop={-30}
+          longitude={coordinates[post.building][1]}
+          latitude={coordinates[post.building][0]}
+          closeButton={false}
+          closeOnClick={true}
+          onClose={this.clickPin}
+        >
+          {this.renderPopupText(post)}
+        </Popup>
+      )
+    );
   }
 
   render() {
@@ -63,8 +115,12 @@ export default class MapPane extends React.Component {
       >
         <Pins
           posts={this.props.posts}
-          onClick={this.onClickPin}
+          onClick={this.clickPin}
+          onMouseEnter={this.hoverPin}
+          onMouseLeave={this.unhoverPin}
         />
+        {this.renderPopupHover()}
+        {this.renderPopupSelect()}
         <div id="nav">
           <NavigationControl onViewportChange={this.onViewportChange} />
         </div>

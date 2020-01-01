@@ -9,7 +9,7 @@ const PIN = `M20.2,15.7L20.2,15.7c1.1-1.6,1.8-3.6,1.8-5.7c0-5.6-4.5-10-10-10S2,4
 
 export default class Pins extends React.PureComponent {
   render() {
-    const { posts, onClick } = this.props;
+    const { posts, onClick, onMouseEnter, onMouseLeave } = this.props;
 
     return posts.map((post, index) => (
       <Marker
@@ -17,7 +17,14 @@ export default class Pins extends React.PureComponent {
         longitude={coordinates[post.building][1]}
         latitude={coordinates[post.building][0]}
       >
-        <svg className="pin" height="25" viewBox="0 0 24 24">
+        <svg
+          className="pin"
+          height="25"
+          viewBox="0 0 24 24"
+          onClick={() => onClick(post)}
+          onMouseEnter={() => onMouseEnter(post)}
+          onMouseLeave={() => onMouseLeave()}
+        >
           <path d={PIN} />
         </svg>
       </Marker>

@@ -629,6 +629,9 @@ a {
   stroke: none;
   transform: translate(-12.5px, -25px); }
 
+#popup-building {
+  border-bottom: 1px solid #b3b3b3; }
+
 /* Profile Page */
 
 #profile {
