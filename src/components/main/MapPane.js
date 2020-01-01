@@ -1,15 +1,9 @@
-import React, { Component } from "react";
-import ReactMapGL, { NavigationControl, Marker, Popup } from "react-map-gl";
-import { Icon } from "semantic-ui-react";
+import React from "react";
+import ReactMapGL, { GeolocateControl, NavigationControl, Popup } from "react-map-gl";
+import Container from "react-bootstrap/Container";
+import Pins from './Pins';
 
 import coordinates from "../../assets/coordinates.json";
-
-const navStyle = {
-  position: "absolute",
-  top: 0,
-  left: 0,
-  padding: "10px"
-};
 
 export default class MapPane extends React.Component {
   constructor(props) {
@@ -19,30 +13,80 @@ export default class MapPane extends React.Component {
       viewport: {
         latitude: 40.346760,
         longitude: -74.655187,
-        zoom: 16,
+        zoom: 15.5,
         width: 1025,
         height:700
-      }
+      },
+      popupHover: null,
+      popupSelect: null
     };
   }
 
-  renderPopup(index) {
-    const post = this.props.post;
-    if (post === undefined) {
+  onViewportChange = viewport => this.setState({ viewport });
+
+  hoverPin = post => {
+    if (this.state.popupSelect === post) {
       return;
     }
     else {
-      return (
-        <Popup tipSize={5}
-          anchor="bottom-right"
+      this.setState({ popupHover: post });
+    }
+  };
+
+  unhoverPin = () => {
+    this.setState({ popupHover: null });
+  };
+
+  clickPin = post => {
+    if (this.state.popupSelect === post) {
+      this.setState({ popupSelect: null });
+    }
+    else {
+      this.setState({
+        popupSelect: post,
+        popupHover: null
+      });
+    }
+  }
+
+  renderPopupPosts(post) {
+    const posts = this.props.posts.filter(item => item.building === post.building && item.id !== "sk")
+    return posts.map(post =>
+      <Container className="p-0">
+        {post.title}, <em>Room: {post.room}</em>
+      </Container>
+    );
+  }
+
+  renderPopup(post) {
+    return (
+      post && (
+        <Popup
+          tipSize={5}
+          anchor="bottom"
+          offsetTop={-30}
           longitude={coordinates[post.building][1]}
           latitude={coordinates[post.building][0]}
-          onMouseLeave={() => this.setState({popupInfo: null})}
-          closeOnClick={true}>
-          <div>food</div>
+          closeButton={false}
+          closeOnClick={false}
+        >
+          <Container className="popup-title p-0">
+            <strong>{post.building}</strong>
+          </Container>
+          {this.renderPopupPosts(post)}
         </Popup>
-      );
-    }
+      )
+    );
+  }
+
+  renderPopupHover() {
+    const post = this.state.popupHover;
+    return this.renderPopup(post);
+  }
+
+  renderPopupSelect() {
+    const post = this.state.popupSelect;
+    return this.renderPopup(post);
   }
 
   render() {
@@ -51,25 +95,32 @@ export default class MapPane extends React.Component {
     return (
       <ReactMapGL
         {...viewport}
-        onViewportChange={(viewport) => this.setState({ viewport })}
+        width="100%"
+        height="100%"
+        onViewportChange={this.onViewportChange}
         mapStyle="mapbox://styles/ibby/ck4s4lknb3ozs1crzpsxv5r4e"
-        mapboxApiAccessToken="pk.eyJ1IjoiaWJieSIsImEiOiJjazRpYm5sb3Ywa3UxM2VudGZsNmxrZDE2In0.v08PMm1hYXIQo6led-GbmQ" >
-        <div className="nav" style={navStyle}>
-          <NavigationControl onViewportChange={(viewport) => this.setState({ viewport })} />
-          {this.props.posts.map((post, index) => {
-            return (
-              <div key ={index}>
-                <Marker
-                  longitude={coordinates[post.building][1]}
-                  latitude={coordinates[post.building][0]}>
-                  <Icon name="hospital" size="big" onMouseEnter={() => this.setState({ popupInfo: true })} onMouseLeave={() => this.setState({ popupInfo: null })}/>
-                </Marker>
-                {this.renderPopup(index)}
-              </div>
-            );
-          })}
+        mapboxApiAccessToken="pk.eyJ1IjoiaWJieSIsImEiOiJjazRpYm5sb3Ywa3UxM2VudGZsNmxrZDE2In0.v08PMm1hYXIQo6led-GbmQ"
+      >
+        <Pins
+          posts={this.props.posts}
+          onClick={this.clickPin}
+          onMouseEnter={this.hoverPin}
+          onMouseLeave={this.unhoverPin}
+        />
+        {this.renderPopupSelect()}
+        {this.renderPopupHover()}
+        <div id="nav">
+          <NavigationControl onViewportChange={this.onViewportChange} />
+        </div>
+
+        <div id = "geo">
+          <GeolocateControl
+            positionOptions={{enableHighAccuracy: true}}
+            trackUserLocation={true}
+          />
         </div>
       </ReactMapGL>
     );
   }
 }
+
