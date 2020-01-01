@@ -2,7 +2,7 @@ import React from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import PostsFeed from "./main/PostsFeed";
-import MapPane from "./main/MapPane";
+import Map from "./main/Map";
 
 export default class Home extends React.Component {
   componentDidMount() {
@@ -33,7 +33,7 @@ export default class Home extends React.Component {
           />
         </Col>
         <Col id="map-pane">
-          <MapPane posts={this.props.posts} />
+          <Map posts={this.props.posts} />
         </Col>
       </Row>
     );
