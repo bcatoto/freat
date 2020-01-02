@@ -111,9 +111,9 @@ export default class App extends React.Component {
     await axios.post(`/api/v1/posting/`, { post })
       .then(async res => {
         if (res.status === 201) {
-          const posts = this.state.posts.filter(post => post.id !== "sk");
-          const userPosts = this.state.userPosts.filter(post =>
-            post.id !== "sk");
+          let { posts, userPosts} = this.state;
+          posts = posts.filter(post => post.id !== "sk");
+          userPosts = userPosts.filter(post => post.id !== "sk");
           posts.unshift(res.data);
           userPosts.unshift(res.data);
           await this.setState({ posts, userPosts });
