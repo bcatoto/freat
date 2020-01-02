@@ -30,6 +30,8 @@ export default class App extends React.Component {
     this.state = {
       netid: "",
       posts: [],
+      filter: [],
+      filterPosts: [],
       userPosts: [],
       likes: [],
       notifs: [],
@@ -68,10 +70,11 @@ export default class App extends React.Component {
 
   getPosts = async () => {
     await axios.get(`/api/v1/posting/`)
-      .then(res => {
+      .then(async res => {
         const posts = res.data;
         if (posts !== this.state.posts) {
-          this.setState({ posts });
+          await this.setState({ posts });
+          this.filterPosts();
         }
       })
       .catch(err => console.log(err));
@@ -92,24 +95,29 @@ export default class App extends React.Component {
       id: "sk",
       building: post.building
     }
-    const posts = this.state.posts;
-    const userPosts = this.state.userPosts;
+    const { posts, userPosts, filterPosts, filter } = this.state;
     posts.unshift(skPost);
     userPosts.unshift(skPost);
     this.setState({ posts, userPosts });
+    if (this.checkFilter(post.diet, filter)) {
+      filterPosts.unshift(skPost);
+      this.setState({ filterPosts });
+    }
   }
 
   addPost = async (post) => {
     post.images = await this.getImageUrls(post.images);
 
     await axios.post(`/api/v1/posting/`, { post })
-      .then(res => {
+      .then(async res => {
         if (res.status === 201) {
           const posts = this.state.posts.filter(post => post.id !== "sk");
-          const userPosts = this.state.userPosts.filter(post => post.id !== "sk");
+          const userPosts = this.state.userPosts.filter(post =>
+            post.id !== "sk");
           posts.unshift(res.data);
           userPosts.unshift(res.data);
-          this.setState({ posts, userPosts });
+          await this.setState({ posts, userPosts });
+          this.filterPosts()
         }
       })
       .catch(err => this.addNotification("post-fail", false));
@@ -123,9 +131,8 @@ export default class App extends React.Component {
     await axios.put(`api/v1/posting/${postid}`, { post })
       .then(res => {
         if (res.status === 200) {
-          let posts = this.state.posts;
+          let { posts, userPosts } = this.state;
           posts = this.replacePost(posts, postid, post)
-          let userPosts = this.state.userPosts;
           userPosts = this.replacePost(userPosts, postid, post)
           this.setState({ posts, userPosts });
           this.addNotification("edit-succ", true);
@@ -138,9 +145,8 @@ export default class App extends React.Component {
     await axios.delete(`/api/v1/posting/${postid}`)
       .then(res => {
         if (res.status === 202 || res.status === 204) {
-          let posts = this.state.posts;
+          let { posts, userPosts } = this.state;
           posts = posts.filter(post => post.id !== postid);
-          let userPosts = this.state.userPosts;
           userPosts = userPosts.filter(post => post.id !== postid);
 
           this.setState({ posts, userPosts });
@@ -159,15 +165,11 @@ export default class App extends React.Component {
     await axios.post(`/api/v1/attendance/`, { data })
       .then(res => {
         if (res.status === 200) {
-          let posts = this.state.posts;
-          let userPosts = this.state.userPosts;
+          let { posts, userPosts, likes } = this.state;
           post.num_going += 1;
           posts = this.replacePost(posts, post.id, post);
           userPosts = this.replacePost(userPosts, post.id, post);
-
-          let likes = this.state.likes;
           likes.push(data);
-
           this.setState({ posts, userPosts, likes });
         }
       })
@@ -183,15 +185,11 @@ export default class App extends React.Component {
     await axios.delete(`/api/v1/attendance/`, { data: { data } })
       .then(res => {
         if (res.status === 202 || res.status === 204) {
-          let posts = this.state.posts;
-          let userPosts = this.state.userPosts;
+          let { posts, userPosts, likes } = this.state;
           post.num_going -= 1;
           posts = this.replacePost(posts, post.id, post);
           userPosts = this.replacePost(userPosts, post.id, post);
-
-          let likes = this.state.likes;
           likes = likes.filter(like => like.post_id !== post.id);
-
           this.setState({ posts, userPosts, likes });
         }
       })
@@ -223,6 +221,25 @@ export default class App extends React.Component {
       urls.push(url);
     }
     return urls;
+  }
+
+  changeFilter = async (filter) => {
+    await this.setState({ filter });
+    this.filterPosts();
+  }
+
+  checkFilter = (array, target) => target.every(item => array.includes(item));
+
+  filterPosts = () => {
+    const { filter, posts } = this.state;
+    if (filter === undefined) {
+      this.setState({ filterPosts: posts });
+    }
+    else {
+      const filterPosts = posts.filter(post => post.diet !== undefined &&
+        this.checkFilter(post.diet, filter));
+      this.setState({ filterPosts });
+    }
   }
 
   handleOpenForm = (isNew, values) => {
@@ -264,8 +281,6 @@ export default class App extends React.Component {
       notifCount: this.state.notifCount + 1
     });
   }
-
-
 
   replacePost(posts, postid, newPost) {
     const newPosts = [];
@@ -309,10 +324,11 @@ export default class App extends React.Component {
               deletePost={this.deletePost}
               getPosts={this.getPosts}
               getUserData={this.getUserData}
+              changeFilter={this.changeFilter}
               likePost={this.likePost}
               likes={this.state.likes}
               netid={this.state.netid}
-              posts={this.state.posts}
+              posts={this.state.filterPosts}
               unlikePost={this.unlikePost}
             />
           )}

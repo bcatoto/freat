@@ -1,5 +1,5 @@
 import React from "react";
-import ReactMapGL, { NavigationControl, Popup, GeolocateControl} from "react-map-gl";
+import ReactMapGL, { NavigationControl, Popup, GeolocateControl } from "react-map-gl";
 import Container from "react-bootstrap/Container";
 import Pins from './Pins';
 

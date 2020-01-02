@@ -1,5 +1,6 @@
 import React from "react";
 import Container from "react-bootstrap/Container"
+import Filter from "./Filter"
 import Post from "./Post"
 
 export default class PostsFeed extends React.Component {
@@ -38,6 +39,7 @@ export default class PostsFeed extends React.Component {
   render() {
     return (
       <>
+        <Filter changeFilter={this.props.changeFilter} />
         {this.renderFeed()}
       </>
     );

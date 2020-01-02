@@ -1,5 +1,5 @@
 import React from "react";
-import Post from "./../main/Post"
+import Post from "./../home/Post"
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
