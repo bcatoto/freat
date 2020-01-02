@@ -5,6 +5,20 @@ import Pins from './Pins';
 
 import coordinates from "../../assets/coordinates.json";
 
+const geoStyle = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  padding: '10px'
+};
+
+const navStyle = {
+  position: 'absolute',
+  top: 36,
+  left: 0,
+  padding: '10px'
+};
+
 export default class MapPane extends React.Component {
   constructor(props) {
     super(props);
@@ -109,15 +123,14 @@ export default class MapPane extends React.Component {
         />
         {this.renderPopupSelect()}
         {this.renderPopupHover()}
-        <div id="nav">
-          <NavigationControl onViewportChange={this.onViewportChange} />
-        </div>
-
-        <div id = "geo">
+        <div style={geoStyle}>
           <GeolocateControl
-            positionOptions={{enableHighAccuracy: true}}
+            positionOptions={{ enableHighAccuracy: true }}
             trackUserLocation={true}
           />
+        </div>
+        <div style={navStyle}>
+          <NavigationControl onViewportChange={this.onViewportChange} />
         </div>
       </ReactMapGL>
     );
