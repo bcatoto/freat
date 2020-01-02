@@ -95,11 +95,14 @@ export default class App extends React.Component {
       id: "sk",
       building: post.building
     }
-    const { posts, userPosts, filterPosts } = this.state;
+    const { posts, userPosts, filterPosts, filter } = this.state;
     posts.unshift(skPost);
-    filterPosts.unshift(skPost);
     userPosts.unshift(skPost);
     this.setState({ posts, userPosts });
+    if (this.checkFilter(post.diet, filter)) {
+      filterPosts.unshift(skPost);
+      this.setState({ filterPosts });
+    }
   }
 
   addPost = async (post) => {
@@ -109,7 +112,8 @@ export default class App extends React.Component {
       .then(async res => {
         if (res.status === 201) {
           const posts = this.state.posts.filter(post => post.id !== "sk");
-          const userPosts = this.state.userPosts.filter(post => post.id !== "sk");
+          const userPosts = this.state.userPosts.filter(post =>
+            post.id !== "sk");
           posts.unshift(res.data);
           userPosts.unshift(res.data);
           await this.setState({ posts, userPosts });
@@ -232,7 +236,8 @@ export default class App extends React.Component {
       this.setState({ filterPosts: posts });
     }
     else {
-      const filterPosts = posts.filter(post => post.diet !== undefined && this.checkFilter(post.diet, filter));
+      const filterPosts = posts.filter(post => post.diet !== undefined &&
+        this.checkFilter(post.diet, filter));
       this.setState({ filterPosts });
     }
   }
