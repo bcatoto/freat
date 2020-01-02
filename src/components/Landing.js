@@ -55,6 +55,16 @@ export default class Landing extends React.Component {
       <Container fluid className="p-0">
         <Container fluid id="landing-image" className="p-0">
           <Container fluid id="landing-title">
+            <Image
+              id="logo"
+              cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}
+              publicId="assets/logo_gqeug8.png"
+            >
+              <Transformation
+                quality="auto:best"
+                flags="progressive"
+              />
+            </Image>
             Freat
           </Container>
           <Container fluid id="tagline" style={{ opacity: tagline }}>
@@ -89,7 +99,7 @@ export default class Landing extends React.Component {
             </Dropdown.Menu>
           </Dropdown>
         </Container>
-        <Container fluid>
+        <Container fluid id="info">
           <Row className="center">
             <Col sm className="info-col center" >
               <i className="fas fa-utensils"></i>
@@ -106,7 +116,7 @@ export default class Landing extends React.Component {
           </Row>
         </Container>
         <Container fluid>
-          <Row>
+          <Row noGutters={true}>
             <Col sm={8} className="center">
               <Image
                 id="app-image"
@@ -194,6 +204,10 @@ export default class Landing extends React.Component {
               </Col>
             </Row>
           </Container>
+        </Container>
+        <Container fluid id="credits">
+          &copy; Freat 2019. All Rights Reserved.<br/>
+          Photo credits to Hongkongfoodlover123 [<a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>], <a href="https://commons.wikimedia.org/wiki/File:New_Punjab_Club_food_spread.jpg">via Wikimedia Commons</a>
         </Container>
       </Container>
     );
