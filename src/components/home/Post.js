@@ -2,7 +2,7 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Carousel from "react-bootstrap/Carousel";
-import { Image, Transformation } from 'cloudinary-react';
+import { Image, Transformation } from "cloudinary-react";
 import Badge from "react-bootstrap/Badge";
 import Skeleton from "react-loading-skeleton";
 import Container from "react-bootstrap/Container";

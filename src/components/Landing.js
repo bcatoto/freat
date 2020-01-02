@@ -2,7 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
-import { Image, Transformation } from 'cloudinary-react';
+import { Image, Transformation } from "cloudinary-react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -17,7 +17,7 @@ export default class Landing extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.scrollEvent)
+    window.addEventListener("scroll", this.scrollEvent)
   }
 
   handleLogin = event => {
@@ -27,12 +27,12 @@ export default class Landing extends React.Component {
 
   handleHelp = event => {
     const url = "https://docs.google.com/document/d/1ZcYP3hfcf65dW5c_q96ewH-gWtcj4WHrgK-nxapdxes/edit?usp=sharing"
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   }
 
   handleFeedback = event => {
     const url = "https://docs.google.com/forms/d/e/1FAIpQLSe2XUCkr4xcpSsqwmo2cEHwrBPaI7G7Dh8kmoWjAo7r7uo4Gw/viewform"
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   }
 
   scrollEvent = event => {
@@ -135,7 +135,7 @@ export default class Landing extends React.Component {
                 <li>Find fresh free food by browsing through posts ordered by most recent post</li>
                 <li>See locations of all current free food listings all at once</li>
                 <li>Know how many people are "going" to grab free food</li>
-                <li>Indicate to others you're "going" to grab food</li>
+                <li>Indicate to others you"re "going" to grab food</li>
               </ul>
             </Col>
           </Row>
@@ -158,7 +158,7 @@ export default class Landing extends React.Component {
                   />
                 </Image>
                 <strong>Bianca Catoto</strong>
-                <span className="dev-info">BSE Computer Science '21</span>
+                <span className="dev-info">BSE Computer Science "21</span>
               </Col>
               <Col sm className="dev-col center">
                 <Image
@@ -172,7 +172,7 @@ export default class Landing extends React.Component {
                   />
                 </Image>
                 <strong>Claire Dong</strong>
-                <span className="dev-info">BSE Electrical Engineering '21</span>
+                <span className="dev-info">BSE Electrical Engineering "21</span>
               </Col>
               <Col sm className="dev-col center">
                 <Image
@@ -186,7 +186,7 @@ export default class Landing extends React.Component {
                   />
                 </Image>
                 <strong>Ibrahim Hashmi</strong>
-                <span className="dev-info">BSE Electrical Engineering '21</span>
+                <span className="dev-info">BSE Electrical Engineering "21</span>
               </Col>
               <Col sm className="dev-col center">
                 <Image
@@ -200,7 +200,7 @@ export default class Landing extends React.Component {
                   />
                 </Image>
                 <strong>Gilron Tsabkevich</strong>
-                <span className="dev-info">BSE Computer Science '21</span>
+                <span className="dev-info">BSE Computer Science "21</span>
               </Col>
             </Row>
           </Container>

@@ -27,7 +27,9 @@ export default class NavBar extends React.Component {
   render() {
     return (
       <Navbar className="p-2" variant="dark" expand="lg">
-        <Link to="/home"><Navbar.Brand className="ml-2">Freat</Navbar.Brand></Link>
+        <Navbar.Brand as={Link} className="ml-2" to="/home">
+          Freat
+        </Navbar.Brand>
         <Button className="mr-auto" variant="navbar"
           onClick={this.handleNewPost}
         >
