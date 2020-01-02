@@ -1,8 +1,8 @@
 import React from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import PostsFeed from "./main/PostsFeed";
-import Map from "./main/Map";
+import PostsFeed from "./home/PostsFeed";
+import Map from "./home/Map";
 
 export default class Home extends React.Component {
   componentDidMount() {
@@ -25,6 +25,7 @@ export default class Home extends React.Component {
         <Col id="post-pane" xs={12} sm={5}>
           <PostsFeed
             deletePost={this.props.deletePost}
+            changeFilter={this.props.changeFilter}
             likePost={this.props.likePost}
             likes={this.props.likes}
             netid={this.props.netid}
