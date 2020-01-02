@@ -1,5 +1,5 @@
 import React from "react";
-import ReactMapGL, { NavigationControl, Popup } from "react-map-gl";
+import ReactMapGL, { NavigationControl, Popup, GeolocateControl } from "react-map-gl";
 import Container from "react-bootstrap/Container";
 import Pins from './Pins';
 
@@ -111,6 +111,13 @@ export default class MapPane extends React.Component {
         {this.renderPopupHover()}
         <div id="nav">
           <NavigationControl onViewportChange={this.onViewportChange} />
+        </div>
+
+        <div id = "geo">
+          <GeolocateControl
+            positionOptions={{enableHighAccuracy: true}}
+            trackUserLocation={true}
+          />
         </div>
       </ReactMapGL>
     );
