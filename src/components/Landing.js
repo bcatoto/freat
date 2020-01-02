@@ -55,6 +55,16 @@ export default class Landing extends React.Component {
       <Container fluid className="p-0">
         <Container fluid id="landing-image" className="p-0">
           <Container fluid id="landing-title">
+            <Image
+              id="logo"
+              cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}
+              publicId="assets/logo_gqeug8.png"
+            >
+              <Transformation
+                quality="auto:best"
+                flags="progressive"
+              />
+            </Image>
             Freat
           </Container>
           <Container fluid id="tagline" style={{ opacity: tagline }}>
