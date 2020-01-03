@@ -88,12 +88,12 @@ export default class Post extends React.Component {
       time.getMilliseconds()
     );
     const diff = now - utc;
-    
+
     console.log("----")
     console.log(now)
     console.log(new Date(now))
-    console.log(time)
-    console.log(new Date(time))
+    console.log(utc)
+    console.log(new Date(utc))
     console.log(diff)
 
     if (diff > 2 * hour) {
