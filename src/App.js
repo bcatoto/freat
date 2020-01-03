@@ -89,7 +89,7 @@ export default class App extends React.Component {
       .catch(err => console.log(err));
   }
 
-  newPost = (post) => {
+  newPost = post => {
     this.addPost(post);
     const skPost = {
       id: "sk",
@@ -105,7 +105,7 @@ export default class App extends React.Component {
     }
   }
 
-  addPost = async (post) => {
+  addPost = async post => {
     post.images = await this.getImageUrls(post.images);
 
     await axios.post(`/api/v1/posting/`, { post })
@@ -141,7 +141,7 @@ export default class App extends React.Component {
       .catch(err => this.addNotification("edit-fail", false));
   }
 
-  deletePost = async (postid) => {
+  deletePost = async postid => {
     await axios.delete(`/api/v1/posting/${postid}`)
       .then(res => {
         if (res.status === 202 || res.status === 204) {
@@ -156,7 +156,7 @@ export default class App extends React.Component {
       .catch(err => this.addNotification("del-fail", false));
   }
 
-  likePost = async (post) => {
+  likePost = async post => {
     const data = {
       "user_id" : this.state.netid,
       "post_id": post.id
@@ -176,7 +176,7 @@ export default class App extends React.Component {
       .catch(err => console.log(err));
   }
 
-  unlikePost = async (post) => {
+  unlikePost = async post => {
     const data = {
       "user_id" : this.state.netid,
       "post_id": post.id
@@ -196,7 +196,7 @@ export default class App extends React.Component {
       .catch(err => console.log(err));
   }
 
-  uploadImage = async (image) => {
+  uploadImage = async image => {
     const formData = new FormData();
     formData.append('file', image);
     formData.append('upload_preset',
@@ -214,7 +214,7 @@ export default class App extends React.Component {
     return res.data.public_id;
   }
 
-  getImageUrls = async (images) => {
+  getImageUrls = async images => {
     const urls = [];
     for (let i = 0; i < images.length; i++) {
       const url = await this.uploadImage(images.item(i));
@@ -223,7 +223,7 @@ export default class App extends React.Component {
     return urls;
   }
 
-  changeFilter = async (filter) => {
+  changeFilter = async filter => {
     await this.setState({ filter });
     this.filterPosts();
   }
@@ -257,7 +257,7 @@ export default class App extends React.Component {
     this.setState({ showForm: false });
   }
 
-  handleCloseNotif = (id) => {
+  handleCloseNotif = id => {
     let notifs = this.state.notifs;
     notifs.forEach(notif => {
       if (notif.id === id) {

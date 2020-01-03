@@ -7,6 +7,14 @@ import PostsFeed from "./home/PostsFeed";
 import Map from "./home/Map";
 
 export default class Home extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      popupSelect: null
+    };
+  }
+
   componentDidMount() {
     this.props.getUserData();
     this.refreshPosts();
@@ -21,6 +29,15 @@ export default class Home extends React.Component {
     setTimeout(this.refreshPosts, 60 * 1000);
   }
 
+  setPopupSelect = state => {
+    if (state === this.state.popupSelect) {
+      this.setState({ popupSelect: null });
+    }
+    else {
+      this.setState({ popupSelect: state });
+    }
+  }
+
   render() {
     if (window.innerWidth < 576) {
       return (
@@ -33,11 +50,16 @@ export default class Home extends React.Component {
               likes={this.props.likes}
               netid={this.props.netid}
               posts={this.props.posts}
+              setPopupSelect={this.setPopupSelect}
               unlikePost={this.props.unlikePost}
             />
           </Container>
           <Container fluid id="map-pane" className="p-0">
-            <Map posts={this.props.posts} />
+            <Map
+              popupSelect={this.state.popupSelect}
+              posts={this.props.posts}
+              setPopupSelect={this.setPopupSelect}
+            />
           </Container>
         </SwipeableViews>
       );
@@ -53,11 +75,16 @@ export default class Home extends React.Component {
               likes={this.props.likes}
               netid={this.props.netid}
               posts={this.props.posts}
+              setPopupSelect={this.setPopupSelect}
               unlikePost={this.props.unlikePost}
             />
           </Col>
           <Col id="map-pane">
-            <Map posts={this.props.posts} />
+            <Map
+              popupSelect={this.state.popupSelect}
+              posts={this.props.posts}
+              setPopupSelect={this.setPopupSelect}
+            />
           </Col>
         </Row>
       );

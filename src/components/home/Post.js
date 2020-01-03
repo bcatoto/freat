@@ -61,6 +61,10 @@ export default class Post extends React.Component {
     }
   }
 
+  handleLocation = event => {
+    this.props.setPopupSelect(this.props.post);
+  }
+
   handleGoing = async event => {
     const liked = this.state.liked;
     if (liked) {
@@ -224,7 +228,7 @@ export default class Post extends React.Component {
                 </Col>
               </Row>
               <Row noGutters="true" className="mt-1">
-                <Button variant="location">
+                <Button variant="location" onClick={this.handleLocation}>
                   <i className="fas fa-map-marker-alt mr-1"></i>
                   {this.props.post.room}, {this.props.post.building}
                 </Button>

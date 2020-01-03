@@ -13,6 +13,7 @@ export default class PostsFeed extends React.Component {
         likes={this.props.likes}
         netid={this.props.netid}
         post={post}
+        setPopupSelect={this.props.setPopupSelect}
         unlikePost={this.props.unlikePost}
       />
     );
