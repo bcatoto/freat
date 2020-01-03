@@ -83,6 +83,11 @@ export default class Landing extends React.Component {
               Log in through CAS
             </Button>
           </Container>
+          <Container fluid id="arrow" className="center"
+            style={{ opacity: arrow }}
+          >
+            <i className="fas fa-angle-double-down"></i>
+          </Container>
           <Dropdown as={ButtonGroup} alignRight className="landing-dropdown"
             style={{ opacity: dropdown }}
           >
@@ -103,11 +108,6 @@ export default class Landing extends React.Component {
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-          <Container fluid id="arrow" className="center"
-            style={{ opacity: arrow }}
-          >
-            <i className="fas fa-angle-double-down"></i>
-          </Container>
         </Container>
         <Container fluid id="info">
           <Row className="center">
