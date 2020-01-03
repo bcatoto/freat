@@ -135,7 +135,7 @@ export default class Landing extends React.Component {
                 <li>Find fresh free food by browsing through posts ordered by most recent post</li>
                 <li>See locations of all current free food listings all at once</li>
                 <li>Know how many people are "going" to grab free food</li>
-                <li>Indicate to others you"re "going" to grab food</li>
+                <li>Indicate to others you're "going" to grab food</li>
               </ul>
             </Col>
           </Row>
