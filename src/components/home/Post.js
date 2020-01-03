@@ -88,7 +88,7 @@ export default class Post extends React.Component {
       time.getMilliseconds()
     );
     const diff = now - utc;
-
+    
     console.log("----")
     console.log(now)
     console.log(new Date(now))
