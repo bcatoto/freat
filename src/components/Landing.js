@@ -115,13 +115,13 @@ export default class Landing extends React.Component {
             </Col>
           </Row>
         </Container>
-        <Container fluid>
+        <Container fluid id="desktop">
           <Row noGutters={true}>
             <Col sm={8} className="center">
               <Image
-                id="app-image"
+                id="desktop-image"
                 cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}
-                publicId="assets/app_xhwzwd.png"
+                publicId="assets/desktop_pxemoh.png"
               >
                 <Transformation
                   quality="auto:best"
@@ -138,6 +138,35 @@ export default class Landing extends React.Component {
                 <li>Know how many people are "going" to grab free food</li>
                 <li>Indicate to others you're "going" to grab food</li>
               </ul>
+            </Col>
+          </Row>
+        </Container>
+        <Container fluid id="mobile">
+          <Row noGutters={true}>
+            <Col sm={6} id="mobile-text" className="center">
+              Swipe between views on mobile!
+            </Col>
+            <Col sm={6} className="center">
+              <Image
+                className="mobile-image"
+                cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}
+                publicId="assets/mobile_posts-iphone8_r0qgqc.png"
+              >
+                <Transformation
+                  quality="auto:best"
+                  flags="progressive"
+                />
+              </Image>
+              <Image
+                className="mobile-image"
+                cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}
+                publicId="assets/mobile_map-iphone8_swhoxd.png"
+              >
+                <Transformation
+                  quality="auto:best"
+                  flags="progressive"
+                />
+              </Image>
             </Col>
           </Row>
         </Container>
