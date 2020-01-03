@@ -61,7 +61,6 @@
     .btn-landing-navbar-dropdown {
       padding: 0.3rem; } }
 
-
 .btn-navbar {
   padding: 6px;
   margin: 0px 2px;
@@ -369,11 +368,14 @@
   display: none; }
 
 .landing-dropdown {
-  margin: auto 25px 25px auto;
+  position: absolute;
+  right: 25px;
+  bottom: 25px;
   opacity: 0; }
   @media (max-width: 576px) {
     .landing-dropdown {
-      margin: auto 10px 15px auto; } }
+      right: 10px;
+      bottom: 15px; } }
 
 .landing-dropdown-menu {
   background-color: #0066ff;
@@ -528,6 +530,15 @@ a {
 
 #login-container {
   margin-top: 30px; }
+
+#arrow {
+  position: absolute;
+  bottom: 30px;
+  color: #fff;
+  font-size: 60px; }
+  @media (max-width: 320px) {
+    #arrow {
+      font-size: 40px; } }
 
 #info {
   padding: 50px 15px; }

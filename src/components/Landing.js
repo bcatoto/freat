@@ -45,10 +45,15 @@ export default class Landing extends React.Component {
     let tagline = 1 - this.state.scroll / 40;
     let button = 1 - (this.state.scroll - 65) / 50;
     const dropdown = (this.state.scroll - 90) / 200;
+    let arrow = 1 - (this.state.scroll - 200) / 150;
 
     if (window.innerWidth < 576) {
       tagline = 1 - this.state.scroll / 30;
       button = 1 - (this.state.scroll - 40) / 40;
+    }
+
+    if (window.innerWidth < 350) {
+      arrow = 1 - (this.state.scroll - 150) / 125;
     }
 
     return (
@@ -98,6 +103,11 @@ export default class Landing extends React.Component {
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
+          <Container fluid id="arrow" className="center"
+            style={{ opacity: arrow }}
+          >
+            <i className="fas fa-angle-double-down"></i>
+          </Container>
         </Container>
         <Container fluid id="info">
           <Row className="center">
