@@ -77,9 +77,14 @@ export default class Post extends React.Component {
     const hour = min * 60;
     const tz = new Date().getTimezoneOffset() * min;
 
-    const now = new Date().getTime()
+    const now = new Date(new Date().getTime());
     const time = new Date(this.props.post.created_at);
     const diff = now - time + tz;
+
+    console.log("----")
+    console.log(tz)
+    console.log(now)
+    console.log(time)
 
     if (diff > 2 * hour) {
       return "2 hours ago"
