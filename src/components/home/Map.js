@@ -31,15 +31,14 @@ export default class MapPane extends React.Component {
         width: 1025,
         height:700
       },
-      popupHover: null,
-      popupSelect: null
+      popupHover: null
     };
   }
 
   onViewportChange = viewport => this.setState({ viewport });
 
   hoverPin = post => {
-    if (this.state.popupSelect === post) {
+    if (this.props.popupSelect === post) {
       return;
     }
     else {
@@ -52,19 +51,19 @@ export default class MapPane extends React.Component {
   };
 
   clickPin = post => {
-    if (this.state.popupSelect === post) {
-      this.setState({ popupSelect: null });
+    const popupSelect = this.props.popupSelect;
+    if (popupSelect === null || popupSelect.building !== post.building) {
+      this.props.setPopupSelect(post);
     }
     else {
-      this.setState({
-        popupSelect: post,
-        popupHover: null
-      });
+      this.props.setPopupSelect(null);
     }
+    this.setState({ popupHover: null });
   }
 
   renderPopupPosts(post) {
-    const posts = this.props.posts.filter(item => item.building === post.building && item.id !== "sk")
+    const posts = this.props.posts.filter(item =>
+      item.building === post.building && item.id !== "sk")
     return posts.map(post =>
       <Container className="p-0">
         {post.title}, <em>Room: {post.room}</em>
@@ -99,7 +98,7 @@ export default class MapPane extends React.Component {
   }
 
   renderPopupSelect() {
-    const post = this.state.popupSelect;
+    const post = this.props.popupSelect;
     return this.renderPopup(post);
   }
 
