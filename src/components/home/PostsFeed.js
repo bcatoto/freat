@@ -42,7 +42,7 @@ export default class PostsFeed extends React.Component {
         <>
           <Filter changeFilter={this.props.changeFilter} />
           <Container fluid id="mobile-msg" className="center">
-            Swipe left for the map view!
+            Swipe left for the map view
           </Container>
           {this.renderFeed()}
         </>
