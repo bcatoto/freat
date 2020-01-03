@@ -37,11 +37,24 @@ export default class PostsFeed extends React.Component {
   }
 
   render() {
-    return (
-      <>
-        <Filter changeFilter={this.props.changeFilter} />
-        {this.renderFeed()}
-      </>
-    );
+    if (window.innerWidth < 576) {
+      return (
+        <>
+          <Filter changeFilter={this.props.changeFilter} />
+          <Container fluid id="mobile-msg" className="center">
+            Swipe left for the map view!
+          </Container>
+          {this.renderFeed()}
+        </>
+      );
+    }
+    else {
+      return (
+        <>
+          <Filter changeFilter={this.props.changeFilter} />
+          {this.renderFeed()}
+        </>
+      );
+    }
   }
 }
