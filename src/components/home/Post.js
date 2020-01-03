@@ -72,28 +72,32 @@ export default class Post extends React.Component {
     await this.setState({ liked: !liked })
   }
 
+  getCreatedDate(date) {
+    const year = date.substring(0, 4)
+    const month = parseInt(date.substring(5, 7)) - 1;
+    const day = date.substring(8, 10);
+    const hour = date.substring(11, 13);
+    const min = date.substring(14, 16);
+    const sec = date.substring(17, 19);
+    const milli = date.substring(20, 22);
+
+    return Date.UTC(year, month, day, hour, min, sec, milli);
+  }
+
   getTime() {
     const min = 60 * 1000;
     const hour = min * 60;
 
     const now = Date.now();
-    const time = new Date(this.props.post.created_at);
-    const utc = Date.UTC(
-      time.getFullYear(),
-      time.getMonth(),
-      time.getDate(),
-      time.getHours(),
-      time.getMinutes(),
-      time.getSeconds(),
-      time.getMilliseconds()
-    );
-    const diff = now - utc;
+    const time = this.getCreatedDate(this.props.post.created_at);
+    const diff = now - time;
 
     console.log("----")
     console.log(now)
     console.log(new Date(now))
-    console.log(utc)
-    console.log(new Date(utc))
+    console.log(this.props.post.created_at)
+    console.log(time)
+    console.log(new Date(time))
     console.log(diff)
 
     if (diff > 2 * hour) {
