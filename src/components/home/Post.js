@@ -92,14 +92,6 @@ export default class Post extends React.Component {
     const time = this.getCreatedDate(this.props.post.created_at);
     const diff = now - time;
 
-    console.log("----")
-    console.log(now)
-    console.log(new Date(now))
-    console.log(this.props.post.created_at)
-    console.log(time)
-    console.log(new Date(time))
-    console.log(diff)
-
     if (diff > 2 * hour) {
       return "2 hours ago"
     }
