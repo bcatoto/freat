@@ -50,13 +50,15 @@ export default class Home extends React.Component {
               likes={this.props.likes}
               netid={this.props.netid}
               posts={this.props.posts}
+              setPopupSelect={this.setPopupSelect}
               unlikePost={this.props.unlikePost}
             />
           </Container>
           <Container fluid id="map-pane" className="p-0">
             <Map
-              popupSelect={this.popupSelect}
+              popupSelect={this.state.popupSelect}
               posts={this.props.posts}
+              setPopupSelect={this.setPopupSelect}
             />
           </Container>
         </SwipeableViews>
