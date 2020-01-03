@@ -25,7 +25,7 @@ export default class Home extends React.Component {
     if (window.innerWidth < 576) {
       return (
         <SwipeableViews enableMouseEvents className="h-100 w-100">
-          <Container fluid className="p-0">
+          <Container fluid id="post-pane" className="p-0">
             <PostsFeed
               deletePost={this.props.deletePost}
               changeFilter={this.props.changeFilter}
