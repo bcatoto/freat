@@ -198,7 +198,7 @@ export default class Landing extends React.Component {
                   />
                 </Image>
                 <strong>Bianca Catoto</strong>
-                <span className="dev-info">BSE Computer Science "21</span>
+                <span className="dev-info">BSE Computer Science '21</span>
               </Col>
               <Col sm className="dev-col center">
                 <Image
@@ -212,7 +212,7 @@ export default class Landing extends React.Component {
                   />
                 </Image>
                 <strong>Claire Dong</strong>
-                <span className="dev-info">BSE Electrical Engineering "21</span>
+                <span className="dev-info">BSE Electrical Engineering '21</span>
               </Col>
               <Col sm className="dev-col center">
                 <Image
@@ -226,7 +226,7 @@ export default class Landing extends React.Component {
                   />
                 </Image>
                 <strong>Ibrahim Hashmi</strong>
-                <span className="dev-info">BSE Electrical Engineering "21</span>
+                <span className="dev-info">BSE Electrical Engineering '21</span>
               </Col>
               <Col sm className="dev-col center">
                 <Image
@@ -240,7 +240,7 @@ export default class Landing extends React.Component {
                   />
                 </Image>
                 <strong>Gilron Tsabkevich</strong>
-                <span className="dev-info">BSE Computer Science "21</span>
+                <span className="dev-info">BSE Computer Science '21</span>
               </Col>
             </Row>
           </Container>
