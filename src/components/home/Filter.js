@@ -50,12 +50,14 @@ export default class Filter extends React.Component {
 
   render() {
     return (
-      <ToggleButtonGroup type="checkbox"
-        value={this.state.value}
-        onChange={this.handleChange}
-      >
-        {this.renderButtons()}
-      </ToggleButtonGroup>
+      <Container fluid className="p-0">
+        <ToggleButtonGroup className="w-100" type="checkbox"
+          value={this.state.value}
+          onChange={this.handleChange}
+        >
+          {this.renderButtons()}
+        </ToggleButtonGroup>
+      </Container>
     );
   }
 }
