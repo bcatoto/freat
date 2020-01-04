@@ -15,29 +15,29 @@ export default class Post extends React.Component {
 
     this.diets = [
       {
-        "key": 0,
-        "name": "Vegetarian",
-        "color": "vegetarian",
+        key: 0,
+        name: "Vegetarian",
+        color: "vegetarian",
       },
       {
-        "key": 1,
-        "name": "Vegan",
-        "color": "vegan",
+        key: 1,
+        name: "Vegan",
+        color: "vegan",
       },
       {
-        "key": 2,
-        "name": "Kosher",
-        "color": "kosher",
+        key: 2,
+        name: "Kosher",
+        color: "kosher",
       },
       {
-        "key": 3,
-        "name": "Halal",
-        "color": "halal",
+        key: 3,
+        name: "Halal",
+        color: "halal",
       },
       {
-        "key": 4,
-        "name": "Gluten-Free",
-        "color": "gluten",
+        key: 4,
+        name: "Gluten-Free",
+        color: "gluten",
       }
     ];
 

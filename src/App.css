@@ -98,10 +98,12 @@
   padding: 3px 6px;
   color: #0066ff;
   background-color: #fff;
-  border-color: #0066ff; }
+  border-color: #0066ff;
+  border-top: none;
+  border-radius: 0rem; }
   .btn-filter:hover {
-    color: #0052cc;
-    background-color: #fff;
+    color: #fff;
+    background-color: #0066ff;
     border-color: #0066ff; }
   .btn-filter:not(:disabled):not(.disabled):active,
   .btn-filter:not(:disabled):not(.disabled).active,
@@ -109,6 +111,10 @@
     color: #fff;
     background-color: #0066ff;
     border-color: #0066ff; }
+  .btn-filter:first-child {
+    border-left: none; }
+  .btn-filter:last-child {
+    border-right: none; }
   @media (max-width: 576px) {
     .btn-filter {
       font-size: 14px; } }
@@ -656,14 +662,10 @@ a {
   font-size: 12px;
   color: #fff;
   background-color: #0066ff;
-  padding: 5px 15px; }
+  padding: 3px 15px; }
 
 #post-feed {
   overflow: auto; }
-
-#filter-options {
-  padding: 15px;
-  border-bottom: 1px solid #0066ff; }
 
 #no-food {
   text-align: center;

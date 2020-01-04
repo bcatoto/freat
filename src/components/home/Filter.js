@@ -7,6 +7,29 @@ export default class Filter extends React.Component {
   constructor(props) {
     super(props);
 
+    this.diets = [
+      {
+        value: 0,
+        name: "Vegetarian"
+      },
+      {
+        value: 1,
+        name: "Vegan"
+      },
+      {
+        value: 2,
+        name: "Kosher"
+      },
+      {
+        value: 3,
+        name: "Halal"
+      },
+      {
+        value: 4,
+        name: "Gluten-Free"
+      },
+    ];
+
     this.state = {
       value: []
     };
@@ -17,20 +40,22 @@ export default class Filter extends React.Component {
     this.props.changeFilter(value);
   }
 
+  renderButtons() {
+    return this.diets.map(diet =>
+      <ToggleButton variant="filter" value={diet.value}>
+        {diet.name}
+      </ToggleButton>
+    );
+  }
+
   render() {
     return (
-      <Container fluid id="filter-options" className="center">
-        <ToggleButtonGroup type="checkbox"
-          value={this.state.value}
-          onChange={this.handleChange}
-        >
-          <ToggleButton variant="filter" value={0}>Vegetarian</ToggleButton>
-          <ToggleButton variant="filter" value={1}>Vegan</ToggleButton>
-          <ToggleButton variant="filter" value={2}>Kosher</ToggleButton>
-          <ToggleButton variant="filter" value={3}>Halal</ToggleButton>
-          <ToggleButton variant="filter" value={4}>Gluten-Free</ToggleButton>
-        </ToggleButtonGroup>
-      </Container>
+      <ToggleButtonGroup type="checkbox"
+        value={this.state.value}
+        onChange={this.handleChange}
+      >
+        {this.renderButtons()}
+      </ToggleButtonGroup>
     );
   }
 }
