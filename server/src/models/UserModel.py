@@ -14,7 +14,6 @@ class UserModel(db.Model):
 
     netid = db.Column(db.String(20), primary_key=True)
     posts = db.relationship('PostingModel', backref='posts')
-    # posts_going = db.Column(db.ARRAY(db.Integer)) # postids of posts liked
 
     def __init__(self, data):
         self.netid = data.get('netid')

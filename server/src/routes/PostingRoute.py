@@ -21,6 +21,7 @@ def getPostings():
     """
     Get all the available postings
     """
+    CASClient().authenticate()
     posts = PostingModel.get_all_postings()
     data = posting_schema.dump(posts, many=True)
     return custom_response(data, 200)
@@ -30,6 +31,7 @@ def newPost():
   """
   Create a new post and add to the database
   """
+  CASClient().authenticate()
   req_data = request.get_json()
   try:
     data = posting_schema.load(req_data['post'])
@@ -46,6 +48,7 @@ def postDetails(postid):
   """
   Get the information from this specific post
   """
+  CASClient().authenticate()
   post = PostingModel.get_one_post(postid)
   data = posting_schema.dump(post, many=True)
   return custom_response(data, 200)
@@ -56,6 +59,7 @@ def deletePost(postid):
   """
   Delete the post with id postid
   """
+  CASClient().authenticate()
   post = PostingModel.get_one_post(postid)
   data = posting_schema.dump(post)
   if (len(data) == 0):
@@ -78,6 +82,7 @@ def updatePost(postid):
   """
   Update the post with id postid
   """
+  CASClient().authenticate()
   req_data = request.get_json()
 
   post = PostingModel.get_one_post(postid)
@@ -106,6 +111,7 @@ def getPostsByUser(netid):
   """
   Get all available posts of a certain user
   """
+  CASClient().authenticate()
   posts = PostingModel.get_by_user(netid)
   data = posting_schema.dump(posts, many=True)
   return custom_response(data, 200)
