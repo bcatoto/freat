@@ -65,9 +65,9 @@ def deletePost(postid):
   if (len(data) == 0):
     return custom_response({'error': 'post not found'}, 404)
 
-  # # check ownership
-  # if data[0]['owner_id'] != CASClient().authenticate().rstrip():
-  #   return custom_response({'error': 'permission denied'}, 400)
+  # check ownership
+  if data['owner_id'] != CASClient().authenticate().rstrip():
+    return custom_response({'error': 'permission denied'}, 400)
 
   for public_id in data['images']:
     cloudinary.uploader.destroy(public_id)
@@ -91,9 +91,9 @@ def updatePost(postid):
   if (len(data) == 0):
     return custom_response({'error': 'post not found'}, 404)
 
-  # # check ownership
-  # if data[0]['owner_id'] != CASClient().authenticate().rstrip():
-  #   return custom_response({'error': 'permission denied'}, 400)
+  # check ownership
+  if data['owner_id'] != CASClient().authenticate().rstrip():
+    return custom_response({'error': 'permission denied'}, 400)
 
   try:
     data = posting_schema.load(req_data['post'], partial=True)

@@ -7,7 +7,7 @@ attending_schema = AttendingSchema()
 
 @attending_api.route('/', methods=['GET'])
 def getUserGoingPosts():
-    CASClient.authenticate()
+    CASClient().authenticate()
     val = request.args.get('userid')
     try:
         if val is not None:
@@ -24,7 +24,7 @@ def going():
     """
     Update that user is going to an event/posting
     """
-    CASClient.authenticate()
+    CASClient().authenticate()
     req_data = request.get_json()
     print(req_data)
     try:
@@ -46,7 +46,7 @@ def notgoing():
     """
     Update that user is not going to an event/posting
     """
-    CASClient.authenticate()
+    CASClient().authenticate()
     req_data =request.get_json()
     print(req_data)
     try:
@@ -60,7 +60,6 @@ def notgoing():
         return custom_response({'message':'successfully deleted'}, 204)
     except Exception as err:
         return custom_response({'message': err}, 400)
-
 
 def custom_response(res, status_code):
   """
