@@ -77,13 +77,14 @@ class CASClient:
                 # username in the session.               
                 session['username'] = username        
                 return username
-      
+
         # The request does not contain a valid login ticket, so
         # redirect the browser to the login page to get one.
         login_url = self.cas_url + 'login' \
             + '?service=' + quote(self.stripTicket())
-            
+
         abort(redirect(login_url))
+        
 
     #-------------------------------------------------------------------
 

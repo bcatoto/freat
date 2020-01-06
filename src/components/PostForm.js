@@ -133,15 +133,14 @@ export default class PostForm extends React.Component {
     event.preventDefault();
     event.returnValue = false;
 
-    const post = this.state.post;
-    post.diet = this.dietToList(this.state.post.diet);
+    const { post, oldPost } = this.state;
+    post.diet = this.dietToList(post.diet);
     post.netid = this.props.netid;
 
     if (this.props.isNew) {
       this.props.newPost(post);
     }
     else {
-      const oldPost = this.state.oldPost;
       let newPost = {};
       for (const key in post) {
         if (post[key] !== oldPost[key]) {
@@ -155,8 +154,7 @@ export default class PostForm extends React.Component {
   }
 
   validate() {
-    const valid = this.state.valid;
-    const post = this.state.post;
+    const { post, valid } = this.state;
 
     valid.title = post.title.length > 0;
     valid.room = post.room.length > 0;

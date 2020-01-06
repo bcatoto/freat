@@ -21,6 +21,7 @@ def getPostings():
     """
     Get all the available postings
     """
+    CASClient().authenticate()
     posts = PostingModel.get_all_postings()
     data = posting_schema.dump(posts, many=True)
     return custom_response(data, 200)
@@ -30,6 +31,7 @@ def newPost():
   """
   Create a new post and add to the database
   """
+  CASClient().authenticate()
   req_data = request.get_json()
   try:
     data = posting_schema.load(req_data['post'])
@@ -46,6 +48,7 @@ def postDetails(postid):
   """
   Get the information from this specific post
   """
+  CASClient().authenticate()
   post = PostingModel.get_one_post(postid)
   data = posting_schema.dump(post, many=True)
   return custom_response(data, 200)
@@ -56,14 +59,15 @@ def deletePost(postid):
   """
   Delete the post with id postid
   """
+  CASClient().authenticate()
   post = PostingModel.get_one_post(postid)
   data = posting_schema.dump(post)
   if (len(data) == 0):
     return custom_response({'error': 'post not found'}, 404)
 
-  # # check ownership
-  # if data[0]['owner_id'] != CASClient().authenticate().rstrip():
-  #   return custom_response({'error': 'permission denied'}, 400)
+  # check ownership
+  if data['owner_id'] != CASClient().authenticate().rstrip():
+    return custom_response({'error': 'permission denied'}, 400)
 
   for public_id in data['images']:
     cloudinary.uploader.destroy(public_id)
@@ -78,6 +82,7 @@ def updatePost(postid):
   """
   Update the post with id postid
   """
+  CASClient().authenticate()
   req_data = request.get_json()
 
   post = PostingModel.get_one_post(postid)
@@ -86,9 +91,9 @@ def updatePost(postid):
   if (len(data) == 0):
     return custom_response({'error': 'post not found'}, 404)
 
-  # # check ownership
-  # if data[0]['owner_id'] != CASClient().authenticate().rstrip():
-  #   return custom_response({'error': 'permission denied'}, 400)
+  # check ownership
+  if data['owner_id'] != CASClient().authenticate().rstrip():
+    return custom_response({'error': 'permission denied'}, 400)
 
   try:
     data = posting_schema.load(req_data['post'], partial=True)
@@ -106,6 +111,7 @@ def getPostsByUser(netid):
   """
   Get all available posts of a certain user
   """
+  CASClient().authenticate()
   posts = PostingModel.get_by_user(netid)
   data = posting_schema.dump(posts, many=True)
   return custom_response(data, 200)

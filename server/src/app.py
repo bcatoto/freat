@@ -1,7 +1,5 @@
 from flask import Flask, request, Response, json, render_template, send_from_directory, session
 from flask_sqlalchemy import SQLAlchemy
-# from flask_cas import CAS
-# from flask_cas import login_required
 from pprint import pprint
 
 import os
@@ -21,7 +19,6 @@ def create_app(env_name):
   """
   Create app
   """
-
   # app initiliazation
   app = Flask(__name__, static_folder='./../../build/static',
     template_folder='./../../build')

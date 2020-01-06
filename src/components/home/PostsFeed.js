@@ -1,5 +1,6 @@
 import React from "react";
 import Container from "react-bootstrap/Container"
+import Filter from "./Filter"
 import Post from "./Post"
 
 export default class PostsFeed extends React.Component {
@@ -12,6 +13,7 @@ export default class PostsFeed extends React.Component {
         likes={this.props.likes}
         netid={this.props.netid}
         post={post}
+        setPopupSelect={this.props.setPopupSelect}
         unlikePost={this.props.unlikePost}
       />
     );
@@ -36,10 +38,24 @@ export default class PostsFeed extends React.Component {
   }
 
   render() {
-    return (
-      <>
-        {this.renderFeed()}
-      </>
-    );
+    if (window.innerWidth < 576) {
+      return (
+        <>
+          <Filter changeFilter={this.props.changeFilter} />
+          <Container fluid id="mobile-msg" className="center">
+            Swipe left for the map view
+          </Container>
+          {this.renderFeed()}
+        </>
+      );
+    }
+    else {
+      return (
+        <>
+          <Filter changeFilter={this.props.changeFilter} />
+          {this.renderFeed()}
+        </>
+      );
+    }
   }
 }

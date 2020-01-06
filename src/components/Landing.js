@@ -2,7 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
-import { Image, Transformation } from 'cloudinary-react';
+import { Image, Transformation } from "cloudinary-react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -17,7 +17,7 @@ export default class Landing extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.scrollEvent)
+    window.addEventListener("scroll", this.scrollEvent)
   }
 
   handleLogin = event => {
@@ -27,12 +27,12 @@ export default class Landing extends React.Component {
 
   handleHelp = event => {
     const url = "https://docs.google.com/document/d/1ZcYP3hfcf65dW5c_q96ewH-gWtcj4WHrgK-nxapdxes/edit?usp=sharing"
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   }
 
   handleFeedback = event => {
     const url = "https://docs.google.com/forms/d/e/1FAIpQLSe2XUCkr4xcpSsqwmo2cEHwrBPaI7G7Dh8kmoWjAo7r7uo4Gw/viewform"
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   }
 
   scrollEvent = event => {
@@ -45,16 +45,31 @@ export default class Landing extends React.Component {
     let tagline = 1 - this.state.scroll / 40;
     let button = 1 - (this.state.scroll - 65) / 50;
     const dropdown = (this.state.scroll - 90) / 200;
+    let arrow = 1 - (this.state.scroll - 200) / 150;
 
     if (window.innerWidth < 576) {
       tagline = 1 - this.state.scroll / 30;
       button = 1 - (this.state.scroll - 40) / 40;
     }
 
+    if (window.innerWidth < 350) {
+      arrow = 1 - (this.state.scroll - 150) / 125;
+    }
+
     return (
       <Container fluid className="p-0">
         <Container fluid id="landing-image" className="p-0">
           <Container fluid id="landing-title">
+            <Image
+              id="logo"
+              cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}
+              publicId="assets/logo_gqeug8.png"
+            >
+              <Transformation
+                quality="auto:best"
+                flags="progressive"
+              />
+            </Image>
             Freat
           </Container>
           <Container fluid id="tagline" style={{ opacity: tagline }}>
@@ -67,6 +82,11 @@ export default class Landing extends React.Component {
             >
               Log in through CAS
             </Button>
+          </Container>
+          <Container fluid id="arrow" className="center"
+            style={{ opacity: arrow }}
+          >
+            <i className="fas fa-angle-double-down"></i>
           </Container>
           <Dropdown as={ButtonGroup} alignRight className="landing-dropdown"
             style={{ opacity: dropdown }}
@@ -89,7 +109,7 @@ export default class Landing extends React.Component {
             </Dropdown.Menu>
           </Dropdown>
         </Container>
-        <Container fluid>
+        <Container fluid id="info">
           <Row className="center">
             <Col sm className="info-col center" >
               <i className="fas fa-utensils"></i>
@@ -105,13 +125,13 @@ export default class Landing extends React.Component {
             </Col>
           </Row>
         </Container>
-        <Container fluid>
-          <Row>
+        <Container fluid id="desktop">
+          <Row noGutters={true}>
             <Col sm={8} className="center">
               <Image
-                id="app-image"
+                id="desktop-image"
                 cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}
-                publicId="assets/app_xhwzwd.png"
+                publicId="assets/desktop_pxemoh.png"
               >
                 <Transformation
                   quality="auto:best"
@@ -121,12 +141,42 @@ export default class Landing extends React.Component {
             </Col>
             <Col sm={4}>
               <ul id="features">
-                <li>Get rid of leftover food by posting its location, picture, amount, and more</li>
-                <li>Find fresh free food by browsing through posts ordered by most recent post</li>
+                <li>Get rid of leftover food by posting location, picture, amount, and more</li>
+                <li>Find fresh free food by browsing through posts ordered by most recent</li>
                 <li>See locations of all current free food listings all at once</li>
+                <li>Filter food by dietary restriction</li>
                 <li>Know how many people are "going" to grab free food</li>
                 <li>Indicate to others you're "going" to grab food</li>
               </ul>
+            </Col>
+          </Row>
+        </Container>
+        <Container fluid id="mobile">
+          <Row noGutters={true}>
+            <Col sm={6} id="mobile-text" className="center">
+              Swipe between views on mobile!
+            </Col>
+            <Col sm={6} className="center">
+              <Image
+                className="mobile-image"
+                cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}
+                publicId="assets/mobile_posts-iphone8_r0qgqc.png"
+              >
+                <Transformation
+                  quality="auto:best"
+                  flags="progressive"
+                />
+              </Image>
+              <Image
+                className="mobile-image"
+                cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}
+                publicId="assets/mobile_map-iphone8_swhoxd.png"
+              >
+                <Transformation
+                  quality="auto:best"
+                  flags="progressive"
+                />
+              </Image>
             </Col>
           </Row>
         </Container>
@@ -194,6 +244,10 @@ export default class Landing extends React.Component {
               </Col>
             </Row>
           </Container>
+        </Container>
+        <Container fluid id="credits">
+          &copy; Freat 2019. All Rights Reserved.<br/>
+          Photo credits to Hongkongfoodlover123 [<a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>], <a href="https://commons.wikimedia.org/wiki/File:New_Punjab_Club_food_spread.jpg">via Wikimedia Commons</a>
         </Container>
       </Container>
     );
