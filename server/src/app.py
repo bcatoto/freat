@@ -27,7 +27,7 @@ def create_app(env_name):
     template_folder='./../../build')
 
   app.secret_key = b'\xcdt\x8dn\xe1\xbdW\x9d[}yJ\xfc\xa3~/'
-  app.config.from_object(app_config[env_name])
+  app.config.from_object(app_config['development'])
 
   db.init_app(app)
 
