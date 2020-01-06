@@ -67,8 +67,7 @@ export default class MapPane extends React.Component {
           offsetTop={-30}
           longitude={coordinates[post.building][1]}
           latitude={coordinates[post.building][0]}
-          closeButton={false}
-          closeOnClick={false}
+         
         >
           <Container className="popup-title p-0">
             <strong>{post.building}</strong>
