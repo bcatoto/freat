@@ -80,7 +80,7 @@ export default class MapPane extends React.Component {
           offsetTop={-30}
           longitude={coordinates[post.building][1]}
           latitude={coordinates[post.building][0]}
-         
+
         >
           <Container className="popup-title p-0">
             <strong>{post.building}</strong>
@@ -123,12 +123,6 @@ export default class MapPane extends React.Component {
         {this.renderPopupHover()}
         <div style={navStyle}>
           <NavigationControl onViewportChange={this.onViewportChange} />
-        </div>
-        <div style={geoStyle}>
-          <GeolocateControl
-            positionOptions={{ enableHighAccuracy: true }}
-            trackUserLocation={true}
-          />
         </div>
       </ReactMapGL>
     );

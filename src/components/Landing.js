@@ -131,7 +131,7 @@ export default class Landing extends React.Component {
               <Image
                 id="desktop-image"
                 cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}
-                publicId="assets/desktop_pxemoh.png"
+                publicId="assets/desktop_qwffih.png"
               >
                 <Transformation
                   quality="auto:best"
@@ -160,7 +160,7 @@ export default class Landing extends React.Component {
               <Image
                 className="mobile-image"
                 cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}
-                publicId="assets/mobile_posts-iphone8_r0qgqc.png"
+                publicId="assets/mobile_posts-iphone8plus_sp1hcq.png"
               >
                 <Transformation
                   quality="auto:best"
