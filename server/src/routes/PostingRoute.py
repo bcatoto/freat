@@ -21,6 +21,8 @@ def getPostings():
     """
     Get all the available postings
     """
+    print(request.url)
+    print(request.host)
     CASClient().authenticate()
     posts = PostingModel.get_all_postings()
     data = posting_schema.dump(posts, many=True)
