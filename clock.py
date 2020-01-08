@@ -18,8 +18,8 @@ def timed_job():
     print("Job runs every 1 minute")
 
     # get all the postings
-    URL = URL + secret
-    postings = json.loads(requests.get(url = URL).text)
+    new_url = URL + secret
+    postings = json.loads(requests.get(url = new_url).text)
 
     for post in postings:
         date_time_obj = datetime.strptime(post['created_at'], '%Y-%m-%dT%H:%M:%S.%f')
