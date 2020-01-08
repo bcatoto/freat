@@ -1,22 +1,15 @@
 import React from "react";
-import ReactMapGL, { NavigationControl, Popup, GeolocateControl } from "react-map-gl";
+import ReactMapGL, { NavigationControl, Popup } from "react-map-gl";
 import Container from "react-bootstrap/Container";
-import Pins from './Pins';
+import Pins from "./Pins";
 
 import coordinates from "../../assets/coordinates.json";
 
 const navStyle = {
-  position: 'absolute',
+  position: "absolute",
   top: 0,
   left: 0,
-  padding: '10px'
-};
-
-const geoStyle = {
-  position: 'absolute',
-  top: 98,
-  left: 0,
-  padding: '10px'
+  padding: "10px"
 };
 
 export default class MapPane extends React.Component {
@@ -27,7 +20,7 @@ export default class MapPane extends React.Component {
       viewport: {
         latitude: 40.346760,
         longitude: -74.655187,
-        zoom: 15.5,
+        zoom: 15.25,
         width: 1025,
         height:700
       },
@@ -80,7 +73,7 @@ export default class MapPane extends React.Component {
           offsetTop={-30}
           longitude={coordinates[post.building][1]}
           latitude={coordinates[post.building][0]}
-
+          closeButton={false}
         >
           <Container className="popup-title p-0">
             <strong>{post.building}</strong>
