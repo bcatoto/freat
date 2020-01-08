@@ -21,9 +21,11 @@ def getPostings():
     """
     Get all the available postings
     """
-    print(request.url)
-    print(request.host)
-    CASClient().authenticate()
+    if request.query_string.decode() == os.getenv('SECRET_TOKEN'):
+      print("secret token received")
+    else: 
+      CASClient().authenticate()
+
     posts = PostingModel.get_all_postings()
     data = posting_schema.dump(posts, many=True)
     return custom_response(data, 200)
@@ -61,14 +63,19 @@ def deletePost(postid):
   """
   Delete the post with id postid
   """
-  CASClient().authenticate()
+  if request.query_string.decode() == os.getenv('SECRET_TOKEN'):
+    isSecret = True
+    print("secret token received")
+  else: 
+    username = CASClient().authenticate().rstrip()
+
   post = PostingModel.get_one_post(postid)
   data = posting_schema.dump(post)
   if (len(data) == 0):
     return custom_response({'error': 'post not found'}, 404)
 
   # check ownership
-  if data['owner_id'] != CASClient().authenticate().rstrip():
+  if not isSecret and data['owner_id'] != username:
     return custom_response({'error': 'permission denied'}, 400)
 
   for public_id in data['images']:
@@ -84,7 +91,7 @@ def updatePost(postid):
   """
   Update the post with id postid
   """
-  CASClient().authenticate()
+  username  = CASClient().authenticate().rstrip()
   req_data = request.get_json()
 
   post = PostingModel.get_one_post(postid)
@@ -94,7 +101,7 @@ def updatePost(postid):
     return custom_response({'error': 'post not found'}, 404)
 
   # check ownership
-  if data['owner_id'] != CASClient().authenticate().rstrip():
+  if data['owner_id'] != username:
     return custom_response({'error': 'permission denied'}, 400)
 
   try:

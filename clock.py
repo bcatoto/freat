@@ -5,19 +5,22 @@ from datetime import datetime
 from flask import request, json, Response, Blueprint, jsonify
 import json
 import time
+import os
 
 tz_offset = time.timezone
 URL = 'https://freat.herokuapp.com/api/v1/posting/'
 local_URL = 'http://localhost:5000/api/v1/posting/'
+secret =  '?' + str(os.getenv('SECRET_TOKEN'))
 sched = BlockingScheduler()
 
 
-@sched.scheduled_job('interval', minutes=1)
+@sched.scheduled_job('interval', seconds=5)
 def timed_job():
     print("Job runs every 1 minute")
 
     # get all the postings
-    # postings = json.loads(requests.get(url = local_URL).text)
+    URL = local_URL + secret
+    print(URL)
     postings = json.loads(requests.get(url = URL).text)
 
     for post in postings:
@@ -28,7 +31,7 @@ def timed_job():
         if mins_elapsed > 120:
             postid = post['id']
             # new_url = local_URL + str(postid)
-            new_url = URL + str(postid)
+            new_url = local_URL + str(postid) + secret
             requests.delete(url = new_url) # send a delete request
         
 sched.start()
