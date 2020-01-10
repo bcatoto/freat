@@ -63,6 +63,7 @@ def deletePost(postid):
   """
   Delete the post with id postid
   """
+  isSecret = False
   if request.query_string.decode() == os.getenv('SECRET_TOKEN'):
     isSecret = True
     print("secret token received")
