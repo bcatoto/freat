@@ -10,7 +10,7 @@ export default class NavBar extends React.Component {
   }
 
   handleHelp = event => {
-    const url = "https://docs.google.com/document/d/1ZcYP3hfcf65dW5c_q96ewH-gWtcj4WHrgK-nxapdxes/edit?usp=sharing"
+    const url = "https://drive.google.com/file/d/1h7bcr-OdTgCEofncoa2L4irlYLuJ-HZS/view?usp=sharing"
     window.open(url, '_blank');
   }
 
