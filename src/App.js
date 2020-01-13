@@ -321,7 +321,6 @@ export default class App extends React.Component {
         <Route path="/home"
           render={(props) => (
             <Home {...props}
-              deletePost={this.deletePost}
               getPosts={this.getPosts}
               getUserData={this.getUserData}
               changeFilter={this.changeFilter}

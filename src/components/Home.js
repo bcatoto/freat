@@ -44,7 +44,6 @@ export default class Home extends React.Component {
         <SwipeableViews enableMouseEvents className="h-100 w-100">
           <Container fluid id="post-pane" className="p-0">
             <PostsFeed
-              deletePost={this.props.deletePost}
               changeFilter={this.props.changeFilter}
               likePost={this.props.likePost}
               likes={this.props.likes}
@@ -69,7 +68,6 @@ export default class Home extends React.Component {
         <Row fluid="true" noGutters="true">
           <Col id="post-pane" xs={12} sm={5}>
             <PostsFeed
-              deletePost={this.props.deletePost}
               changeFilter={this.props.changeFilter}
               likePost={this.props.likePost}
               likes={this.props.likes}

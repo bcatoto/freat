@@ -8,7 +8,6 @@ export default class PostsFeed extends React.Component {
     return this.props.posts.map(post =>
       <Post
         key={post.id}
-        deletePost={this.props.deletePost}
         likePost={this.props.likePost}
         likes={this.props.likes}
         netid={this.props.netid}
