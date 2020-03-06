@@ -15,7 +15,7 @@ export default class NavBar extends React.Component {
   }
 
   handleFeedback = event => {
-    const url = "https://docs.google.com/forms/d/e/1FAIpQLSe2XUCkr4xcpSsqwmo2cEHwrBPaI7G7Dh8kmoWjAo7r7uo4Gw/viewform"
+    const url = "https://docs.google.com/forms/d/e/1FAIpQLSfWzDUR2hwCOXG_Rep556ZftmB1X_aAhcXhEllW-V_umJLNjQ/viewform"
     window.open(url, '_blank');
   }
 
