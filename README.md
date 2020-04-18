@@ -5,6 +5,10 @@ The final capstone project for COS333 Fall 2019. The developers of this app are 
 
 The app can be found at https://freat.herokuapp.com/.
 
+[User's Guide](https://drive.google.com/open?id=1h7bcr-OdTgCEofncoa2L4irlYLuJ-HZS)
+
+[Programmer's Guide](https://drive.google.com/open?id=11HTql7QdCIWR36s63uO8SNLaH1AvSKv3)
+
 ### Run Locally
 
 To run the project locally, first install all the NodeJS and Python dependencies:
